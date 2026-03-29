@@ -2,14 +2,14 @@
 definePageMeta({
   layout: "docs",
 })
-import { Map } from "@/components/ui/map";
+import { Map } from "@/base/ui/map";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 const markersData = {
     type: "FeatureCollection" as const,
     features: [
@@ -135,7 +135,7 @@ const markersData = {
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl, { type MapOptions } from "maplibre-gl";
 import { ref, onMounted } from "vue";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import { Plus, Minus, MapPin, Compass, Expand, X } from "lucide-vue-next";
 import type { FeatureCollection, Point } from "geojson";
 import { cn } from "@midoneui/utils/cn";
@@ -405,7 +405,7 @@ export { default as Map } from "./Map.vue";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { Map } from "@/components/ui/map";
+import { Map } from "@/base/ui/map";
                     ` }}
         </PreviewCode>
         <PreviewCode>

@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import fakers from '@/utils/faker'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Lucide } from '@/components/ui/lucide'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
-import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Textarea } from '@/components/ui/textarea'
+import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { Badge } from '@/base/ui/badge'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
+import { Input } from '@/base/ui/input'
+import { Lucide } from '@/base/ui/lucide'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/base/ui/tabs'
+import { Textarea } from '@/base/ui/textarea'
 </script>
 
 <template>

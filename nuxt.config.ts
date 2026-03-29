@@ -19,6 +19,6 @@ export default defineNuxtConfig({
     '@': fileURLToPath(new URL('./app', import.meta.url)),
     '~': fileURLToPath(new URL('./app', import.meta.url)),
     '@assets': fileURLToPath(new URL('./app/assets', import.meta.url)),
-    '@midoneui': fileURLToPath(new URL('./app/components/ui', import.meta.url)),
+    '@midoneui': fileURLToPath(new URL('./app/base/ui', import.meta.url)),
   }
 })

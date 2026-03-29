@@ -9,14 +9,14 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationEllipsis,
-} from "@/components/ui/pagination";
+} from "@/base/ui/pagination";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -85,7 +85,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { paginationEllipsis } from "@midoneui/styles/pagination.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, EllipsisProps } from "@zag-js/pagination";
 import { inject } from "vue";
 
@@ -127,7 +127,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { paginationItem } from "@midoneui/styles/pagination.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemProps } from "@zag-js/pagination";
 import { inject } from "vue";
 
@@ -166,7 +166,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { paginationNextTrigger } from "@midoneui/styles/pagination.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/pagination";
 import { inject } from "vue";
 
@@ -203,7 +203,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { paginationPrevTrigger } from "@midoneui/styles/pagination.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/pagination";
 import { inject } from "vue";
 
@@ -240,7 +240,7 @@ definePageMeta({
 })
 import * as pagination from "@zag-js/pagination";
 import type { Props } from "@zag-js/pagination";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
@@ -305,7 +305,7 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationEllipsis,
-} from "@/components/ui/pagination";
+} from "@/base/ui/pagination";
               ` }}
         </PreviewCode>
         <PreviewCode>

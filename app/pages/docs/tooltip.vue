@@ -7,14 +7,14 @@ import {
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from "@/components/ui/tooltip";
+} from "@/base/ui/tooltip";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -98,8 +98,8 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { tooltipTrigger } from "@midoneui/styles/tooltip.styles";
-import { Slot } from "@/components/ui/slot";
-import { Button } from "@/components/ui/button";
+import { Slot } from "@/base/ui/slot";
+import { Button } from "@/base/ui/button";
 import type { Api } from "@zag-js/tooltip";
 import { inject } from "vue";
 
@@ -138,7 +138,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { tooltipPositioner } from "@midoneui/styles/tooltip.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/tooltip";
 import { inject } from "vue";
 
@@ -177,7 +177,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { tooltipContent } from "@midoneui/styles/tooltip.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { TooltipArrow, TooltipArrowTip } from ".";
 import type { Api } from "@zag-js/tooltip";
 import { inject } from "vue";
@@ -218,7 +218,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { tooltipArrow } from "@midoneui/styles/tooltip.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/tooltip";
 import { inject } from "vue";
 
@@ -255,7 +255,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { tooltipArrowTip } from "@midoneui/styles/tooltip.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/tooltip";
 import { inject } from "vue";
 
@@ -307,7 +307,7 @@ import {
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from "@/components/ui/tooltip";
+} from "@/base/ui/tooltip";
               ` }}
         </PreviewCode>
         <PreviewCode>

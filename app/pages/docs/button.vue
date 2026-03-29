@@ -2,14 +2,14 @@
 definePageMeta({
   layout: "docs",
 })
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import { LoaderCircle, Copy, Scissors, Trash, SquarePlus } from "lucide-vue-next";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -49,7 +49,7 @@ import {
   buttonVariants,
   type ButtonVariants,
 } from "@midoneui/styles/button.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -92,7 +92,7 @@ export { default as Button } from "./Button.vue";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
               ` }}
         </PreviewCode>
         <PreviewCode>

@@ -14,14 +14,14 @@ import {
   MenuRadioItemGroup,
   MenuItemGroupLabel,
   MenuRadioItem,
-} from "@/components/ui/menu";
+} from "@/base/ui/menu";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 import { ref } from "vue";
 const react = ref(false);
   const solid = ref(false);
@@ -80,7 +80,7 @@ definePageMeta({
 })
 import * as menu from "@zag-js/menu";
 import type { Props } from "@zag-js/menu";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
@@ -124,8 +124,8 @@ definePageMeta({
 import { type Api } from "@zag-js/menu";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
-import { Button } from "@/components/ui/button";
-import { Slot } from "@/components/ui/slot";
+import { Button } from "@/base/ui/button";
+import { Slot } from "@/base/ui/slot";
 import { menuTrigger } from "@midoneui/styles/menu.styles";
 import { MenuIndicator } from ".";
 
@@ -161,7 +161,7 @@ definePageMeta({
 import { cn } from "@midoneui/utils/cn";
 import { ChevronDown } from "lucide-vue-next";
 import { menuIndicator } from "@midoneui/styles/menu.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/menu";
 import { inject } from "vue";
 
@@ -193,7 +193,7 @@ import { type Api } from "@zag-js/menu";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
 import { menuPositioner } from "@midoneui/styles/menu.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -231,8 +231,8 @@ definePageMeta({
 import { type Api } from "@zag-js/menu";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
-import { Box } from "@/components/ui/box";
-import { Slot } from "@/components/ui/slot";
+import { Box } from "@/base/ui/box";
+import { Slot } from "@/base/ui/slot";
 import { menuContent } from "@midoneui/styles/menu.styles";
 
 const {
@@ -266,7 +266,7 @@ const api = inject<Api>("menuApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { type Api, type ItemProps } from "@zag-js/menu";
 import { inject } from "vue";
 import { cn } from "@midoneui/utils/cn";
@@ -312,7 +312,7 @@ import { type Api } from "@zag-js/menu";
 import { inject } from "vue";
 import { cn } from "@midoneui/utils/cn";
 import { ChevronRight } from "lucide-vue-next";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { menuItem } from "@midoneui/styles/menu.styles";
 
 const { class: className, ...props } = defineProps<{
@@ -399,7 +399,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { menuRadioItemGroup } from "@midoneui/styles/menu.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -433,7 +433,7 @@ const {
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { menuItemGroupLabel } from "@midoneui/styles/menu.styles";
 
@@ -525,7 +525,7 @@ definePageMeta({
 import type { Api } from "@zag-js/menu";
 import { cn } from "@midoneui/utils/cn";
 import { menuSeparator } from "@midoneui/styles/menu.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { inject } from "vue";
 
 const {
@@ -593,7 +593,7 @@ import {
   MenuRadioItemGroup,
   MenuItemGroupLabel,
   MenuRadioItem,
-} from "@/components/ui/menu";
+} from "@/base/ui/menu";
               ` }}
         </PreviewCode>
         <PreviewCode>

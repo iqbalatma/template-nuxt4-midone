@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import fakers from '@/utils/faker'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Box } from '@/components/ui/box'
+import { Button } from '@/base/ui/button'
+import { Badge } from '@/base/ui/badge'
+import { Input } from '@/base/ui/input'
+import { Textarea } from '@/base/ui/textarea'
+import { Box } from '@/base/ui/box'
 import {
   MenuRoot,
   MenuTrigger,
@@ -12,17 +12,17 @@ import {
   MenuContent,
   MenuItem,
   MenuSeparator,
-} from '@/components/ui/menu'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+} from '@/base/ui/menu'
+import { Field, FieldGroup, FieldLabel } from '@/base/ui/field'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
+import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
 import {
   TooltipRoot,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from '@/components/ui/tooltip'
-import { Lucide } from '@/components/ui/lucide'
+} from '@/base/ui/tooltip'
+import { Lucide } from '@/base/ui/lucide'
 </script>
 
 <template>

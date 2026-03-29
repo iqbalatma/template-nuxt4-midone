@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Box } from '@/components/ui/box'
-import { Field, FieldLabel } from '@/components/ui/field'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
+import { Button } from '@/base/ui/button'
+import { Input } from '@/base/ui/input'
+import { Box } from '@/base/ui/box'
+import { Field, FieldLabel } from '@/base/ui/field'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
 </script>
 
 <template>

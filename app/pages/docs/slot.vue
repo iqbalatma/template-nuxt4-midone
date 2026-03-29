@@ -7,9 +7,9 @@ import {
   SectionTitle,
   SectionContent,
   PreviewCode,
-} from "@/components/docs";
-import { Box } from "@/components/ui/box";
-import { Button } from "@/components/ui/button";
+} from "@/base/docs";
+import { Box } from "@/base/ui/box";
+import { Button } from "@/base/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-vue-next";
 </script>
 

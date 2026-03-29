@@ -13,7 +13,7 @@ import {
   ComboboxItemGroupLabel,
   ComboboxItem,
   ComboboxItemText,
-} from "@/components/ui/combobox";
+} from "@/base/ui/combobox";
 import * as combobox from "@zag-js/combobox";
 import {
   Preview,
@@ -21,7 +21,7 @@ import {
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 import { ref, computed } from "vue";
 const comboboxData = [
   { label: "React", code: "react" },
@@ -302,7 +302,7 @@ import { provide, computed } from "vue";
 import * as combobox from "@zag-js/combobox";
 import { useMachine, normalizeProps } from "@zag-js/vue";
 import type { Props } from "@zag-js/combobox";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -353,10 +353,10 @@ provide("comboboxApi", api);
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { comboboxLabel } from "@midoneui/styles/combobox.styles";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/base/ui/label";
 import type { Api } from "@zag-js/combobox";
 import { inject } from "vue";
 
@@ -388,7 +388,7 @@ definePageMeta({
 })
 import type { Api } from "@zag-js/combobox";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { comboboxControl } from "@midoneui/styles/combobox.styles";
 
@@ -425,7 +425,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { comboboxInput } from "@midoneui/styles/combobox.styles";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/base/ui/input";
 import type { Api } from "@zag-js/combobox";
 import { inject } from "vue";
 
@@ -451,13 +451,13 @@ definePageMeta({
   layout: "docs",
 })
 import { cn } from "@midoneui/utils/cn";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import { ChevronsUpDownIcon } from "lucide-vue-next";
 import { comboboxTrigger } from "@midoneui/styles/combobox.styles";
 import { ComboboxClearTrigger } from ".";
 import type { Api } from "@zag-js/combobox";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -493,7 +493,7 @@ const api = inject<Api>("comboboxApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { comboboxClearTrigger } from "@midoneui/styles/combobox.styles";
 import type { Api } from "@zag-js/combobox";
@@ -531,7 +531,7 @@ import { cn } from "@midoneui/utils/cn";
 import { comboboxPositioner } from "@midoneui/styles/combobox.styles";
 import type { Api } from "@zag-js/combobox";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -566,11 +566,11 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { comboboxContent } from "@midoneui/styles/combobox.styles";
-import { Box } from "@/components/ui/box";
+import { Box } from "@/base/ui/box";
 import { ComboboxPositioner } from ".";
 import type { Api } from "@zag-js/combobox";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -604,7 +604,7 @@ const api = inject<Api>("comboboxApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { comboboxItemGroup } from "@midoneui/styles/combobox.styles";
 import type { Api } from "@zag-js/combobox";
@@ -644,7 +644,7 @@ provide("comboboxItemGroupId", itemGroupId);
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { comboboxItemGroupLabel } from "@midoneui/styles/combobox.styles";
 import type { Api, ItemGroupProps } from "@zag-js/combobox";
@@ -684,7 +684,7 @@ const itemGroupId = inject<ItemGroupProps>("comboboxItemGroupId");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { comboboxItem } from "@midoneui/styles/combobox.styles";
 import type { ItemProps } from "@zag-js/combobox";
@@ -723,7 +723,7 @@ provide("comboboxItem", props);
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { comboboxItemText } from "@midoneui/styles/combobox.styles";
 import type { Api, ItemProps } from "@zag-js/combobox";
@@ -761,7 +761,7 @@ const item = inject<ItemProps>("comboboxItem");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { comboboxItemIndicator } from "@midoneui/styles/combobox.styles";
 import { Check } from "lucide-vue-next";
@@ -831,7 +831,7 @@ import {
   ComboboxItemGroupLabel,
   ComboboxItem,
   ComboboxItemText,
-} from "@/components/ui/combobox";
+} from "@/base/ui/combobox";
                     ` }}
         </PreviewCode>
         <PreviewCode>

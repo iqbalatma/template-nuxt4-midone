@@ -2,13 +2,13 @@
 definePageMeta({
   layout: "docs",
 })
-import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { Breadcrumb } from "@/base/ui/breadcrumb";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -49,7 +49,7 @@ import {
   MenuPositioner,
   MenuContent,
   MenuItem,
-} from "@/components/ui/menu";
+} from "@/base/ui/menu";
 import { BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from ".";
 
 const { class: className, ...props } = defineProps<{
@@ -191,7 +191,7 @@ export { default as BreadcrumbList } from "./BreadcrumbList.vue";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { Breadcrumb } from "@/base/ui/breadcrumb";
               ` }}
         </PreviewCode>
         <PreviewCode>

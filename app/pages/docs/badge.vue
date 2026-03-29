@@ -3,13 +3,13 @@ definePageMeta({
   layout: "docs",
 })
 import { ChevronDown, CheckSquare } from "lucide-vue-next";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/base/ui/badge";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -44,7 +44,7 @@ import {
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from "@/components/ui/tooltip";
+} from "@/base/ui/tooltip";
 import {
   badgeVariants,
   type BadgeVariants,
@@ -94,7 +94,7 @@ export { default as Badge } from "./Badge.vue";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/base/ui/badge";
               ` }}
         </PreviewCode>
         <PreviewCode>

@@ -6,14 +6,14 @@ import {
   AvatarRoot,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar";
+} from "@/base/ui/avatar";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -54,7 +54,7 @@ import type { Api } from "@zag-js/avatar";
 import { cn } from "@midoneui/utils/cn";
 import { avatarFallback } from "@midoneui/styles/avatar.styles";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -122,7 +122,7 @@ import {
   avatarRootVariants,
   type AvatarRootVariants,
 } from "@midoneui/styles/avatar.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -187,7 +187,7 @@ import {
   AvatarRoot,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar";
+} from "@/base/ui/avatar";
               ` }}
         </PreviewCode>
         <PreviewCode>

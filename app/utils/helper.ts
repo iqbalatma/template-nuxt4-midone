@@ -110,8 +110,7 @@ const isset = (obj: object | string) => {
 
   return false
 }
-
-const toRaw = (obj: object) => {
+const toSimpleRaw = (obj: object) => {
   return JSON.parse(JSON.stringify(obj))
 }
 
@@ -193,7 +192,7 @@ export {
   timeAgo,
   diffTimeByNow,
   isset,
-  toRaw,
+  toSimpleRaw,
   randomNumbers,
   stringToHTML,
   slideUp,

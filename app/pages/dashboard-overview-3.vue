@@ -1,24 +1,24 @@
 <script lang="ts" setup>
-import { AlertRoot, AlertDescription, AlertCloseTrigger } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
-import { Lucide } from '@/components/ui/lucide'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
-import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { AlertRoot, AlertDescription, AlertCloseTrigger } from '@/base/ui/alert'
+import { Badge } from '@/base/ui/badge'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
+import { Lucide } from '@/base/ui/lucide'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/base/ui/tabs'
 import {
   TooltipRoot,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from '@/components/ui/tooltip'
-import { Line3, Donut1, Bar2 } from '@/components/chart-presets'
-import { Transactions } from '@/components/transactions'
-import { RecentActivities } from '@/components/recent-activities'
-import { OfficialStores } from '@/components/official-stores'
-import { WeeklyBestSellers } from '@/components/weekly-best-sellers'
-import { WeeklyTopProducts } from '@/components/weekly-top-products'
+} from '@/base/ui/tooltip'
+import { Line3, Donut1, Bar2 } from '@/base/chart-presets'
+import { Transactions } from '@/base/transactions'
+import { RecentActivities } from '@/base/recent-activities'
+import { OfficialStores } from '@/base/official-stores'
+import { WeeklyBestSellers } from '@/base/weekly-best-sellers'
+import { WeeklyTopProducts } from '@/base/weekly-top-products'
 </script>
 
 <template>

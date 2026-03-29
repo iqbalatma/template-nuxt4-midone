@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Box } from "@/components/ui/box";
+import { Box } from "@/base/ui/box";
 </script>
 <template>
     <Box class="w-full xl:w-1/2">

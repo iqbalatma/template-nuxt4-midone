@@ -8,7 +8,7 @@ import {
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 import { ref, h } from "vue";
 import {
   type ColumnDef,
@@ -23,9 +23,9 @@ import {
   type VisibilityState,
 } from "@tanstack/vue-table";
 import { ArrowUpDown, MoreVertical } from "lucide-vue-next";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { CheckboxRoot, CheckboxControl } from "@/components/ui/checkbox";
+import { Button } from "@/base/ui/button";
+import { Badge } from "@/base/ui/badge";
+import { CheckboxRoot, CheckboxControl } from "@/base/ui/checkbox";
 import {
   MenuRoot,
   MenuTrigger,
@@ -33,8 +33,8 @@ import {
   MenuContent,
   MenuItem,
   MenuCheckboxItem,
-} from "@/components/ui/menu";
-import { Input } from "@/components/ui/input";
+} from "@/base/ui/menu";
+import { Input } from "@/base/ui/input";
 import {
   Table,
   TableBody,
@@ -42,7 +42,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/base/ui/table";
 
 export type Payment = {
   id: string;
@@ -426,9 +426,9 @@ import {
   type VisibilityState,
 } from "@tanstack/vue-table";
 import { ArrowUpDown, MoreVertical } from "lucide-vue-next";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { CheckboxRoot, CheckboxControl } from "@/components/ui/checkbox";
+import { Button } from "@/base/ui/button";
+import { Badge } from "@/base/ui/badge";
+import { CheckboxRoot, CheckboxControl } from "@/base/ui/checkbox";
 import {
   MenuRoot,
   MenuTrigger,
@@ -436,8 +436,8 @@ import {
   MenuContent,
   MenuItem,
   MenuCheckboxItem,
-} from "@/components/ui/menu";
-import { Input } from "@/components/ui/input";
+} from "@/base/ui/menu";
+import { Input } from "@/base/ui/input";
 import {
   Table,
   TableBody,
@@ -445,7 +445,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/base/ui/table";
 
 export type Payment = {
   id: string;
@@ -835,9 +835,9 @@ import {
   type VisibilityState,
 } from "@tanstack/vue-table";
 import { ArrowUpDown, MoreVertical } from "lucide-vue-next";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { CheckboxRoot, CheckboxControl } from "@/components/ui/checkbox";
+import { Button } from "@/base/ui/button";
+import { Badge } from "@/base/ui/badge";
+import { CheckboxRoot, CheckboxControl } from "@/base/ui/checkbox";
 import {
   MenuRoot,
   MenuTrigger,
@@ -845,8 +845,8 @@ import {
   MenuContent,
   MenuItem,
   MenuCheckboxItem,
-} from "@/components/ui/menu";
-import { Input } from "@/components/ui/input";
+} from "@/base/ui/menu";
+import { Input } from "@/base/ui/input";
 import {
   Table,
   TableBody,
@@ -854,7 +854,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/base/ui/table";
                     ` }}
         </PreviewCode>
         <PreviewCode>
@@ -877,9 +877,9 @@ import {
   type VisibilityState,
 } from "@tanstack/vue-table";
 import { ArrowUpDown, MoreVertical } from "lucide-vue-next";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { CheckboxRoot, CheckboxControl } from "@/components/ui/checkbox";
+import { Button } from "@/base/ui/button";
+import { Badge } from "@/base/ui/badge";
+import { CheckboxRoot, CheckboxControl } from "@/base/ui/checkbox";
 import {
   MenuRoot,
   MenuTrigger,
@@ -887,8 +887,8 @@ import {
   MenuContent,
   MenuItem,
   MenuCheckboxItem,
-} from "@/components/ui/menu";
-import { Input } from "@/components/ui/input";
+} from "@/base/ui/menu";
+import { Input } from "@/base/ui/input";
 import {
   Table,
   TableBody,
@@ -896,7 +896,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/base/ui/table";
 
 export type Payment = {
   id: string;

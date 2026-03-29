@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import fakers from '@/utils/faker'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Box } from '@/components/ui/box'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
+import { Button } from '@/base/ui/button'
+import { Input } from '@/base/ui/input'
+import { Box } from '@/base/ui/box'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
 import {
   Table,
   TableHeader,
@@ -11,9 +11,9 @@ import {
   TableHead,
   TableRow,
   TableCell,
-} from '@/components/ui/table'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
-import { CheckboxRoot, CheckboxControl } from '@/components/ui/checkbox'
+} from '@/base/ui/table'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
+import { CheckboxRoot, CheckboxControl } from '@/base/ui/checkbox'
 import {
   PaginationContext,
   PaginationRoot,
@@ -21,14 +21,14 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationEllipsis,
-} from '@/components/ui/pagination'
+} from '@/base/ui/pagination'
 import {
   TooltipRoot,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from '@/components/ui/tooltip'
-import { Lucide } from '@/components/ui/lucide'
+} from '@/base/ui/tooltip'
+import { Lucide } from '@/base/ui/lucide'
 </script>
 
 <template>

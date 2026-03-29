@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import fakers from '@/utils/faker'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Box } from '@/components/ui/box'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
+import { Button } from '@/base/ui/button'
+import { Badge } from '@/base/ui/badge'
+import { Box } from '@/base/ui/box'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
 import {
   PaginationContext,
   PaginationRoot,
@@ -13,9 +13,9 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationEllipsis,
-} from '@/components/ui/pagination'
-import { DialogRoot, DialogContent, DialogCloseTrigger } from '@/components/ui/dialog'
-import { Lucide } from '@/components/ui/lucide'
+} from '@/base/ui/pagination'
+import { DialogRoot, DialogContent, DialogCloseTrigger } from '@/base/ui/dialog'
+import { Lucide } from '@/base/ui/lucide'
 
 const deleteConfirmationOpen = ref(false)
 </script>

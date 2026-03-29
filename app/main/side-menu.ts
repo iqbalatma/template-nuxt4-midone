@@ -1,4 +1,4 @@
-import { type Icon } from '@/components/ui/lucide'
+import { type Icon } from '@/base/ui/lucide'
 
 export interface Menu {
   icon?: Icon

@@ -4,15 +4,15 @@ import logo from '@/assets/images/logo.svg'
 import { useSideMenu } from '@/composables/useSideMenu'
 import { useQuickSearch } from '@/composables/useQuickSearch'
 import fakers from '@/utils/faker'
-import { Box } from '@/components/ui/box'
-import { Lucide } from '@/components/ui/lucide'
-import { Breadcrumb } from '@/components/ui/breadcrumb'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Box } from '@/base/ui/box'
+import { Lucide } from '@/base/ui/lucide'
+import { Breadcrumb } from '@/base/ui/breadcrumb'
+import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
 import mainMenu from '@/main/side-menu'
-import { SideMenu } from '@/components/side-menu'
-import { AccountDropdown, AccountTrigger } from '@/components/account-dropdown'
-import { NotificationDropdown } from '@/components/notification-dropdown'
-import { QuickSearchDialog } from '@/components/quick-search-dialog'
+import { SideMenu } from '@/base/side-menu'
+import { AccountDropdown, AccountTrigger } from '@/base/account-dropdown'
+import { NotificationDropdown } from '@/base/notification-dropdown'
+import { QuickSearchDialog } from '@/base/quick-search-dialog'
 import {
   ScrollAreaRoot,
   ScrollAreaViewport,
@@ -20,7 +20,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaCorner,
-} from "@/components/ui/scroll-area";
+} from "@/base/ui/scroll-area";
 
 const {
   compactMenu,

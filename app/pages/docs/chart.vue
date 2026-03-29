@@ -2,14 +2,14 @@
 definePageMeta({
   layout: "docs",
 })
-import { Chart, getColor } from "@/components/ui/chart";
+import { Chart, getColor } from "@/base/ui/chart";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -186,7 +186,7 @@ export { getColor } from "./utils";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { Chart, getColor } from "@/components/ui/chart";
+import { Chart, getColor } from "@/base/ui/chart";
               ` }}
         </PreviewCode>
         <PreviewCode>

@@ -1,22 +1,22 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import fakers from '@/utils/faker'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
 import {
   DialogRoot,
   DialogContent,
   DialogTitle,
   DialogDescription,
   DialogCloseTrigger,
-} from '@/components/ui/dialog'
-import { Field, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Lucide } from '@/components/ui/lucide'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
-import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Textarea } from '@/components/ui/textarea'
+} from '@/base/ui/dialog'
+import { Field, FieldLabel } from '@/base/ui/field'
+import { Input } from '@/base/ui/input'
+import { Lucide } from '@/base/ui/lucide'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/base/ui/tabs'
+import { Textarea } from '@/base/ui/textarea'
 
 const newOrderDialogOpen = ref(false)
 const addItemDialogOpen = ref(false)

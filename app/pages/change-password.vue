@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import fakers from '@/utils/faker'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Lucide } from '@/components/ui/lucide'
+import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { Badge } from '@/base/ui/badge'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
+import { Field, FieldGroup, FieldLabel } from '@/base/ui/field'
+import { Input } from '@/base/ui/input'
+import { Lucide } from '@/base/ui/lucide'
 import {
   MenuRoot,
   MenuTrigger,
@@ -14,7 +14,7 @@ import {
   MenuContent,
   MenuItem,
   MenuSeparator,
-} from '@/components/ui/menu'
+} from '@/base/ui/menu'
 </script>
 
 <template>

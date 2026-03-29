@@ -2,9 +2,9 @@
 import { ref, computed } from 'vue'
 import * as combobox from '@zag-js/combobox'
 import fakers from '@/utils/faker'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
+import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
 import {
   ComboboxRoot,
   ComboboxControl,
@@ -15,7 +15,7 @@ import {
   ComboboxItemGroupLabel,
   ComboboxItem,
   ComboboxItemText,
-} from '@/components/ui/combobox'
+} from '@/base/ui/combobox'
 import {
   DatePickerRoot,
   DatePickerControl,
@@ -40,20 +40,20 @@ import {
   DatePickerTableCell,
   DatePickerTableCellTrigger,
   DatePickerContext,
-} from '@/components/ui/datepicker'
-import { Field, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Lucide } from '@/components/ui/lucide'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
-import { SwitchRoot, SwitchControl } from '@/components/ui/switch'
-import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Textarea } from '@/components/ui/textarea'
+} from '@/base/ui/datepicker'
+import { Field, FieldLabel } from '@/base/ui/field'
+import { Input } from '@/base/ui/input'
+import { Lucide } from '@/base/ui/lucide'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
+import { SwitchRoot, SwitchControl } from '@/base/ui/switch'
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/base/ui/tabs'
+import { Textarea } from '@/base/ui/textarea'
 import {
   TooltipRoot,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from '@/components/ui/tooltip'
+} from '@/base/ui/tooltip'
 
 // Categories combobox data
 const categoryData = [

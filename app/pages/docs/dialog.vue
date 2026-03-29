@@ -9,10 +9,10 @@ import {
   DialogTitle,
   DialogDescription,
   DialogCloseTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+} from "@/base/ui/dialog";
+import { Label } from "@/base/ui/label";
+import { Input } from "@/base/ui/input";
+import { Button } from "@/base/ui/button";
 import { SquareX, Save, ExternalLink } from "lucide-vue-next";
 import {
   Preview,
@@ -20,7 +20,7 @@ import {
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 import { ref } from "vue";
 const dialog = ref(false);
 </script>
@@ -164,10 +164,10 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { dialogTrigger } from "@midoneui/styles/dialog.styles";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -206,7 +206,7 @@ import { cn } from "@midoneui/utils/cn";
 import { dialogBackdrop } from "@midoneui/styles/dialog.styles";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -243,7 +243,7 @@ import { cn } from "@midoneui/utils/cn";
 import { dialogPositioner } from "@midoneui/styles/dialog.styles";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -278,11 +278,11 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { dialogContent } from "@midoneui/styles/dialog.styles";
-import { Box } from "@/components/ui/box";
-import { DialogBackdrop, DialogPositioner } from "@/components/ui/dialog";
+import { Box } from "@/base/ui/box";
+import { DialogBackdrop, DialogPositioner } from "@/base/ui/dialog";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -327,7 +327,7 @@ import { cn } from "@midoneui/utils/cn";
 import { dialogTitle } from "@midoneui/styles/dialog.styles";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -364,7 +364,7 @@ import { cn } from "@midoneui/utils/cn";
 import { dialogDescription } from "@midoneui/styles/dialog.styles";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -399,7 +399,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { dialogCloseTrigger } from "@midoneui/styles/dialog.styles";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import type { Api } from "@zag-js/dialog";
 import {
   buttonVariants,
@@ -407,7 +407,7 @@ import {
 } from "@midoneui/styles/button.styles";
 import { X } from "lucide-vue-next";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -478,7 +478,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogCloseTrigger,
-} from "@/components/ui/dialog";
+} from "@/base/ui/dialog";
               ` }}
         </PreviewCode>
         <PreviewCode>

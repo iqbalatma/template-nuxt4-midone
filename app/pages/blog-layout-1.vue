@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 import fakers from '@/utils/faker'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Lucide } from '@/components/ui/lucide'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
+import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
+import { Input } from '@/base/ui/input'
+import { Lucide } from '@/base/ui/lucide'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
 import {
   PaginationContext,
   PaginationRoot,
@@ -15,13 +15,13 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationEllipsis,
-} from '@/components/ui/pagination'
+} from '@/base/ui/pagination'
 import {
   TooltipRoot,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from '@/components/ui/tooltip'
+} from '@/base/ui/tooltip'
 </script>
 
 <template>

@@ -8,7 +8,7 @@ import {
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 import {
   ScrollAreaRoot,
   ScrollAreaViewport,
@@ -16,7 +16,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaCorner,
-} from "@/components/ui/scroll-area";
+} from "@/base/ui/scroll-area";
 </script>
 
 <template>
@@ -51,7 +51,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaCorner,
-} from "@/components/ui/scroll-area";
+} from "@/base/ui/scroll-area";
 </script>
 
 <template>
@@ -276,7 +276,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaCorner,
-} from "@/components/ui/scroll-area";
+} from "@/base/ui/scroll-area";
           ` }}
         </PreviewCode>
         <PreviewCode>

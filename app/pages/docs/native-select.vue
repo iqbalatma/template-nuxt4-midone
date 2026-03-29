@@ -6,13 +6,13 @@ import {
     NativeSelect,
     NativeSelectOption,
     NativeSelectOptionGroup,
-} from "@/components/ui/native-select";
+} from "@/base/ui/native-select";
 import {
     Preview,
     SectionTitle,
     SectionContent,
     PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -139,7 +139,7 @@ import {
   NativeSelect,
   NativeSelectOption,
   NativeSelectOptionGroup,
-} from "@/components/ui/native-select";
+} from "@/base/ui/native-select";
                     ` }}
                 </PreviewCode>
                 <PreviewCode>

@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import fakers from '@/utils/faker'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Box } from '@/components/ui/box'
-import { Lucide } from '@/components/ui/lucide'
-import { Textarea } from '@/components/ui/textarea'
+import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { Box } from '@/base/ui/box'
+import { Lucide } from '@/base/ui/lucide'
+import { Textarea } from '@/base/ui/textarea'
 import {
   TooltipRoot,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from '@/components/ui/tooltip'
+} from '@/base/ui/tooltip'
 </script>
 
 <template>

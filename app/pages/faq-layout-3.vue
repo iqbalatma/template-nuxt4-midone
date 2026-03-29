@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { Box } from '@/components/ui/box'
+import { Box } from '@/base/ui/box'
 import {
   AccordionRoot,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from '@/components/ui/accordion'
-import { Lucide } from '@/components/ui/lucide'
+} from '@/base/ui/accordion'
+import { Lucide } from '@/base/ui/lucide'
 </script>
 
 <template>

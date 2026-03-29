@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import * as combobox from '@zag-js/combobox'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
 import {
   ComboboxRoot,
   ComboboxControl,
@@ -13,11 +13,11 @@ import {
   ComboboxItemGroupLabel,
   ComboboxItem,
   ComboboxItemText,
-} from '@/components/ui/combobox'
-import { Field, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { SwitchRoot, SwitchControl } from '@/components/ui/switch'
-import { Textarea } from '@/components/ui/textarea'
+} from '@/base/ui/combobox'
+import { Field, FieldLabel } from '@/base/ui/field'
+import { Input } from '@/base/ui/input'
+import { SwitchRoot, SwitchControl } from '@/base/ui/switch'
+import { Textarea } from '@/base/ui/textarea'
 
 const categoryData = [
   { label: 'Sport & Outdoor', code: 'sport' },

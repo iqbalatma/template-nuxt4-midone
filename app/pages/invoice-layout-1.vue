@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { Button } from '@/components/ui/button'
-import { Box } from '@/components/ui/box'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
+import { Button } from '@/base/ui/button'
+import { Box } from '@/base/ui/box'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
 import {
   Table,
   TableHeader,
@@ -9,8 +9,8 @@ import {
   TableHead,
   TableRow,
   TableCell,
-} from '@/components/ui/table'
-import { Lucide } from '@/components/ui/lucide'
+} from '@/base/ui/table'
+import { Lucide } from '@/base/ui/lucide'
 </script>
 
 <template>

@@ -8,14 +8,14 @@ import {
   RadioGroupItem,
   RadioGroupItemText,
   RadioGroupItemControl,
-} from "@/components/ui/radio-group";
+} from "@/base/ui/radio-group";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 const frameworks = ["React", "Solid", "Vue", "Svelte"];
 </script>
 
@@ -71,7 +71,7 @@ definePageMeta({
 })
 import * as radioGroup from "@zag-js/radio-group";
 import type { Props } from "@zag-js/radio-group";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
@@ -119,7 +119,7 @@ definePageMeta({
 import { cn } from "@midoneui/utils/cn";
 import { radioGroupLabel } from "@midoneui/styles/radio-group.styles";
 import { label } from "@midoneui/styles/label.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/radio-group";
 import { inject } from "vue";
 
@@ -154,7 +154,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { radioGroupIndicator } from "@midoneui/styles/radio-group.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/radio-group";
 import { inject } from "vue";
 
@@ -189,7 +189,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { radioGroupItem } from "@midoneui/styles/radio-group.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { RadioGroupItemHiddenInput } from ".";
 import type { Api, ItemProps } from "@zag-js/radio-group";
 import { provide, inject } from "vue";
@@ -232,7 +232,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { radioGroupItemText } from "@midoneui/styles/radio-group.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemProps } from "@zag-js/radio-group";
 import { inject } from "vue";
 
@@ -270,7 +270,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { radioGroupItemControl } from "@midoneui/styles/radio-group.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemProps } from "@zag-js/radio-group";
 import { inject } from "vue";
 
@@ -352,7 +352,7 @@ import {
   RadioGroupItem,
   RadioGroupItemText,
   RadioGroupItemControl,
-} from "@/components/ui/radio-group";
+} from "@/base/ui/radio-group";
               ` }}
         </PreviewCode>
         <PreviewCode>

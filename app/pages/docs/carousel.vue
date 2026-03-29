@@ -11,14 +11,14 @@ import {
   CarouselIndicator,
   CarouselItemGroup,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@/base/ui/carousel";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 const images = Array.from(
   { length: 5 },
   (_, i) => `https://picsum.photos/seed/${i + 1}/500/300`
@@ -113,7 +113,7 @@ definePageMeta({
 import * as carousel from "@zag-js/carousel";
 import { useMachine, normalizeProps } from "@zag-js/vue";
 import type { Props } from "@zag-js/carousel";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { carouselRoot } from "@midoneui/styles/carousel.styles";
 import { computed, provide } from "vue";
@@ -161,7 +161,7 @@ provide("carouselApi", api);
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { carouselControl } from "@midoneui/styles/carousel.styles";
 import type { Api } from "@zag-js/carousel";
@@ -198,9 +198,9 @@ const api = inject<Api>("carouselApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import { ArrowLeft } from "lucide-vue-next";
 import { carouselPrevTrigger } from "@midoneui/styles/carousel.styles";
 import type { Api } from "@zag-js/carousel";
@@ -235,9 +235,9 @@ const api = inject<Api>("carouselApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import { ArrowRight } from "lucide-vue-next";
 import { carouselNextTrigger } from "@midoneui/styles/carousel.styles";
 import type { Api } from "@zag-js/carousel";
@@ -272,7 +272,7 @@ const api = inject<Api>("carouselApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { carouselIndicatorGroup } from "@midoneui/styles/carousel.styles";
 import type { Api } from "@zag-js/carousel";
@@ -343,7 +343,7 @@ const api = inject<Api>("carouselApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { carouselItemGroup } from "@midoneui/styles/carousel.styles";
 import type { Api } from "@zag-js/carousel";
@@ -380,9 +380,9 @@ const api = inject<Api>("carouselApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
-import { Box } from "@/components/ui/box";
+import { Box } from "@/base/ui/box";
 import { carouselItem } from "@midoneui/styles/carousel.styles";
 import type { Api, ItemProps } from "@zag-js/carousel";
 import { inject } from "vue";
@@ -439,7 +439,7 @@ import {
   CarouselIndicator,
   CarouselItemGroup,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@/base/ui/carousel";
               ` }}
         </PreviewCode>
         <PreviewCode>

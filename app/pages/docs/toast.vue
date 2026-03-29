@@ -2,7 +2,7 @@
 definePageMeta({
   layout: "docs",
 })
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import {
   toaster,
   ToasterContainer,
@@ -10,14 +10,14 @@ import {
   ToastTitle,
   ToastDescription,
   ToastCloseTrigger,
-} from "@/components/ui/toast";
+} from "@/base/ui/toast";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -107,7 +107,7 @@ import {
   boxVariants,
   type BoxVariants,
 } from "@midoneui/styles/box.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/toast";
 import { inject } from "vue";
 
@@ -150,7 +150,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { toastTitle } from "@midoneui/styles/toast.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/toast";
 import { inject } from "vue";
 
@@ -187,7 +187,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { toastDescription } from "@midoneui/styles/toast.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/toast";
 import { inject } from "vue";
 
@@ -228,8 +228,8 @@ import {
   buttonVariants,
   type ButtonVariants,
 } from "@midoneui/styles/button.styles";
-import { Slot } from "@/components/ui/slot";
-import { Button } from "@/components/ui/button";
+import { Slot } from "@/base/ui/slot";
+import { Button } from "@/base/ui/button";
 import { X } from "lucide-vue-next";
 import type { Api } from "@zag-js/toast";
 import { inject } from "vue";
@@ -392,7 +392,7 @@ import {
   ToastTitle,
   ToastDescription,
   ToastCloseTrigger,
-} from "@/components/ui/toast";
+} from "@/base/ui/toast";
               ` }}
         </PreviewCode>
         <PreviewCode>

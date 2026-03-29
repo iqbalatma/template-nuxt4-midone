@@ -6,14 +6,14 @@ import {
   CheckboxRoot,
   CheckboxLabel,
   CheckboxControl,
-} from "@/components/ui/checkbox";
+} from "@/base/ui/checkbox";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -95,7 +95,7 @@ provide("checkboxApi", api);
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import type { Api } from "@zag-js/checkbox";
 import { checkboxLabel } from "@midoneui/styles/checkbox.styles";
@@ -133,7 +133,7 @@ const api = inject<Api>("checkboxApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { CheckIcon } from "lucide-vue-next";
 import { cn } from "@midoneui/utils/cn";
 import { checkboxControl } from "@midoneui/styles/checkbox.styles";
@@ -174,7 +174,7 @@ const api = inject<Api>("checkboxApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/checkbox";
 import { cn } from "@midoneui/utils/cn";
 import { checkboxIndicator } from "@midoneui/styles/checkbox.styles";
@@ -252,7 +252,7 @@ import {
   CheckboxRoot,
   CheckboxLabel,
   CheckboxControl,
-} from "@/components/ui/checkbox";
+} from "@/base/ui/checkbox";
               ` }}
         </PreviewCode>
         <PreviewCode>

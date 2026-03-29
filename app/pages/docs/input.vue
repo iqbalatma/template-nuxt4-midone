@@ -2,13 +2,13 @@
 definePageMeta({
   layout: "docs",
 })
-import { Input } from "@/components/ui/input";
+import { Input } from "@/base/ui/input";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -68,7 +68,7 @@ export { default as Input } from "./Input.vue";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { Input } from "@/components/ui/input";
+import { Input } from "@/base/ui/input";
               ` }}
         </PreviewCode>
         <PreviewCode>

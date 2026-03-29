@@ -9,14 +9,14 @@ import {
   ProgressCircle,
   ProgressCircleTrack,
   ProgressCircleRange,
-} from "@/components/ui/progress-circular";
+} from "@/base/ui/progress-circular";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -143,8 +143,8 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { progressLabel } from "@midoneui/styles/progress-circular.styles";
-import { Label } from "@/components/ui/label";
-import { Slot } from "@/components/ui/slot";
+import { Label } from "@/base/ui/label";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/progress";
 import { inject } from "vue";
 
@@ -178,7 +178,7 @@ definePageMeta({
 })
 import * as progress from "@zag-js/progress";
 import type { Props } from "@zag-js/progress";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
@@ -270,7 +270,7 @@ import {
   ProgressCircle,
   ProgressCircleTrack,
   ProgressCircleRange,
-} from "@/components/ui/progress-circular";
+} from "@/base/ui/progress-circular";
               ` }}
         </PreviewCode>
         <PreviewCode>

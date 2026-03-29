@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import fakers from '@/utils/faker'
-import { Badge } from '@/components/ui/badge'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
-import { CheckboxRoot, CheckboxControl } from '@/components/ui/checkbox'
-import { Field, FieldLabel } from '@/components/ui/field'
-import { FileIcon } from '@/components/ui/file-icon'
-import { Input } from '@/components/ui/input'
-import { Lucide } from '@/components/ui/lucide'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
+import { Badge } from '@/base/ui/badge'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
+import { CheckboxRoot, CheckboxControl } from '@/base/ui/checkbox'
+import { Field, FieldLabel } from '@/base/ui/field'
+import { FileIcon } from '@/base/ui/file-icon'
+import { Input } from '@/base/ui/input'
+import { Lucide } from '@/base/ui/lucide'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
 import {
   PaginationContext,
   PaginationRoot,
@@ -17,13 +17,13 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationEllipsis,
-} from '@/components/ui/pagination'
+} from '@/base/ui/pagination'
 import {
   PopoverRoot,
   PopoverTrigger,
   PopoverPositioner,
   PopoverContent,
-} from '@/components/ui/popover'
+} from '@/base/ui/popover'
 </script>
 
 <template>

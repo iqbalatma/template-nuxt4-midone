@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
-import { CheckboxRoot, CheckboxControl, CheckboxLabel } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
+import { CheckboxRoot, CheckboxControl, CheckboxLabel } from '@/base/ui/checkbox'
+import { Input } from '@/base/ui/input'
 import logoUrl from '@/assets/images/logo.svg'
 import illustrationUrl from '@/assets/images/illustration.svg'
 

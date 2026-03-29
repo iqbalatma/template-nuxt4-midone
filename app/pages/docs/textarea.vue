@@ -2,13 +2,13 @@
 definePageMeta({
   layout: "docs",
 })
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/base/ui/textarea";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -63,7 +63,7 @@ export { default as Textarea } from "./Textarea.vue";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/base/ui/textarea";
               ` }}
         </PreviewCode>
         <PreviewCode>

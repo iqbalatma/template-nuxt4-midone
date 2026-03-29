@@ -7,15 +7,15 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
+} from "@/base/ui/accordion";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
-import { Box } from "@/components/ui/box";
+} from "@/base/docs";
+import { Box } from "@/base/ui/box";
 </script>
 
 <template>
@@ -151,7 +151,7 @@ definePageMeta({
 import { accordionContent } from "@midoneui/styles/accordion.styles";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemProps } from "@zag-js/accordion";
 
 const {
@@ -193,7 +193,7 @@ import {
 } from "@midoneui/styles/box.styles";
 import { cn } from "@midoneui/utils/cn";
 import { inject, provide } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemProps } from "@zag-js/accordion";
 
 const {
@@ -242,7 +242,7 @@ import { provide, computed } from "vue";
 import * as accordion from "@zag-js/accordion";
 import type { Props } from "@zag-js/accordion";
 import { useMachine, normalizeProps } from "@zag-js/vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -296,7 +296,7 @@ import {
 } from "@midoneui/styles/accordion.styles";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemProps } from "@zag-js/accordion";
 
 const {
@@ -352,8 +352,8 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
-import { Box } from "@/components/ui/box";
+} from "@/base/ui/accordion";
+import { Box } from "@/base/ui/box";
               ` }}
         </PreviewCode>
         <PreviewCode>

@@ -13,14 +13,14 @@ import {
   SliderHiddenInput,
   SliderMarkerGroup,
   SliderMarker,
-} from "@/components/ui/slider";
+} from "@/base/ui/slider";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -83,7 +83,7 @@ definePageMeta({
 })
 import * as slider from "@zag-js/slider";
 import type { Props } from "@zag-js/slider";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
@@ -125,8 +125,8 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sliderLabel } from "@midoneui/styles/slider.styles";
-import { Slot } from "@/components/ui/slot";
-import { Label } from "@/components/ui/label";
+import { Slot } from "@/base/ui/slot";
+import { Label } from "@/base/ui/label";
 import type { Api } from "@zag-js/slider";
 import { inject } from "vue";
 
@@ -160,7 +160,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sliderValueText } from "@midoneui/styles/slider.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/slider";
 import { inject } from "vue";
 
@@ -195,7 +195,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sliderControl } from "@midoneui/styles/slider.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/slider";
 import { inject } from "vue";
 
@@ -232,7 +232,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sliderTrack } from "@midoneui/styles/slider.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/slider";
 import { inject } from "vue";
 
@@ -269,7 +269,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sliderRange } from "@midoneui/styles/slider.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/slider";
 import { inject } from "vue";
 
@@ -306,7 +306,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sliderThumb } from "@midoneui/styles/slider.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ThumbProps } from "@zag-js/slider";
 import { provide, inject } from "vue";
 
@@ -374,7 +374,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sliderMarkerGroup } from "@midoneui/styles/slider.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/slider";
 import { inject } from "vue";
 
@@ -411,7 +411,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sliderMarker } from "@midoneui/styles/slider.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, MarkerProps } from "@zag-js/slider";
 import { inject } from "vue";
 
@@ -475,7 +475,7 @@ import {
   SliderHiddenInput,
   SliderMarkerGroup,
   SliderMarker,
-} from "@/components/ui/slider";
+} from "@/base/ui/slider";
                     ` }}
         </PreviewCode>
         <PreviewCode>

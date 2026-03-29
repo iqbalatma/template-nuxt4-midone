@@ -7,16 +7,16 @@ import {
   AlertTitle,
   AlertDescription,
   AlertCloseTrigger,
-} from "@/components/ui/alert";
+} from "@/base/ui/alert";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 import { Compass } from "lucide-vue-next";
-import { Box } from "@/components/ui/box";
+import { Box } from "@/base/ui/box";
 </script>
 
 <template>
@@ -63,7 +63,7 @@ definePageMeta({
 })
 import { X } from "lucide-vue-next";
 import { cn } from "@midoneui/utils/cn";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { alertCloseTrigger } from "@midoneui/styles/alert.styles";
 import { inject } from "vue";
 
@@ -104,7 +104,7 @@ definePageMeta({
   layout: "docs",
 })
 import { cn } from "@midoneui/utils/cn";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { alertDescription } from "@midoneui/styles/alert.styles";
 
 const {
@@ -141,7 +141,7 @@ import {
   alertRootVariants,
   type AlertRootVariants,
 } from "@midoneui/styles/alert.styles";
-import { Presence } from "@/components/ui/presence";
+import { Presence } from "@/base/ui/presence";
 import { ref, provide } from "vue";
 
 const {
@@ -185,7 +185,7 @@ definePageMeta({
   layout: "docs",
 })
 import { cn } from "@midoneui/utils/cn";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { alertTitle } from "@midoneui/styles/alert.styles";
 
 const {
@@ -229,7 +229,7 @@ import {
   AlertTitle,
   AlertDescription,
   AlertCloseTrigger,
-} from "@/components/ui/alert";
+} from "@/base/ui/alert";
               ` }}
         </PreviewCode>
         <PreviewCode>

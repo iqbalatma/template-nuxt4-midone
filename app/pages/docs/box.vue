@@ -3,13 +3,13 @@ definePageMeta({
   layout: "docs",
 })
 import { CircleGauge } from "lucide-vue-next";
-import { Box } from "@/components/ui/box";
+import { Box } from "@/base/ui/box";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -59,7 +59,7 @@ import {
   boxVariants,
   type BoxVariants,
 } from "@midoneui/styles/box.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -100,7 +100,7 @@ export { default as Box } from "./Box.vue";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { Box } from "@/components/ui/box";
+import { Box } from "@/base/ui/box";
               ` }}
         </PreviewCode>
         <PreviewCode>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import errorIllustrationUrl from '@/assets/images/error-illustration.svg'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/base/ui/button'
 
 definePageMeta({
   layout: false,

@@ -11,14 +11,14 @@ import {
   TableRow,
   TableCell,
   TableCaption,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+} from "@/base/ui/table";
+import { Badge } from "@/base/ui/badge";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 const invoices: {
     invoice: string;
     paymentStatus: string;
@@ -413,7 +413,7 @@ import {
   TableRow,
   TableCell,
   TableCaption,
-} from "@/components/ui/table";
+} from "@/base/ui/table";
               ` }}
         </PreviewCode>
         <PreviewCode>

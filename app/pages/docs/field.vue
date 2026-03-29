@@ -2,12 +2,12 @@
 definePageMeta({
   layout: "docs",
 })
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import {
     CheckboxRoot,
     CheckboxLabel,
     CheckboxControl,
-} from "@/components/ui/checkbox";
+} from "@/base/ui/checkbox";
 import {
     Field,
     FieldDescription,
@@ -18,8 +18,8 @@ import {
     FieldSet,
     FieldTitle,
     FieldContent,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+} from "@/base/ui/field";
+import { Input } from "@/base/ui/input";
 import {
     SelectRoot,
     SelectControl,
@@ -30,20 +30,20 @@ import {
     SelectItemGroupLabel,
     SelectItem,
     SelectItemText,
-} from "@/components/ui/select";
+} from "@/base/ui/select";
 import * as select from "@zag-js/select";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/base/ui/textarea";
 import {
     RadioGroupRoot,
     RadioGroupItem,
     RadioGroupItemControl,
-} from "@/components/ui/radio-group";
+} from "@/base/ui/radio-group";
 import {
     Preview,
     SectionTitle,
     SectionContent,
     PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -237,7 +237,7 @@ definePageMeta({
   layout: "docs",
 })
 import { cn } from "@midoneui/utils/cn";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/base/ui/label";
 import { fieldLabel } from "@midoneui/styles/field.styles";
 
 const { class: className, ...props } = defineProps<{
@@ -264,7 +264,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { fieldSeparator } from "@midoneui/styles/field.styles";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/base/ui/separator";
 
 const { class: className, ...props } = defineProps<{
   class?: string;
@@ -319,7 +319,7 @@ import {
   FieldSeparator,
   FieldSet,
   FieldTitle,
-} from "@/components/ui/field";
+} from "@/base/ui/field";
           ` }}
                 </PreviewCode>
                 <PreviewCode>

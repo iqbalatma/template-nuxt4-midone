@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import fakers from '@/utils/faker'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Box } from '@/components/ui/box'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
+import { Button } from '@/base/ui/button'
+import { Badge } from '@/base/ui/badge'
+import { Box } from '@/base/ui/box'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
 import {
   Table,
   TableHeader,
@@ -11,14 +11,14 @@ import {
   TableHead,
   TableRow,
   TableCell,
-} from '@/components/ui/table'
+} from '@/base/ui/table'
 import {
   TooltipRoot,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from '@/components/ui/tooltip'
-import { Lucide } from '@/components/ui/lucide'
+} from '@/base/ui/tooltip'
+import { Lucide } from '@/base/ui/lucide'
 </script>
 
 <template>

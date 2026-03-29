@@ -28,16 +28,16 @@ import {
   DatePickerTableBody,
   DatePickerTableCell,
   DatePickerTableCellTrigger,
-} from "@/components/ui/datepicker";
-import { Badge } from "@/components/ui/badge";
-import { Box } from "@/components/ui/box";
+} from "@/base/ui/datepicker";
+import { Badge } from "@/base/ui/badge";
+import { Box } from "@/base/ui/box";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -308,7 +308,7 @@ import { provide, computed } from "vue";
 import * as datepicker from "@zag-js/date-picker";
 import type { Props } from "@zag-js/date-picker";
 import { useMachine, normalizeProps } from "@zag-js/vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -354,8 +354,8 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { datePickerLabel } from "@midoneui/styles/datepicker.styles";
-import { Label } from "@/components/ui/label";
-import { Slot } from "@/components/ui/slot";
+import { Label } from "@/base/ui/label";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/date-picker";
 import { inject } from "vue";
 
@@ -387,7 +387,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerControl } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
@@ -424,10 +424,10 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerInput } from "@midoneui/styles/datepicker.styles";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/base/ui/input";
 import type { Api } from "@zag-js/date-picker";
 import { inject } from "vue";
 
@@ -457,10 +457,10 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerTrigger } from "@midoneui/styles/datepicker.styles";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import { Calendar } from "lucide-vue-next";
 import type { Api } from "@zag-js/date-picker";
 import { inject } from "vue";
@@ -498,10 +498,10 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerClearTrigger } from "@midoneui/styles/datepicker.styles";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import type { Api } from "@zag-js/date-picker";
 import { inject } from "vue";
 import { X } from "lucide-vue-next";
@@ -539,7 +539,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerPositioner } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
@@ -581,8 +581,8 @@ definePageMeta({
 import { cn } from "@midoneui/utils/cn";
 import { datePickerContent } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
-import { Box } from "@/components/ui/box";
-import { Slot } from "@/components/ui/slot";
+import { Box } from "@/base/ui/box";
+import { Slot } from "@/base/ui/slot";
 import { inject } from "vue";
 
 const {
@@ -617,7 +617,7 @@ import { cn } from "@midoneui/utils/cn";
 import {
   NativeSelect,
   NativeSelectOption,
-} from "@/components/ui/native-select";
+} from "@/base/ui/native-select";
 import { datePickerYearSelect } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
 import { inject } from "vue";
@@ -661,7 +661,7 @@ import { datePickerMonthSelect } from "@midoneui/styles/datepicker.styles";
 import {
   NativeSelect,
   NativeSelectOption,
-} from "@/components/ui/native-select";
+} from "@/base/ui/native-select";
 import type { Api } from "@zag-js/date-picker";
 import { inject } from "vue";
 
@@ -699,7 +699,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerView } from "@midoneui/styles/datepicker.styles";
 import type { Api, ViewProps } from "@zag-js/date-picker";
@@ -740,7 +740,7 @@ provide("datepickerView", props);
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerViewControl } from "@midoneui/styles/datepicker.styles";
 import type { Api, ViewProps } from "@zag-js/date-picker";
@@ -781,10 +781,10 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { datePickerPresetTrigger } from "@midoneui/styles/datepicker.styles";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import type { Api, PresetTriggerProps } from "@zag-js/date-picker";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -820,7 +820,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerPrevTrigger } from "@midoneui/styles/datepicker.styles";
 import { MoveLeft } from "lucide-vue-next";
@@ -856,7 +856,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerViewTrigger } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
@@ -893,7 +893,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerNextTrigger } from "@midoneui/styles/datepicker.styles";
 import { MoveRight } from "lucide-vue-next";
@@ -957,7 +957,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerTable } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
@@ -994,7 +994,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerTableHead } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
@@ -1031,7 +1031,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerTableRow } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
@@ -1068,7 +1068,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerTableHeader } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
@@ -1105,7 +1105,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerTableBody } from "@midoneui/styles/datepicker.styles";
 import type { Api } from "@zag-js/date-picker";
@@ -1142,7 +1142,7 @@ const api = inject<Api>("datepickerApi");
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerTableCell } from "@midoneui/styles/datepicker.styles";
 import type {
@@ -1195,7 +1195,7 @@ provide("datepickerCell", props);
 definePageMeta({
   layout: "docs",
 })
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { datePickerTableCellTrigger } from "@midoneui/styles/datepicker.styles";
 import type {
@@ -1318,7 +1318,7 @@ import {
   DatePickerTableBody,
   DatePickerTableCell,
   DatePickerTableCellTrigger,
-} from "@/components/ui/datepicker";
+} from "@/base/ui/datepicker";
               ` }}
         </PreviewCode>
         <PreviewCode>

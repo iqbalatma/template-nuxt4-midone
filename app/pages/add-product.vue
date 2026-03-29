@@ -1,22 +1,22 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 import fakers from '@/utils/faker'
-import { AlertRoot, AlertTitle, AlertCloseTrigger } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
-import { Box } from '@/components/ui/box'
-import { Button } from '@/components/ui/button'
-import { Field, FieldDescription } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Lucide } from '@/components/ui/lucide'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
+import { AlertRoot, AlertTitle, AlertCloseTrigger } from '@/base/ui/alert'
+import { Badge } from '@/base/ui/badge'
+import { Box } from '@/base/ui/box'
+import { Button } from '@/base/ui/button'
+import { Field, FieldDescription } from '@/base/ui/field'
+import { Input } from '@/base/ui/input'
+import { Label } from '@/base/ui/label'
+import { Lucide } from '@/base/ui/lucide'
+import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
 import {
   RadioGroupRoot,
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
-} from '@/components/ui/radio-group'
-import { SwitchRoot, SwitchControl, SwitchLabel } from '@/components/ui/switch'
+} from '@/base/ui/radio-group'
+import { SwitchRoot, SwitchControl, SwitchLabel } from '@/base/ui/switch'
 import {
   Table,
   TableHeader,
@@ -24,14 +24,14 @@ import {
   TableHead,
   TableRow,
   TableCell,
-} from '@/components/ui/table'
-import { Textarea } from '@/components/ui/textarea'
+} from '@/base/ui/table'
+import { Textarea } from '@/base/ui/textarea'
 import {
   TooltipRoot,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
-} from '@/components/ui/tooltip'
+} from '@/base/ui/tooltip'
 </script>
 
 <template>

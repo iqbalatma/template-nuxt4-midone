@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useThemeStore, getTheme, themes, type Themes } from '@/stores/theme'
-import { ThemeSwitcher } from '@/components/theme-switcher'
+import { ThemeSwitcher } from '@/base/theme-switcher'
 import { useRoute } from 'vue-router'
 import { onMounted, computed } from 'vue'
 

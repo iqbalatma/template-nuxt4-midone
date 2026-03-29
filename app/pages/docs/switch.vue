@@ -2,14 +2,14 @@
 definePageMeta({
   layout: "docs",
 })
-import { SwitchRoot, SwitchControl, SwitchLabel } from "@/components/ui/switch";
+import { SwitchRoot, SwitchControl, SwitchLabel } from "@/base/ui/switch";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -53,7 +53,7 @@ import { switchRoot } from "@midoneui/styles/switch.styles";
 import { SwitchHiddenInput } from ".";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -97,7 +97,7 @@ import { switchControl } from "@midoneui/styles/switch.styles";
 import { SwitchThumb } from ".";
 import type { Api } from "@zag-js/switch";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -134,7 +134,7 @@ import { cn } from "@midoneui/utils/cn";
 import { switchThumb } from "@midoneui/styles/switch.styles";
 import type { Api } from "@zag-js/switch";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -172,7 +172,7 @@ import { switchLabel } from "@midoneui/styles/switch.styles";
 import { label } from "@midoneui/styles/label.styles";
 import type { Api } from "@zag-js/switch";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -247,7 +247,7 @@ export { default as SwitchHiddenInput } from "./SwitchHiddenInput.vue";
         <SectionTitle>Usage</SectionTitle>
         <PreviewCode>
           {{ `
-import { SwitchRoot, SwitchControl, SwitchLabel } from "@/components/ui/switch";
+import { SwitchRoot, SwitchControl, SwitchLabel } from "@/base/ui/switch";
               ` }}
         </PreviewCode>
         <PreviewCode>

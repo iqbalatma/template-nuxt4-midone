@@ -2,16 +2,16 @@
 definePageMeta({
   layout: "docs",
 })
-import { Box } from "@/components/ui/box";
+import { Box } from "@/base/ui/box";
 import {
   TabsRoot,
   TabsList,
   TabsTrigger,
   TabsContent,
-} from "@/components/ui/tabs";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+} from "@/base/ui/tabs";
+import { Label } from "@/base/ui/label";
+import { Input } from "@/base/ui/input";
+import { Button } from "@/base/ui/button";
 import { SquareX, Save, ExternalLink } from "lucide-vue-next";
 import {
   Preview,
@@ -19,7 +19,7 @@ import {
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -142,7 +142,7 @@ import { cn } from "@midoneui/utils/cn";
 import { tabsContent } from "@midoneui/styles/tabs.styles";
 import type { Api, ContentProps } from "@zag-js/tabs";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -181,7 +181,7 @@ import { cn } from "@midoneui/utils/cn";
 import { tabsIndicator } from "@midoneui/styles/tabs.styles";
 import type { Api } from "@zag-js/tabs";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -218,7 +218,7 @@ import { cn } from "@midoneui/utils/cn";
 import { tabsList } from "@midoneui/styles/tabs.styles";
 import type { Api } from "@zag-js/tabs";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { TabsIndicator } from ".";
 
 const {
@@ -259,7 +259,7 @@ import { cn } from "@midoneui/utils/cn";
 import { tabsRoot } from "@midoneui/styles/tabs.styles";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -299,7 +299,7 @@ import { cn } from "@midoneui/utils/cn";
 import { tabsTrigger } from "@midoneui/styles/tabs.styles";
 import type { Api, TriggerProps } from "@zag-js/tabs";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -350,7 +350,7 @@ import {
   TabsList,
   TabsTrigger,
   TabsContent,
-} from "@/components/ui/tabs";
+} from "@/base/ui/tabs";
               ` }}
         </PreviewCode>
         <PreviewCode>

@@ -13,7 +13,7 @@ import {
   SelectItemGroupLabel,
   SelectItem,
   SelectItemText,
-} from "@/components/ui/select";
+} from "@/base/ui/select";
 import * as select from "@zag-js/select";
 import {
   Preview,
@@ -21,7 +21,7 @@ import {
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 const comboboxData = [
   { label: "React", code: "react" },
   { label: "Solid", code: "solid" },
@@ -251,7 +251,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectClearTrigger } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/select";
 import { inject } from "vue";
 
@@ -283,8 +283,8 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectContent } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
-import { Box } from "@/components/ui/box";
+import { Slot } from "@/base/ui/slot";
+import { Box } from "@/base/ui/box";
 import { SelectPositioner } from ".";
 import type { Api } from "@zag-js/select";
 import { inject } from "vue";
@@ -323,7 +323,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectControl } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/select";
 import { inject } from "vue";
 
@@ -385,7 +385,7 @@ definePageMeta({
 import { cn } from "@midoneui/utils/cn";
 import { selectIndicator } from "@midoneui/styles/select.styles";
 import { ChevronDownIcon } from "lucide-vue-next";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/select";
 import { inject } from "vue";
 
@@ -423,7 +423,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectItem } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { SelectItemIndicator } from ".";
 import type { Api, ItemProps } from "@zag-js/select";
 import { provide, inject } from "vue";
@@ -466,7 +466,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectItemGroup } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/select";
 import { provide, inject } from "vue";
 
@@ -504,7 +504,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectItemGroupLabel } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemGroupProps } from "@zag-js/select";
 import { inject } from "vue";
 
@@ -542,7 +542,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectItemIndicator } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemProps } from "@zag-js/select";
 import { Check } from "lucide-vue-next";
 import { inject } from "vue";
@@ -582,7 +582,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectItemText } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api, ItemProps } from "@zag-js/select";
 import { inject } from "vue";
 
@@ -620,8 +620,8 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectLabel } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
-import { Label } from "@/components/ui/label";
+import { Slot } from "@/base/ui/slot";
+import { Label } from "@/base/ui/label";
 import type { Api } from "@zag-js/select";
 import { inject } from "vue";
 
@@ -653,7 +653,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectPositioner } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/select";
 import { inject } from "vue";
 
@@ -688,7 +688,7 @@ definePageMeta({
 })
 import * as select from "@zag-js/select";
 import type { Props } from "@zag-js/select";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
@@ -739,8 +739,8 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectTrigger } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
-import { Button } from "@/components/ui/button";
+import { Slot } from "@/base/ui/slot";
+import { Button } from "@/base/ui/button";
 import { SelectClearTrigger, SelectIndicator } from ".";
 import type { Api } from "@zag-js/select";
 import { inject } from "vue";
@@ -781,7 +781,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { selectValueText } from "@midoneui/styles/select.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import type { Api } from "@zag-js/select";
 import { inject } from "vue";
 
@@ -847,7 +847,7 @@ import {
   SelectItemGroupLabel,
   SelectItem,
   SelectItemText,
-} from "@/components/ui/select";
+} from "@/base/ui/select";
                     ` }}
         </PreviewCode>
         <PreviewCode>

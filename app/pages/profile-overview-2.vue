@@ -1,22 +1,22 @@
 <script lang="ts" setup>
 import fakers from '@/utils/faker'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Box } from '@/components/ui/box'
-import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/components/ui/menu'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { SwitchRoot, SwitchControl } from '@/components/ui/switch'
-import { ProgressRoot, ProgressTrack, ProgressRange } from '@/components/ui/progress-linear'
+import { Button } from '@/base/ui/button'
+import { Badge } from '@/base/ui/badge'
+import { Box } from '@/base/ui/box'
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/base/ui/tabs'
+import { MenuRoot, MenuTrigger, MenuPositioner, MenuContent, MenuItem } from '@/base/ui/menu'
+import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { SwitchRoot, SwitchControl } from '@/base/ui/switch'
+import { ProgressRoot, ProgressTrack, ProgressRange } from '@/base/ui/progress-linear'
 import {
   CarouselRoot,
   CarouselPrevTrigger,
   CarouselNextTrigger,
   CarouselItemGroup,
   CarouselItem,
-} from '@/components/ui/carousel'
-import { Lucide } from '@/components/ui/lucide'
-import { FileIcon } from '@/components/ui/file-icon'
+} from '@/base/ui/carousel'
+import { Lucide } from '@/base/ui/lucide'
+import { FileIcon } from '@/base/ui/file-icon'
 </script>
 
 <template>

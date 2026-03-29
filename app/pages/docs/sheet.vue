@@ -9,10 +9,10 @@ import {
   SheetTitle,
   SheetDescription,
   SheetCloseTrigger,
-} from "@/components/ui/sheet";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+} from "@/base/ui/sheet";
+import { Label } from "@/base/ui/label";
+import { Input } from "@/base/ui/input";
+import { Button } from "@/base/ui/button";
 import { SquareX, Save, ExternalLink } from "lucide-vue-next";
 import {
   Preview,
@@ -20,7 +20,7 @@ import {
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -162,10 +162,10 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sheetTrigger } from "@midoneui/styles/sheet.styles";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -204,7 +204,7 @@ import { cn } from "@midoneui/utils/cn";
 import { sheetBackdrop } from "@midoneui/styles/sheet.styles";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -241,7 +241,7 @@ import { cn } from "@midoneui/utils/cn";
 import { sheetPositioner } from "@midoneui/styles/sheet.styles";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -276,11 +276,11 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sheetContent } from "@midoneui/styles/sheet.styles";
-import { Box } from "@/components/ui/box";
-import { SheetBackdrop, SheetPositioner } from "@/components/ui/sheet";
+import { Box } from "@/base/ui/box";
+import { SheetBackdrop, SheetPositioner } from "@/base/ui/sheet";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -328,7 +328,7 @@ import { cn } from "@midoneui/utils/cn";
 import { sheetTitle } from "@midoneui/styles/sheet.styles";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -365,7 +365,7 @@ import { cn } from "@midoneui/utils/cn";
 import { sheetDescription } from "@midoneui/styles/sheet.styles";
 import type { Api } from "@zag-js/dialog";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -400,7 +400,7 @@ definePageMeta({
 })
 import { cn } from "@midoneui/utils/cn";
 import { sheetCloseTrigger } from "@midoneui/styles/sheet.styles";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base/ui/button";
 import type { Api } from "@zag-js/dialog";
 import {
   buttonVariants,
@@ -408,7 +408,7 @@ import {
 } from "@midoneui/styles/button.styles";
 import { X } from "lucide-vue-next";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -479,7 +479,7 @@ import {
   SheetTitle,
   SheetDescription,
   SheetCloseTrigger,
-} from "@/components/ui/sheet";
+} from "@/base/ui/sheet";
               ` }}
         </PreviewCode>
         <PreviewCode>

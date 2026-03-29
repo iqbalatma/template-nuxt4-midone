@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { Button } from '@/components/ui/button'
-import { Box } from '@/components/ui/box'
-import { Lucide } from '@/components/ui/lucide'
+import { Button } from '@/base/ui/button'
+import { Box } from '@/base/ui/box'
+import { Lucide } from '@/base/ui/lucide'
 </script>
 
 <template>

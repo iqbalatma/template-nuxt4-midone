@@ -9,16 +9,16 @@ import {
   PopoverContent,
   PopoverTitle,
   PopoverDescription,
-} from "@/components/ui/popover";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+} from "@/base/ui/popover";
+import { Label } from "@/base/ui/label";
+import { Input } from "@/base/ui/input";
 import {
   Preview,
   SectionTitle,
   SectionContent,
   InstallPackage,
   PreviewCode,
-} from "@/components/docs";
+} from "@/base/docs";
 </script>
 
 <template>
@@ -164,10 +164,10 @@ definePageMeta({
 import { type Api } from "@zag-js/popover";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { popoverContent } from "@midoneui/styles/popover.styles";
 import { PopoverArrow, PopoverArrowTip } from ".";
-import { Box } from "@/components/ui/box";
+import { Box } from "@/base/ui/box";
 
 const {
   class: className,
@@ -207,7 +207,7 @@ import { type Api } from "@zag-js/popover";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
 import { popoverDescription } from "@midoneui/styles/popover.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -243,7 +243,7 @@ definePageMeta({
 import { type Api } from "@zag-js/popover";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { popoverIndicator } from "@midoneui/styles/popover.styles";
 import { ChevronDown } from "lucide-vue-next";
 
@@ -280,7 +280,7 @@ import { type Api } from "@zag-js/popover";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
 import { popoverPositioner } from "@midoneui/styles/popover.styles";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 
 const {
   class: className,
@@ -317,7 +317,7 @@ definePageMeta({
 })
 import * as popover from "@zag-js/popover";
 import type { Props } from "@zag-js/popover";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { cn } from "@midoneui/utils/cn";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { computed, provide } from "vue";
@@ -361,7 +361,7 @@ definePageMeta({
 import { type Api } from "@zag-js/popover";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
-import { Slot } from "@/components/ui/slot";
+import { Slot } from "@/base/ui/slot";
 import { popoverTitle } from "@midoneui/styles/popover.styles";
 
 const {
@@ -398,8 +398,8 @@ definePageMeta({
 import { type Api } from "@zag-js/popover";
 import { cn } from "@midoneui/utils/cn";
 import { inject } from "vue";
-import { Button } from "@/components/ui/button";
-import { Slot } from "@/components/ui/slot";
+import { Button } from "@/base/ui/button";
+import { Slot } from "@/base/ui/slot";
 import { popoverTrigger } from "@midoneui/styles/popover.styles";
 import { PopoverIndicator } from ".";
 
@@ -458,7 +458,7 @@ import {
   PopoverContent,
   PopoverTitle,
   PopoverDescription,
-} from "@/components/ui/popover";
+} from "@/base/ui/popover";
               ` }}
         </PreviewCode>
         <PreviewCode>
