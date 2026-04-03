@@ -24,6 +24,7 @@ onMounted(() => {
   <div>
     <ThemeSwitcher />
     <Component>
+      <SimpleAlert/>
       <slot />
     </Component>
   </div>

@@ -2,6 +2,8 @@
 import { cn } from "@midoneui/utils/cn";
 import { input } from "@midoneui/styles/input.styles";
 
+const modelValue = defineModel<string>()
+
 const {
   class: className,
   type,
@@ -13,5 +15,5 @@ const {
 </script>
 
 <template>
-  <input :type="type" :class="cn(input, className)" v-bind="{ ...props }" />
+  <input :type="type" :class="cn(input, className)" v-model="modelValue" v-bind="{ ...props }" />
 </template>
