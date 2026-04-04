@@ -13,10 +13,17 @@ export const useAuthStore = defineStore("authStore", () => {
         accessToken.value = responseUser.access_token
     }
 
+    const setUnauthenticatedUser = async ()=>{
+      useCookie("access_token").value = null
+      user.value = null
+    }
+
+
 
     return {
-        user,
-        accessToken,
-        setAuthenticatedUser
+      user,
+      accessToken,
+      setAuthenticatedUser,
+      setUnauthenticatedUser,
     }
 })

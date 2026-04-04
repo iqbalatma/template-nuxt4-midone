@@ -10,6 +10,7 @@ import FormFeedback from '~/components/FormFeedback.vue'
 
 definePageMeta({
   layout: false,
+  public: true,
 })
 const formRequest = ref<AuthRequest>({
   email: '',
@@ -73,7 +74,11 @@ const { authenticate } = useAuthService()
               <div class="mt-8 flex flex-col gap-2">
                 <SimpleAlert />
                 <Input
-                  :class="cn('box block min-w-full px-5 py-6 xl:min-w-md', { 'border-danger': flashStore.isKeyErrors('email') })"
+                  :class="
+                    cn('box block min-w-full px-5 py-6 xl:min-w-md', {
+                      'border-danger': flashStore.isKeyErrors('email'),
+                    })
+                  "
                   type="text"
                   v-model="formRequest.email"
                   placeholder="Email"
@@ -81,7 +86,11 @@ const { authenticate } = useAuthService()
                 <FormFeedback feedbackKey="email" />
 
                 <Input
-                  :class="cn('box block min-w-full px-5 py-6 xl:min-w-md mt-2', { 'border-danger': flashStore.isKeyErrors('password') })"
+                  :class="
+                    cn('box block min-w-full px-5 py-6 xl:min-w-md mt-2', {
+                      'border-danger': flashStore.isKeyErrors('password'),
+                    })
+                  "
                   type="password"
                   v-model="formRequest.password"
                   placeholder="Password"

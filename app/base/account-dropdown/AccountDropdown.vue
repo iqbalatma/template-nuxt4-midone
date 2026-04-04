@@ -2,6 +2,7 @@
 import { Box } from '@/base/ui/box'
 import { Lucide } from '@/base/ui/lucide'
 import fakers from '@/utils/faker'
+import { useAuthService } from '~/services/AuthService'
 
 interface Props {
   class?: string
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const {logout} = useAuthService()
 </script>
 
 <template>
@@ -43,7 +45,7 @@ const props = defineProps<Props>()
       </div>
       <div class="bg-foreground/5 h-px"></div>
       <div class="flex flex-col gap-0.5">
-        <a class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5" href="">
+        <a class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5" href="#" @click.prevent="logout()">
           <Lucide icon="Power" /> Logout
         </a>
       </div>

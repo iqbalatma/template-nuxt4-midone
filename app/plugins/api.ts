@@ -1,12 +1,15 @@
 import type { RuntimeConfig } from 'nuxt/schema'
 import type { FetchOptions, FetchResponse } from 'ofetch'
-import type {  ResponseError } from '~/types/response'
+import type { ResponseData, ResponseError } from '~/types/response'
 import { useFlashStore } from '~/stores/flash'
 export default defineNuxtPlugin(() => {
   const config: RuntimeConfig = useRuntimeConfig()
 
   const api = $fetch.create({
     baseURL: config.public.apiBase,
+    onResponse({ response }: { response: FetchResponse<ResponseData> }) {
+      useFlashStore().clearMessages()
+    },
 
     onRequest({ options }: { options: FetchOptions }) {
       // Add default headers here
@@ -14,13 +17,14 @@ export default defineNuxtPlugin(() => {
         ...options.headers,
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        Authorization: useCookie('access_token').value ?? '',
       }
     },
 
     onResponseError({ response }: { response: FetchResponse<ResponseError> }) {
       const flashStore = useFlashStore()
       if (response._data) flashStore.setFailed(response._data)
-      // throw response
+      throw response
     },
   })
 

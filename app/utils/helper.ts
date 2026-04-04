@@ -1,5 +1,7 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
+import type { FetchResponse } from 'ofetch'
+import type { ResponseError } from '~/types/response'
 
 dayjs.extend(duration)
 
@@ -183,6 +185,9 @@ const slideDown = (el: HTMLElement, duration = 300, callback = (el: HTMLElement)
   }, duration)
 }
 
+function isFetchResponseError(error: any): error is FetchResponse<ResponseError> {
+  return error && typeof error === 'object' && '_data' in error
+}
 export {
   cutText,
   formatDate,
@@ -197,4 +202,5 @@ export {
   stringToHTML,
   slideUp,
   slideDown,
+  isFetchResponseError,
 }
