@@ -11,6 +11,7 @@ export default defineNuxtConfig({
       apiBase: process.env['NUXT_PUBLIC_API_BASE'],
     },
   },
+  components: true,
   modules: ['@pinia/nuxt'],
   css: ['@assets/css/index.css'],
   vite: {

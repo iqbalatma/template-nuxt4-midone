@@ -27,6 +27,8 @@ import {
 } from '@/base/ui/table'
 
 const deleteConfirmationOpen = ref(false)
+
+
 </script>
 
 <template>

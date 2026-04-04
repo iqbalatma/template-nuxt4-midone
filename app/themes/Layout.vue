@@ -18,14 +18,24 @@ onMounted(() => {
     switchTheme(theme)
   }
 })
+
+useHead({
+  title: route.meta.title ?? 'Atma Dev',
+})
 </script>
 
 <template>
   <div>
     <ThemeSwitcher />
     <Component>
-      <SimpleAlert/>
-      <slot />
+      <SimpleAlert />
+
+      <h2 class="text-lg font-medium" v-if="route.meta.title">{{ route.meta.title }}</h2>
+      <p class="text-xs" v-if="route.meta.pageSubTitle">{{ route.meta.pageSubTitle }}</p>
+
+      <div class="mt-5">
+        <slot />
+      </div>
     </Component>
   </div>
 </template>

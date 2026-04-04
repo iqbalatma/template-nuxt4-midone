@@ -19,11 +19,17 @@ export default defineNuxtPlugin(() => {
         Accept: 'application/json',
         Authorization: useCookie('access_token').value ?? '',
       }
+      options.credentials = "include"
     },
 
     onResponseError({ response }: { response: FetchResponse<ResponseError> }) {
       const flashStore = useFlashStore()
       if (response._data) flashStore.setFailed(response._data)
+
+      if (response._data?.code === 'ERR_ACTION_UNAUTHORIZED') {
+        useAuthStore().setUnauthenticatedUser()
+        navigateTo('/auth')
+      }
       throw response
     },
   })

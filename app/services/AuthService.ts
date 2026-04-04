@@ -2,7 +2,7 @@ import type { ResponseData, ResponseError, ResponseSingleData } from '~/types/re
 import type User from '~/types/entities/user'
 import { useAuthStore } from '~/stores/auth'
 import { isFetchResponseError } from '~/utils/helper'
-import { ResponseCode } from '~/layouts/ResponseCode'
+import { ResponseCode } from '~/enums/ResponseCode'
 
 export interface AuthRequest {
   email: string
@@ -20,7 +20,6 @@ export const useAuthService = () => {
       const response: ResponseSingleData<User> = await $api('api/auth/authenticate', {
         method: 'POST',
         body: request,
-        credentials: 'include',
       })
 
       await setAuthenticatedUser(response.payload.data)
@@ -34,9 +33,8 @@ export const useAuthService = () => {
     try {
       const accessToken = useCookie('access_token').value
       if (accessToken) {
-        const response = await $api<ResponseData>('/api/auth/logout', {
+        await $api<ResponseData>('/api/auth/logout', {
           method: 'POST',
-          credentials: 'include',
         })
         await setUnauthenticatedUser()
         navigateTo('/auth')

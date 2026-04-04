@@ -51,3 +51,4 @@ export interface ClientSidePaginationProps<T> {
     data: T[],
     start: number;
 }
+

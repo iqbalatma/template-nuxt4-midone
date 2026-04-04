@@ -188,7 +188,17 @@ const slideDown = (el: HTMLElement, duration = 300, callback = (el: HTMLElement)
 function isFetchResponseError(error: any): error is FetchResponse<ResponseError> {
   return error && typeof error === 'object' && '_data' in error
 }
+
+function getDefaultPerPage() {
+  return 10
+}
+
+function getDefaultPage() {
+  return 1
+}
 export {
+  getDefaultPerPage,
+  getDefaultPage,
   cutText,
   formatDate,
   capitalizeFirstLetter,

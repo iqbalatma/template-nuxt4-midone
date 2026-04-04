@@ -10,6 +10,17 @@ export interface Menu {
 }
 
 const mainMenu: (string | Menu)[] = [
+  'MANAGEMENT',
+  {
+    icon: 'UserLockIcon',
+    route_name: 'management/roles',
+    title: 'Roles',
+  },
+  {
+    icon: 'ShieldIcon',
+    route_name: 'management/permissions',
+    title: 'Permissions',
+  },
   'GENERAL REPORTS',
   {
     icon: 'CircleGauge',
