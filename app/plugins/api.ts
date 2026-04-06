@@ -8,7 +8,6 @@ export default defineNuxtPlugin(() => {
   const api = $fetch.create({
     baseURL: config.public.apiBase,
     onResponse({ response }: { response: FetchResponse<ResponseData> }) {
-      useFlashStore().clearMessages()
     },
 
     onRequest({ options }: { options: FetchOptions }) {
@@ -24,12 +23,15 @@ export default defineNuxtPlugin(() => {
 
     onResponseError({ response }: { response: FetchResponse<ResponseError> }) {
       const flashStore = useFlashStore()
+      flashStore.clearMessages()
+
       if (response._data) flashStore.setFailed(response._data)
 
       if (response._data?.code === 'ERR_ACTION_UNAUTHORIZED') {
         useAuthStore().setUnauthenticatedUser()
         navigateTo('/auth')
       }
+      console.log(response)
       throw response
     },
   })

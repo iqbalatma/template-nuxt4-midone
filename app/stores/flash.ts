@@ -23,8 +23,6 @@ export const useFlashStore = defineStore('flashStore', () => {
     failedMessage.value = responseError.message
     if (responseError.errors) {
       errors.value = responseError.errors
-      console.log("ini errors.value")
-      console.log(errors.value)
     }
     variant.value = 'danger'
     icon.value = 'OctagonAlertIcon'

@@ -14,9 +14,9 @@ definePageMeta({
   pageSubTitle: 'Data list of existing permission to assign to role',
 })
 
-const { getAllData, permissionsCollection } = usePermissionService()
+const { getAll, permissionsCollection } = usePermissionService()
 onMounted(async () => {
-  await getAllData()
+  await getAll()
 })
 
 const searchKey = ref<string>('')
@@ -46,34 +46,27 @@ const filteredData = computed((): Permission[] => {
             <TableHead> NO </TableHead>
             <TableHead> NAME </TableHead>
             <TableHead> DESCRIPTION </TableHead>
-            <TableHead> FEATURE GROUP </TableHead>
             <TableHead> CREATED AT </TableHead>
-            <TableHead> ACTIONS </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow v-for="(role, key) in slotProps.data" :key="key">
+          <TableRow v-for="(permission, key) in slotProps.data" :key="key">
             <TableCell>
               {{ slotProps.start + key }}
             </TableCell>
             <TableCell>
-              {{ role.name }}
+              <div>
+                <p class="font-medium">{{ permission.name }}</p>
+                <p class="text-xs opacity-70">ID : {{ permission.id }}</p>
+              </div>
             </TableCell>
             <TableCell>
-              {{ role.description }}
+              {{ permission.description }}
             </TableCell>
             <TableCell>
-              {{ role.feature_group }}
-            </TableCell>
-            <TableCell>
-              {{ role.created_at }}
-            </TableCell>
-            <TableCell>
-              <div class="flex items-center">
-                <a class="mr-3 flex items-center" href="">
-                  <Lucide class="mr-1 h-4 w-4" icon="CheckSquare" />
-                  Edit
-                </a>
+              <div class="flex gap-2">
+                <Lucide icon="Calendar" />
+                {{ permission.created_at }}
               </div>
             </TableCell>
           </TableRow>

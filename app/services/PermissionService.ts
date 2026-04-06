@@ -4,12 +4,14 @@ import type Permission from '~/types/entities/permission'
 export const usePermissionService = () => {
   const { $api } = useNuxtApp()
   const permissionsCollection = ref<Permission[]>([])
-  const getAllData = async () => {
+  const getAll = async () => {
     try {
-      const response = await $api<ResponseDataCollectionWithoutPagination<Permission>>('api/management/permissions', {
-        method: 'GET',
-      })
-
+      const response = await $api<ResponseDataCollectionWithoutPagination<Permission>>(
+        'api/management/permissions',
+        {
+          method: 'GET',
+        },
+      )
       permissionsCollection.value = response.payload.data
     } catch (e) {
       console.log(e)
@@ -18,6 +20,6 @@ export const usePermissionService = () => {
 
   return {
     permissionsCollection,
-    getAllData
+    getAll,
   }
 }
