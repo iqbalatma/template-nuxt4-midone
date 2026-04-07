@@ -20,26 +20,6 @@ defineProps({
 const { updateById, addNew } = useRoleService()
 const checkedPermissions = reactive<Record<string, boolean>>({})
 
-const emit = defineEmits<{
-  (e: 'submit'): void
-}>()
-const modalType = ref<ModalType>('create')
-const onSubmit = async () => {
-  if (modalType.value === 'create') {
-    await addNew(form.value)
-    handleModal(false)
-    emit('submit')
-    form.value = getInitialFormValue()
-  } else {
-    if (form.value.id) {
-      await updateById(form.value.id, form.value)
-      handleModal(false)
-      emit('submit')
-      form.value = getInitialFormValue()
-    }
-  }
-}
-
 const getInitialFormValue = (): RoleRequest => ({
   id: null,
   name: '',
@@ -48,17 +28,55 @@ const getInitialFormValue = (): RoleRequest => ({
 })
 
 const form = ref<RoleRequest>(getInitialFormValue())
+
+const resetCheckedPermissions = () => {
+  Object.keys(checkedPermissions).forEach((key) => delete checkedPermissions[key])
+}
+
+const getCheckedPermissionIds = (): string[] =>
+  Object.entries(checkedPermissions)
+    .filter(([, checked]) => checked)
+    .map(([id]) => id)
+
+const emit = defineEmits<{
+  (e: 'submit'): void
+}>()
+const modalType = ref<ModalType>('create')
 const isShowModal = ref(false)
+
 const handleModal = (isShow: boolean, role?: Role) => {
   isShowModal.value = isShow
   modalType.value = 'create'
+  form.value = getInitialFormValue()
+  resetCheckedPermissions()
   if (role) {
     modalType.value = 'edit'
     form.value.id = role.id
     form.value.name = role.name
     form.value.is_mutable = role.is_mutable
+    // Pre-tick checkboxes for existing permissions
+    role.permissions?.forEach((permission) => {
+      checkedPermissions[permission.id] = true
+    })
   }
 }
+
+const onSubmit = async () => {
+  form.value.permission_ids = getCheckedPermissionIds()
+
+  if (modalType.value === 'create') {
+    await addNew(form.value)
+    handleModal(false)
+    emit('submit')
+  } else {
+    if (form.value.id) {
+      await updateById(form.value.id, form.value)
+      handleModal(false)
+      emit('submit')
+    }
+  }
+}
+
 defineExpose({ handleModal })
 </script>
 
@@ -92,7 +110,8 @@ defineExpose({ handleModal })
             <CheckboxRoot
               v-for="permission in permissions"
               :key="permission.id"
-              v-model="checkedPermissions[permission.id]"
+              :checked="checkedPermissions[permission.id] === true"
+              :onCheckedChange="(details) => { checkedPermissions[permission.id] = details.checked === true }"
             >
               <CheckboxControl />
               <CheckboxLabel>
