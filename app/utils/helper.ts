@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import type { FetchResponse } from 'ofetch'
-import type { ResponseError } from '~/types/response'
+import type { PayloadDataCollectionPaginated, ResponseError } from '~/types/response'
 
 dayjs.extend(duration)
 
@@ -196,7 +196,29 @@ function getDefaultPerPage() {
 function getDefaultPage() {
   return 1
 }
+
+function createDefaultPaginated<T>(): PayloadDataCollectionPaginated<T> {
+  return {
+    meta: {
+      current_page: 1,
+      first_page_url: '',
+      from: 0,
+      last_page: 1,
+      last_page_url: '',
+      links: [],
+      next_page_url: null,
+      path: '',
+      per_page: getDefaultPerPage(),
+      prev_page_url: null,
+      to: 0,
+      total: 0,
+    },
+    data: [],
+  }
+}
+
 export {
+  createDefaultPaginated,
   getDefaultPerPage,
   getDefaultPage,
   cutText,

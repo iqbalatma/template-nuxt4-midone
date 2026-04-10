@@ -9,16 +9,19 @@ export interface ResponseError extends ResponseData {
     errors?: Record<string, string[]>,
 }
 
+export interface PayloadDataCollectionPaginated<T> {
+  meta: PaginationMeta
+  data: T[]
+}
+
 export interface ResponseSingleData<T> extends ResponseData{
     payload: {
         data: T
     }
 }
-export interface ResponseDataCollectionWithPagination<T> extends ResponseData{
-    payload: {
-        meta: PaginationMeta,
-        data: T[]
-    }
+
+export interface ResponseDataCollectionWithPagination<T> extends ResponseData {
+  payload: PayloadDataCollectionPaginated<T>
 }
 
 export interface ResponseDataCollectionWithoutPagination<T> extends ResponseData{

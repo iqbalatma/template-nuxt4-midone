@@ -100,7 +100,10 @@ const initialFetch = async () => {
               </span>
             </TableCell>
             <TableCell>
-              {{ role.created_at }}
+              <div class="flex gap-2">
+                <Lucide icon="Calendar" />
+                {{ role.created_at }}
+              </div>
             </TableCell>
             <TableCell>
               <div class="flex items-center" v-if="role.name !== 'Super Admin'">
@@ -145,7 +148,11 @@ const initialFetch = async () => {
       }
     "
   />
-  <ModalFormRole @submit="initialFetch()" :permissions="permissionsCollection" ref="modalFormRoleRef" />
+  <ModalFormRole
+    @submit="initialFetch()"
+    :permissions="permissionsCollection"
+    ref="modalFormRoleRef"
+  />
 </template>
 
 <style scoped></style>

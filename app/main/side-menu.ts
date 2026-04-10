@@ -12,6 +12,11 @@ export interface Menu {
 const mainMenu: (string | Menu)[] = [
   'MANAGEMENT',
   {
+    icon: 'UsersRoundIcon',
+    route_name: 'management/users',
+    title: 'Users',
+  },
+  {
     icon: 'UserLockIcon',
     route_name: 'management/roles',
     title: 'Roles',
