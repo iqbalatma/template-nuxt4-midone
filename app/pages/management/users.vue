@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Box } from '@/base/ui/box'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/base/ui/table'
+import { Table, TableBody, TableHeader, TableRow } from '~/base/ui/table'
 import { Button } from '~/base/ui/button'
 import { Lucide } from '~/base/ui/lucide'
 import ClientSideFilter from '~/components/ClientSideFilter.vue'
@@ -9,12 +9,14 @@ import ModalFormRole from '~/components/features/ModalFormRole.vue'
 import { userUserService } from '~/services/UserService'
 import TH from '~/components/TH.vue'
 import TD from '~/components/TD.vue'
+import ButtonEdit from '~/components/ButtonEdit.vue'
+import ButtonDelete from '~/components/ButtonDelete.vue'
 definePageMeta({
   title: 'Users',
   pageSubTitle: 'List data of users',
 })
 
-const { getAllPaginated, usersCollection } = userUserService()
+const { getAllPaginated, deleteById, usersCollection } = userUserService()
 onMounted(async () => {
   await initialFetch()
 })
@@ -24,10 +26,10 @@ const modalFormRoleRef = useTemplateRef<InstanceType<typeof ModalFormRole> | nul
   'modalFormRoleRef',
 )
 const modalDeleteRef = useTemplateRef<InstanceType<typeof ModalDelete> | null>('modalDeleteRef')
-const selectedRoleId = ref<string>('')
 const initialFetch = async () => {
   await getAllPaginated()
 }
+const selectedUserId = ref<string>('')
 </script>
 
 <template>
@@ -64,11 +66,34 @@ const initialFetch = async () => {
                 {{ user.created_at }}
               </div>
             </TD>
+            <TD>
+              <div class="flex items-center">
+                <ButtonEdit @click-edit="" />
+                <ButtonDelete
+                  @click-delete="
+                    () => {
+                      modalDeleteRef?.handleModal(true)
+                      selectedUserId = user.id
+                    }
+                  "
+                />
+              </div>
+            </TD>
           </TableRow>
         </TableBody>
       </Table>
     </Box>
   </div>
+
+  <ModalDelete
+    ref="modalDeleteRef"
+    @submit="
+      async () => {
+        await deleteById(selectedUserId)
+        await initialFetch()
+      }
+    "
+  />
 </template>
 
 <style scoped></style>

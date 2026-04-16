@@ -12,6 +12,8 @@ import ModalFormRole from '~/components/features/ModalFormRole.vue'
 import { usePermissionService } from '~/services/PermissionService'
 import TH from '~/components/TH.vue'
 import TD from '~/components/TD.vue'
+import ButtonDelete from '~/components/ButtonDelete.vue'
+import ButtonEdit from '~/components/ButtonEdit.vue'
 definePageMeta({
   title: 'Roles',
   pageSubTitle: 'Data list of roles for user',
@@ -109,29 +111,16 @@ const initialFetch = async () => {
             </TD>
             <TD>
               <div class="flex items-center" v-if="role.name !== 'Super Admin'">
-                <a
-                  class="mr-3 flex items-center"
-                  href="#"
-                  @click.prevent="modalFormRoleRef?.handleModal(true, role)"
-                >
-                  <Lucide class="mr-1 h-4 w-4" icon="CheckSquare" />
-                  Edit
-                </a>
-
-                <a
+                <ButtonEdit @click-edit="modalFormRoleRef?.handleModal(true, role)" />
+                <ButtonDelete
                   v-if="role.is_mutable"
-                  class="mr-3 flex items-center text-danger"
-                  href="#"
-                  @click.prevent="
+                  @click-delete="
                     () => {
                       modalDeleteRef?.handleModal(true)
                       selectedRoleId = role.id
                     }
                   "
-                >
-                  <Lucide class="mr-1 h-4 w-4" icon="Trash" />
-                  Delete
-                </a>
+                />
               </div>
               <div v-else class="font-bold">Locked</div>
             </TD>
