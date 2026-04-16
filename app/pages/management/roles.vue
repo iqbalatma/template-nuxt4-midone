@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Box } from '@/base/ui/box'
-import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/base/ui/table'
+import { TableBody, TableHeader, TableRow } from '~/base/ui/table'
 import { Button } from '~/base/ui/button'
 import { Lucide } from '~/base/ui/lucide'
 import { useRoleService } from '~/services/RoleService'
@@ -10,6 +10,8 @@ import ClientSideFilter from '~/components/ClientSideFilter.vue'
 import type { ModalDelete } from '#components'
 import ModalFormRole from '~/components/features/ModalFormRole.vue'
 import { usePermissionService } from '~/services/PermissionService'
+import TH from '~/components/TH.vue'
+import TD from '~/components/TD.vue'
 definePageMeta({
   title: 'Roles',
   pageSubTitle: 'Data list of roles for user',
@@ -56,19 +58,19 @@ const initialFetch = async () => {
       >
         <TableHeader>
           <TableRow>
-            <TableHead> NO </TableHead>
-            <TableHead> NAME </TableHead>
-            <TableHead> MUTABLE </TableHead>
-            <TableHead> CREATED AT </TableHead>
-            <TableHead> ACTIONS </TableHead>
+            <TH icon="Hash"> NO </TH>
+            <TH icon="FileText"> NAME </TH>
+            <TH icon="Shield"> MUTABLE </TH>
+            <TH icon="Calendar"> CREATED AT </TH>
+            <TH icon="Settings"> ACTIONS </TH>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow v-for="(role, key) in slotProps.data" :key="key">
-            <TableCell>
+            <TD>
               {{ slotProps.start + key }}
-            </TableCell>
-            <TableCell>
+            </TD>
+            <TD>
               <div class="flex items-center gap-2.5 mb-2">
                 <div
                   class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0"
@@ -81,9 +83,9 @@ const initialFetch = async () => {
                   {{ role.name }}
                 </p>
               </div>
-              <p class="text-xs opacity-70">ID : {{ role.id }}</p>
-            </TableCell>
-            <TableCell>
+              <SmallInfo>ID : {{ role.id }}</SmallInfo>
+            </TD>
+            <TD>
               <span
                 v-if="role.is_mutable"
                 class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-success/10 text-success text-xs font-medium"
@@ -98,14 +100,14 @@ const initialFetch = async () => {
                 <Lucide icon="Lock" class="w-3 h-3" />
                 Immutable
               </span>
-            </TableCell>
-            <TableCell>
+            </TD>
+            <TD>
               <div class="flex gap-2">
                 <Lucide icon="Calendar" />
                 {{ role.created_at }}
               </div>
-            </TableCell>
-            <TableCell>
+            </TD>
+            <TD>
               <div class="flex items-center" v-if="role.name !== 'Super Admin'">
                 <a
                   class="mr-3 flex items-center"
@@ -132,7 +134,7 @@ const initialFetch = async () => {
                 </a>
               </div>
               <div v-else class="font-bold">Locked</div>
-            </TableCell>
+            </TD>
           </TableRow>
         </TableBody>
       </ClientSidePagination>

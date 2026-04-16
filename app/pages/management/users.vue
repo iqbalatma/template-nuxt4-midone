@@ -7,6 +7,8 @@ import ClientSideFilter from '~/components/ClientSideFilter.vue'
 import type { ModalDelete } from '#components'
 import ModalFormRole from '~/components/features/ModalFormRole.vue'
 import { userUserService } from '~/services/UserService'
+import TH from '~/components/TH.vue'
+import TD from '~/components/TD.vue'
 definePageMeta({
   title: 'Users',
   pageSubTitle: 'List data of users',
@@ -39,33 +41,32 @@ const initialFetch = async () => {
       <Table variant="boxed">
         <TableHeader>
           <TableRow>
-            <TableHead> NO </TableHead>
-            <TableHead> NAME </TableHead>
-            <TableHead> EMAIL </TableHead>
-            <TableHead> CREATED AT </TableHead>
-            <TableHead> ACTIONS </TableHead>
+            <TH icon="Hash"> NO </TH>
+            <TH icon="FileText"> NAME </TH>
+            <TH icon="Mail"> EMAIL </TH>
+            <TH icon="Calendar"> CREATED AT </TH>
+            <TH icon="Settings"> ACTIONS </TH>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow v-for="(user, key) in usersCollection.data" :key="key">
-            <TableCell>{{ key + 1 }}</TableCell>
-            <TableCell>
+            <TD>{{ key + 1 }}</TD>
+            <TD>
               <div class="font-medium">
                 {{ user.full_name }}
               </div>
               <SmallInfo>ID : {{ user.id }}</SmallInfo>
-            </TableCell>
-            <TableCell>{{ user.email }}</TableCell>
-            <TableCell>
+            </TD>
+            <TD>{{ user.email }}</TD>
+            <TD>
               <div class="flex gap-2">
                 <Lucide icon="Calendar" />
                 {{ user.created_at }}
               </div>
-            </TableCell>
+            </TD>
           </TableRow>
         </TableBody>
       </Table>
-
     </Box>
   </div>
 </template>

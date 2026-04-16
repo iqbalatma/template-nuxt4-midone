@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { Box } from '@/base/ui/box'
-import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/base/ui/table'
+import { TableBody, TableHeader, TableRow } from '~/base/ui/table'
 import { Lucide } from '~/base/ui/lucide'
-import { Input } from '~/base/ui/input'
-import { useRoleService } from '~/services/RoleService'
-import type Role from '~/types/entities/role'
 import type { ClientSidePaginationProps } from '~/types/response'
 import ClientSideFilter from '~/components/ClientSideFilter.vue'
 import { usePermissionService } from '~/services/PermissionService'
 import type Permission from '~/types/entities/permission'
+import TH from '~/components/TH.vue'
+import TD from '~/components/TD.vue'
 definePageMeta({
   title: 'Permissions',
   pageSubTitle: 'Data list of existing permission to assign to role',
@@ -43,32 +42,32 @@ const filteredData = computed((): Permission[] => {
       >
         <TableHeader>
           <TableRow>
-            <TableHead> NO </TableHead>
-            <TableHead> NAME </TableHead>
-            <TableHead> DESCRIPTION </TableHead>
-            <TableHead> CREATED AT </TableHead>
+            <TH icon="Hash"> NO </TH>
+            <TH icon="FileText"> NAME </TH>
+            <TH icon="AlignLeft"> DESCRIPTION </TH>
+            <TH icon="Calendar"> CREATED AT </TH>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow v-for="(permission, key) in slotProps.data" :key="key">
-            <TableCell>
+            <TD>
               {{ slotProps.start + key }}
-            </TableCell>
-            <TableCell>
+            </TD>
+            <TD>
               <div>
                 <p class="font-medium">{{ permission.name }}</p>
-                <p class="text-xs opacity-70">ID : {{ permission.id }}</p>
+                <SmallInfo>ID : {{ permission.id }}</SmallInfo>
               </div>
-            </TableCell>
-            <TableCell>
+            </TD>
+            <TD>
               {{ permission.description }}
-            </TableCell>
-            <TableCell>
+            </TD>
+            <TD>
               <div class="flex gap-2">
                 <Lucide icon="Calendar" />
                 {{ permission.created_at }}
               </div>
-            </TableCell>
+            </TD>
           </TableRow>
         </TableBody>
       </ClientSidePagination>
