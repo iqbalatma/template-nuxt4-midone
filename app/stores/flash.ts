@@ -12,6 +12,7 @@ export const useFlashStore = defineStore('flashStore', () => {
 
   const errors = ref<Record<string, string[]> | null>(null)
   const setSuccess = (responseData: ResponseData) => {
+    clearMessages()
     title.value = responseData.code
     successMessage.value = responseData.message
     variant.value = 'success'
@@ -19,6 +20,7 @@ export const useFlashStore = defineStore('flashStore', () => {
   }
 
   const setFailed = (responseError: ResponseError) => {
+    clearMessages()
     title.value = responseError.code
     failedMessage.value = responseError.message
     if (responseError.errors) {
