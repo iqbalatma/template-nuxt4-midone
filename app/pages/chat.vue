@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import { Box } from '@/base/ui/box'
-import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '@/base/ui/tabs'
+import { TabsRoot, TabsList, TabsTrigger } from '@/base/ui/tabs'
 import ChatRoom from '~/components/ChatRoom.vue'
 import ChatTopBar from '~/components/ChatTopBar.vue'
 import TabChatProfile from '~/components/TabChatProfile.vue'
 import TabChatFriendList from '~/components/TabChatFriendList.vue'
 import TabChatRoomList from '~/components/TabChatRoomList.vue'
-
 </script>
 
 <template>
@@ -24,9 +23,9 @@ import TabChatRoomList from '~/components/TabChatRoomList.vue'
             </TabsList>
           </Box>
 
-          <TabChatRoomList/>
-          <TabChatFriendList/>
-          <TabChatProfile/>
+          <TabChatRoomList />
+          <TabChatFriendList />
+          <TabChatProfile />
         </TabsRoot>
       </div>
       <!-- END: Chat Side Menu -->
