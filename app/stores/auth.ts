@@ -8,16 +8,15 @@ export const useAuthStore = defineStore("authStore", () => {
         secure: false,
         watch: true
     })
-    const setAuthenticatedUser = async (responseUser: User): Promise<void> => {
-        user.value = responseUser
-        accessToken.value = responseUser.access_token
+    const setAuthenticatedUser = async (responseUser: {token : string, user : User}): Promise<void> => {
+        user.value = responseUser.user
+        accessToken.value = responseUser.token
     }
 
     const setUnauthenticatedUser = async ()=>{
       useCookie("access_token").value = null
       user.value = null
     }
-
 
 
     return {

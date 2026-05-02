@@ -1,19 +1,20 @@
 <script lang="ts" setup>
-import { Box } from '@/base/ui/box'
-import { Button } from '@/base/ui/button'
-import { CheckboxRoot, CheckboxControl, CheckboxLabel } from '@/base/ui/checkbox'
-import { Input } from '@/base/ui/input'
-import logoUrl from '@/assets/images/logo.svg'
-import illustrationUrl from '@/assets/images/illustration.svg'
+import { Box } from '~/base/ui/box'
+import { Button } from '~/base/ui/button'
+import { CheckboxRoot, CheckboxControl, CheckboxLabel } from '~/base/ui/checkbox'
+import { Input } from '~/base/ui/input'
+import logoUrl from '~/assets/images/logo.svg'
+import illustrationUrl from '~/assets/images/illustration.svg'
 import { type AuthRequest, useAuthService } from '~/services/AuthService'
 import FormFeedback from '~/components/FormFeedback.vue'
+import SimpleAlert from '~/components/SimpleAlert.vue'
 
 definePageMeta({
   layout: false,
   public: true,
 })
 const formRequest = ref<AuthRequest>({
-  email: '',
+  username: '',
   password: '',
 })
 const flashStore = useFlashStore()
@@ -76,14 +77,14 @@ const { authenticate } = useAuthService()
                 <Input
                   :class="
                     cn('box block min-w-full px-5 py-6 xl:min-w-md', {
-                      'border-danger': flashStore.isKeyErrors('email'),
+                      'border-danger': flashStore.isKeyErrors('username'),
                     })
                   "
                   type="text"
-                  v-model="formRequest.email"
-                  placeholder="Email"
+                  v-model="formRequest.username"
+                  placeholder="Username"
                 />
-                <FormFeedback feedbackKey="email" />
+                <FormFeedback feedbackKey="username" />
 
                 <Input
                   :class="

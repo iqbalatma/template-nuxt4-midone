@@ -5,7 +5,7 @@ import { isFetchResponseError } from '~/utils/helper'
 import { ResponseCode } from '~/enums/ResponseCode'
 
 export interface AuthRequest {
-  email: string
+  username: string
   password: string
 }
 
@@ -17,10 +17,16 @@ export const useAuthService = () => {
 
   const authenticate = async (request: AuthRequest) => {
     try {
-      const response: ResponseSingleData<User> = await $api('api/auth/authenticate', {
-        method: 'POST',
-        body: request,
-      })
+      console.log(request)
+      const response: ResponseSingleData<{ token: string; user: User }> = await $api(
+        'api/auth/login',
+        {
+          method: 'POST',
+          body: request,
+        },
+      )
+
+      console.log(response)
 
       await setAuthenticatedUser(response.payload.data)
       navigateTo('/')

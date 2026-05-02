@@ -1,11 +1,66 @@
 <script setup lang="ts">
-import fakers from '~/utils/faker'
 import { Lucide } from '~/base/ui/lucide'
 import { AvatarFallback, AvatarImage, AvatarRoot } from '~/base/ui/avatar'
 import { Box } from '~/base/ui/box'
 import { Badge } from '~/base/ui/badge'
 import { TabsContent } from '~/base/ui/tabs'
 import { Input } from '~/base/ui/input'
+import type { ResponseDataCollectionWithoutPagination } from '~/types/response'
+import type BaseEntity from '~/types/entities/base_entity'
+
+interface ChatMember extends BaseEntity {
+  name: string
+  email: string
+  username: string
+}
+
+interface ChatRoom extends BaseEntity {
+  type: 'PERSONAL' | 'GROUP'
+  name: string
+  members: ChatMember[]
+  recipient: ChatMember | null
+}
+
+const { $api } = useNuxtApp()
+const search = ref('')
+const chatRooms = ref<ChatRoom[]>([])
+const loading = ref(false)
+
+const fetchChatRooms = async () => {
+  loading.value = true
+  try {
+    const response = await $api<ResponseDataCollectionWithoutPagination<ChatRoom>>('api/chat-rooms', {
+      method: 'GET',
+    })
+    chatRooms.value = response.payload.data
+  } finally {
+    loading.value = false
+  }
+}
+
+const displayName = (room: ChatRoom) =>
+  room.type === 'PERSONAL' && room.recipient ? room.recipient.name : room.name
+
+const filteredRooms = computed(() =>
+  search.value
+    ? chatRooms.value.filter(r => displayName(r).toLowerCase().includes(search.value.toLowerCase()))
+    : chatRooms.value
+)
+
+const onlineMembers = computed(() => {
+  const seen = new Set<string>()
+  const members: ChatMember[] = []
+  for (const room of chatRooms.value) {
+    const member = room.type === 'PERSONAL' ? room.recipient : null
+    if (member && !seen.has(member.id)) {
+      seen.add(member.id)
+      members.push(member)
+    }
+  }
+  return members
+})
+
+onMounted(fetchChatRooms)
 </script>
 
 <template>
@@ -14,6 +69,7 @@ import { Input } from '~/base/ui/input'
     <Box>
       <div class="relative">
         <Input
+          v-model="search"
           class="bg-foreground/[.03] px-4 py-3 pr-10"
           type="text"
           placeholder="Search for messages or users..."
@@ -26,64 +82,55 @@ import { Input } from '~/base/ui/input'
       <div class="scrollbar-hidden overflow-x-auto">
         <div class="mt-5 flex">
           <a
-            v-for="(faker, index) in fakers.slice(0, 10)"
-            :key="'online-' + index"
+            v-for="member in onlineMembers.slice(0, 10)"
+            :key="'online-' + member.id"
             class="mr-4 w-11 cursor-pointer"
             href=""
           >
             <div class="relative">
               <AvatarRoot class="size-12 rounded-full">
-                <AvatarFallback>{{ faker['users'][0]!['name'].substring(0, 2) }}</AvatarFallback>
-                <AvatarImage :src="faker['photos'][0]" :alt="faker['users'][0]!['name']" />
+                <AvatarFallback>{{ member.name.substring(0, 2) }}</AvatarFallback>
+                <AvatarImage :alt="member.name" />
               </AvatarRoot>
               <div
                 class="bg-success/90 border-background absolute bottom-0 right-0 h-3 w-3 rounded-full border-2"
               ></div>
             </div>
             <div class="mt-1.5 truncate text-center text-xs opacity-70">
-              {{ faker['users'][0]!['name'] }}
+              {{ member.name }}
             </div>
           </a>
         </div>
       </div>
     </Box>
     <div class="scrollbar-hidden -mr-1 h-[29rem] space-y-4 overflow-y-auto pr-1 pt-1 snap-y">
-      <Box
-        v-for="(faker, fakerKey) in fakers.slice(0, 10)"
-        :key="'chat-' + fakerKey"
-        class="chat-item relative flex cursor-pointer items-center snap-start"
-      >
-        <div class="relative mr-1">
-          <AvatarRoot class="rounded-full size-12">
-            <AvatarFallback>{{ faker['users'][0]!['name'].substring(0, 2) }}</AvatarFallback>
-            <AvatarImage :src="faker['photos'][0]" :alt="faker['users'][0]!['name']" />
-          </AvatarRoot>
-          <div
-            class="bg-success/90 border-background absolute bottom-0 right-0 h-3 w-3 rounded-full border-2"
-          ></div>
-        </div>
-        <div class="ml-2 overflow-hidden">
-          <div class="flex items-center">
-            <a class="font-medium" href="#">
-              {{ faker['users'][0]!['name'] }}
-            </a>
-            <div class="ml-auto text-xs opacity-70">
-              {{ faker['times'][0] }}
+      <div v-if="loading" class="flex justify-center py-4 opacity-70">Loading...</div>
+      <template v-else-if="filteredRooms.length">
+        <Box
+          v-for="room in filteredRooms"
+          :key="'chat-' + room.id"
+          class="chat-item relative flex cursor-pointer items-center snap-start"
+        >
+          <div class="relative mr-1">
+            <AvatarRoot class="rounded-full size-12">
+              <AvatarFallback>{{ displayName(room).substring(0, 2) }}</AvatarFallback>
+              <AvatarImage :alt="displayName(room)" />
+            </AvatarRoot>
+            <div
+              class="bg-success/90 border-background absolute bottom-0 right-0 h-3 w-3 rounded-full border-2"
+            ></div>
+          </div>
+          <div class="ml-2 overflow-hidden">
+            <div class="flex items-center">
+              <a class="font-medium" href="#">{{ displayName(room) }}</a>
+            </div>
+            <div class="mt-1 w-full truncate text-xs opacity-70">
+              {{ room.type === 'PERSONAL' ? room.recipient?.username : room.name }}
             </div>
           </div>
-          <div class="mt-1 w-full truncate opacity-70">
-            {{ faker['news'][0]!['shortContent'] }}
-          </div>
-        </div>
-        <Badge
-          v-if="faker['trueFalse'][0]"
-          class="absolute right-0 top-0 -mr-1 -mt-1"
-          variant="primary"
-          look="outline"
-        >
-          {{ faker['notificationCount'] }}
-        </Badge>
-      </Box>
+        </Box>
+      </template>
+      <div v-else class="py-4 text-center opacity-70">No chats found.</div>
     </div>
   </TabsContent>
 </template>

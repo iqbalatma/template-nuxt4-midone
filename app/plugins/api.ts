@@ -16,9 +16,9 @@ export default defineNuxtPlugin(() => {
         ...options.headers,
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: useCookie('access_token').value ?? '',
+        Authorization: `Bearer ${useCookie('access_token').value ?? ''}`,
       }
-      options.credentials = "include"
+      // options.credentials = "include"
     },
 
     onResponseError({ response }: { response: FetchResponse<ResponseError> }) {

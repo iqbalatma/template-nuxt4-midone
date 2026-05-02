@@ -6,6 +6,10 @@ import ChatTopBar from '~/components/ChatTopBar.vue'
 import TabChatProfile from '~/components/TabChatProfile.vue'
 import TabChatFriendList from '~/components/TabChatFriendList.vue'
 import TabChatRoomList from '~/components/TabChatRoomList.vue'
+
+definePageMeta({
+  public: false,
+})
 </script>
 
 <template>
