@@ -67,9 +67,6 @@ onMounted(fetchUsers)
           icon="Search"
         />
       </div>
-      <Button class="mt-3 w-full" type="button" variant="primary" look="outline">
-        Invite Friends
-      </Button>
     </Box>
     <div class="scrollbar-hidden -mr-1 h-[29rem] space-y-4 overflow-y-auto pr-1 pt-1 snap-y">
       <div v-if="loading" class="flex justify-center py-4 opacity-70">Loading...</div>

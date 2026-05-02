@@ -6,21 +6,9 @@ import { Badge } from '~/base/ui/badge'
 import { TabsContent } from '~/base/ui/tabs'
 import { Input } from '~/base/ui/input'
 import type { ResponseDataCollectionWithoutPagination } from '~/types/response'
-import type BaseEntity from '~/types/entities/base_entity'
+import { useChatStore, type ChatRoom } from '~/stores/chat'
 
-interface ChatMember extends BaseEntity {
-  name: string
-  email: string
-  username: string
-}
-
-interface ChatRoom extends BaseEntity {
-  type: 'PERSONAL' | 'GROUP'
-  name: string
-  members: ChatMember[]
-  recipient: ChatMember | null
-}
-
+const chatStore = useChatStore()
 const { $api } = useNuxtApp()
 const search = ref('')
 const chatRooms = ref<ChatRoom[]>([])
@@ -110,6 +98,7 @@ onMounted(fetchChatRooms)
           v-for="room in filteredRooms"
           :key="'chat-' + room.id"
           class="chat-item relative flex cursor-pointer items-center snap-start"
+          @click="chatStore.selectRoom(room)"
         >
           <div class="relative mr-1">
             <AvatarRoot class="rounded-full size-12">
