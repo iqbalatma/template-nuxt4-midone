@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: process.env['NUXT_PUBLIC_API_BASE'],
+      wsBase: process.env['NUXT_PUBLIC_WS_BASE'] ?? '',
     },
   },
   components: true,

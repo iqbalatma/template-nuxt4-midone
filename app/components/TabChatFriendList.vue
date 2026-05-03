@@ -6,8 +6,9 @@ import { Button } from '~/base/ui/button'
 import { Box } from '~/base/ui/box'
 import { TabsContent } from '~/base/ui/tabs'
 import { Input } from '~/base/ui/input'
-import type { ResponseDataCollectionWithoutPagination } from '~/types/response'
+import type { ResponseDataCollectionWithoutPagination, ResponseSingleData } from '~/types/response'
 import type BaseEntity from '~/types/entities/base_entity'
+import { useChatStore, type ChatRoom } from '~/stores/chat'
 
 interface ChatUser extends BaseEntity {
   name: string
@@ -15,10 +16,39 @@ interface ChatUser extends BaseEntity {
   username: string
 }
 
+const chatStore = useChatStore()
 const { $api } = useNuxtApp()
 const search = ref('')
 const users = ref<ChatUser[]>([])
 const loading = ref(false)
+const creating = ref(false)
+
+const openChat = async (user: ChatUser) => {
+  if (creating.value) return
+  creating.value = true
+  try {
+    const response = await $api<ResponseSingleData<ChatRoom>>('api/chat-rooms', {
+      method: 'POST',
+      body: { type: 'PERSONAL', name: '-', target_user_id: user.id },
+    })
+    const room = response.payload.data
+    // If the API returns no recipient, build a temporary one from the selected user
+    if (!room.recipient) {
+      room.recipient = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        username: user.username,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+      }
+    }
+    chatStore.addOrUpdateRoom(room)
+    chatStore.selectRoom(room)
+  } finally {
+    creating.value = false
+  }
+}
 
 const fetchUsers = async () => {
   loading.value = true
@@ -77,6 +107,7 @@ onMounted(fetchUsers)
             v-for="user in group"
             :key="user.id"
             class="relative flex cursor-pointer items-center"
+            @click="openChat(user)"
           >
             <div class="relative mr-1">
               <AvatarRoot class="rounded-full size-12">
@@ -93,7 +124,7 @@ onMounted(fetchUsers)
               </div>
               <div class="mt-0.5 w-full truncate text-xs opacity-70">{{ user.username }}</div>
             </div>
-            <MenuRoot class="ml-auto w-auto">
+            <MenuRoot class="ml-auto w-auto" @click.stop>
               <MenuTrigger as-child>
                 <a class="block size-5" href="#">
                   <Lucide class="size-5 opacity-70" icon="MoreHorizontal" />

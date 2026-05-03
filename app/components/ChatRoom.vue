@@ -9,6 +9,7 @@ import { Lucide } from '@/base/ui/lucide'
 import type { ResponseDataCollectionWithoutPagination, ResponseSingleData } from '~/types/response'
 import type BaseEntity from '~/types/entities/base_entity'
 import { useChatStore } from '~/stores/chat'
+import { useChatWebSocket, type WsMessage } from '~/composables/useChatWebSocket'
 
 interface Me extends BaseEntity {
   name: string
@@ -32,6 +33,33 @@ interface Chat extends BaseEntity {
 
 const chatStore = useChatStore()
 const { $api } = useNuxtApp()
+const { connect, disconnect, send, connected, onlineUsers } = useChatWebSocket()
+
+/** Whether a given user ID is online globally (via the presence socket) */
+const isOnline = (userId: string) => chatStore.isGloballyOnline(userId)
+
+/** Online status label shown in the room header */
+const presenceLabel = computed(() => {
+  if (!connected.value) return 'Connecting…'
+  const room = selectedRoom.value
+  if (!room) return ''
+  if (room.type === 'PERSONAL' && room.recipient) {
+    return chatStore.isGloballyOnline(room.recipient.id) ? 'Online' : 'Offline'
+  }
+  // GROUP: use room-level online count (connected to this room's WS)
+  const count = onlineUsers.value.length
+  return count === 1 ? '1 member online' : `${count} members online`
+})
+
+/** Dot colour for the header presence indicator */
+const presenceDotClass = computed(() => {
+  if (!connected.value) return 'bg-warning/80'
+  const room = selectedRoom.value
+  if (room?.type === 'PERSONAL' && room.recipient) {
+    return chatStore.isGloballyOnline(room.recipient.id) ? 'bg-success/90' : 'bg-foreground/30'
+  }
+  return onlineUsers.value.length > 0 ? 'bg-success/90' : 'bg-foreground/30'
+})
 
 const me = ref<Me | null>(null)
 const chats = ref<Chat[]>([])
@@ -54,6 +82,25 @@ const formatTime = (isoString: string) => {
 
 const isMine = (chat: Chat) => me.value !== null && chat.sender_user_id === me.value.id
 
+/** Convert a WebSocket broadcast message to the unified Chat shape */
+const wsMessageToChat = (msg: WsMessage): Chat => ({
+  id: msg.id,
+  content: msg.content,
+  sender_user_id: msg.sender_id,
+  recipient_user_id: '',
+  chat_room_id: msg.room_id,
+  sender: {
+    id: msg.sender_id,
+    name: msg.username,
+    email: '',
+    username: msg.username,
+    created_at: msg.created_at,
+    updated_at: msg.created_at,
+  },
+  created_at: msg.created_at,
+  updated_at: msg.created_at,
+})
+
 const fetchMe = async () => {
   const response = await $api<ResponseSingleData<Me>>('api/users/me', { method: 'GET' })
   me.value = response.payload.data
@@ -74,6 +121,15 @@ const fetchChats = async () => {
   scrollToBottom()
 }
 
+const openRoom = (roomId: string) => {
+  connect(roomId, (msg: WsMessage) => {
+    // Avoid duplicate if history already contains the message (edge case)
+    if (chats.value.some(c => c.id === msg.id)) return
+    chats.value.push(wsMessageToChat(msg))
+    scrollToBottom()
+  })
+}
+
 const scrollToBottom = async () => {
   await nextTick()
   if (messageBox.value) {
@@ -81,21 +137,11 @@ const scrollToBottom = async () => {
   }
 }
 
-const sendMessage = async () => {
+const sendMessage = () => {
   const content = newMessage.value.trim()
   if (!content || !selectedRoom.value || sending.value) return
-  sending.value = true
-  try {
-    const response = await $api<ResponseSingleData<Chat>>(
-      `api/chat-rooms/${selectedRoom.value.id}/chats`,
-      { method: 'POST', body: { content } },
-    )
-    chats.value.push(response.payload.data)
-    newMessage.value = ''
-    scrollToBottom()
-  } finally {
-    sending.value = false
-  }
+  send(content)
+  newMessage.value = ''
 }
 
 const onKeydown = (e: KeyboardEvent) => {
@@ -105,13 +151,19 @@ const onKeydown = (e: KeyboardEvent) => {
   }
 }
 
-watch(selectedRoom, () => {
+watch(selectedRoom, (room) => {
   chats.value = []
   newMessage.value = ''
-  fetchChats()
+  if (room) {
+    fetchChats()
+    openRoom(room.id)
+  } else {
+    disconnect()
+  }
 })
 
 onMounted(fetchMe)
+onUnmounted(disconnect)
 </script>
 
 <template>
@@ -130,8 +182,12 @@ onMounted(fetchMe)
               </AvatarRoot>
               <div class="ml-3 mr-auto">
                 <div class="text-base font-medium">{{ roomDisplayName }}</div>
-                <div class="text-xs opacity-70 sm:text-sm">
-                  Online
+                <div class="text-xs opacity-70 sm:text-sm flex items-center gap-1.5">
+                  <span
+                    class="inline-block size-2 rounded-full"
+                    :class="presenceDotClass"
+                  ></span>
+                  {{ presenceLabel }}
                 </div>
               </div>
             </div>
@@ -171,10 +227,16 @@ onMounted(fetchMe)
               <template v-for="chat in chats" :key="chat.id">
                 <!-- Received message -->
                 <div v-if="!isMine(chat)" class="float-left mb-4 flex max-w-[90%] items-end sm:max-w-[49%]">
-                  <AvatarRoot class="mr-5 hidden size-10 rounded-full sm:block">
-                    <AvatarFallback>{{ chat.sender.name.substring(0, 2) }}</AvatarFallback>
-                    <AvatarImage :alt="chat.sender.name" />
-                  </AvatarRoot>
+                  <div class="relative mr-5 hidden sm:block">
+                    <AvatarRoot class="size-10 rounded-full">
+                      <AvatarFallback>{{ chat.sender.name.substring(0, 2) }}</AvatarFallback>
+                      <AvatarImage :alt="chat.sender.name" />
+                    </AvatarRoot>
+                    <div
+                      v-if="isOnline(chat.sender_user_id)"
+                      class="bg-success/90 border-background absolute bottom-0 right-0 h-3 w-3 rounded-full border-2"
+                    ></div>
+                  </div>
                   <div
                     class="bg-(--color)/10 border-(--color)/20 rounded-r-xl rounded-t-xl border px-4 py-3 [--color:var(--color-warning)]"
                   >
@@ -225,10 +287,16 @@ onMounted(fetchMe)
                     {{ chat.content }}
                     <div class="mt-1 text-xs opacity-70">{{ formatTime(chat.created_at) }}</div>
                   </div>
-                  <AvatarRoot class="ml-5 hidden size-10 rounded-full sm:block">
-                    <AvatarFallback>{{ me?.name?.substring(0, 2) }}</AvatarFallback>
-                    <AvatarImage :alt="me?.name" />
-                  </AvatarRoot>
+                  <div class="relative ml-5 hidden sm:block">
+                    <AvatarRoot class="size-10 rounded-full">
+                      <AvatarFallback>{{ me?.name?.substring(0, 2) }}</AvatarFallback>
+                      <AvatarImage :alt="me?.name" />
+                    </AvatarRoot>
+                    <div
+                      v-if="connected"
+                      class="bg-success/90 border-background absolute bottom-0 right-0 h-3 w-3 rounded-full border-2"
+                    ></div>
+                  </div>
                 </div>
 
                 <div class="clear-both"></div>
@@ -256,7 +324,7 @@ onMounted(fetchMe)
             <Button
               class="mr-5 flex size-8 flex-none items-center justify-center rounded-full sm:size-10"
               variant="primary"
-              :disabled="sending || !newMessage.trim()"
+              :disabled="!connected || !newMessage.trim()"
               @click="sendMessage"
             >
               <Lucide class="size-4" icon="Send" />

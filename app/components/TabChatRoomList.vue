@@ -2,7 +2,6 @@
 import { Lucide } from '~/base/ui/lucide'
 import { AvatarFallback, AvatarImage, AvatarRoot } from '~/base/ui/avatar'
 import { Box } from '~/base/ui/box'
-import { Badge } from '~/base/ui/badge'
 import { TabsContent } from '~/base/ui/tabs'
 import { Input } from '~/base/ui/input'
 import type { ResponseDataCollectionWithoutPagination } from '~/types/response'
@@ -11,8 +10,12 @@ import { useChatStore, type ChatRoom } from '~/stores/chat'
 const chatStore = useChatStore()
 const { $api } = useNuxtApp()
 const search = ref('')
-const chatRooms = ref<ChatRoom[]>([])
 const loading = ref(false)
+
+const chatRooms = computed(() => chatStore.chatRooms)
+
+/** True if a user ID is currently online globally */
+const isOnline = (userId: string) => chatStore.isGloballyOnline(userId)
 
 const fetchChatRooms = async () => {
   loading.value = true
@@ -20,7 +23,7 @@ const fetchChatRooms = async () => {
     const response = await $api<ResponseDataCollectionWithoutPagination<ChatRoom>>('api/chat-rooms', {
       method: 'GET',
     })
-    chatRooms.value = response.payload.data
+    chatStore.setChatRooms(response.payload.data)
   } finally {
     loading.value = false
   }
@@ -40,7 +43,7 @@ const onlineMembers = computed(() => {
   const members: ChatMember[] = []
   for (const room of chatRooms.value) {
     const member = room.type === 'PERSONAL' ? room.recipient : null
-    if (member && !seen.has(member.id)) {
+    if (member && !seen.has(member.id) && isOnline(member.id)) {
       seen.add(member.id)
       members.push(member)
     }
@@ -58,7 +61,7 @@ onMounted(fetchChatRooms)
       <div class="relative">
         <Input
           v-model="search"
-          class="bg-foreground/[.03] px-4 py-3 pr-10"
+          class="bg-foreground/3 px-4 py-3 pr-10"
           type="text"
           placeholder="Search for messages or users..."
         />
@@ -81,6 +84,7 @@ onMounted(fetchChatRooms)
                 <AvatarImage :alt="member.name" />
               </AvatarRoot>
               <div
+                v-if="isOnline(member.id)"
                 class="bg-success/90 border-background absolute bottom-0 right-0 h-3 w-3 rounded-full border-2"
               ></div>
             </div>
@@ -91,13 +95,16 @@ onMounted(fetchChatRooms)
         </div>
       </div>
     </Box>
-    <div class="scrollbar-hidden -mr-1 h-[29rem] space-y-4 overflow-y-auto pr-1 pt-1 snap-y">
+    <div class="scrollbar-hidden -mx-1 h-[29rem] space-y-4 overflow-y-auto px-1 pt-1 snap-y">
       <div v-if="loading" class="flex justify-center py-4 opacity-70">Loading...</div>
       <template v-else-if="filteredRooms.length">
         <Box
           v-for="room in filteredRooms"
           :key="'chat-' + room.id"
-          class="chat-item relative flex cursor-pointer items-center snap-start"
+          :class="[
+            'chat-item relative flex cursor-pointer items-center snap-start',
+            chatStore.selectedRoom?.id === room.id ? 'ring-2 ring-primary/50 bg-primary/10' : ''
+          ].join(' ')"
           @click="chatStore.selectRoom(room)"
         >
           <div class="relative mr-1">
@@ -106,6 +113,7 @@ onMounted(fetchChatRooms)
               <AvatarImage :alt="displayName(room)" />
             </AvatarRoot>
             <div
+              v-if="room.recipient && isOnline(room.recipient.id)"
               class="bg-success/90 border-background absolute bottom-0 right-0 h-3 w-3 rounded-full border-2"
             ></div>
           </div>
