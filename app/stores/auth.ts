@@ -1,4 +1,5 @@
 import type User from "~/types/entities/user";
+import type { AuthUser } from "~/types/entities/user";
 
 export const useAuthStore = defineStore("authStore", () => {
     const user = ref<User | null>(null)
@@ -8,9 +9,15 @@ export const useAuthStore = defineStore("authStore", () => {
         secure: false,
         watch: true
     })
-    const setAuthenticatedUser = async (responseUser: {token : string, user : User}): Promise<void> => {
-        user.value = responseUser.user
-        accessToken.value = responseUser.token
+
+    const setAuthenticatedUser = async (authUser: AuthUser): Promise<void> => {
+        const { tokens, ...profile } = authUser
+        user.value = profile
+        accessToken.value = tokens.access_token
+    }
+
+    const setUser = async (profile: User): Promise<void> => {
+        user.value = profile
     }
 
     const setUnauthenticatedUser = async ()=>{
@@ -23,6 +30,7 @@ export const useAuthStore = defineStore("authStore", () => {
       user,
       accessToken,
       setAuthenticatedUser,
+      setUser,
       setUnauthenticatedUser,
     }
 })

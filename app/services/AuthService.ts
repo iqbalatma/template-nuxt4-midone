@@ -1,11 +1,10 @@
 import type { ResponseData, ResponseError, ResponseSingleData } from '~/types/response'
 import type User from '~/types/entities/user'
+import type { AuthUser } from '~/types/entities/user'
 import { useAuthStore } from '~/stores/auth'
-import { isFetchResponseError } from '~/utils/helper'
-import { ResponseCode } from '~/enums/ResponseCode'
 
 export interface AuthRequest {
-  username: string
+  email: string
   password: string
 }
 
@@ -13,57 +12,56 @@ export const useAuthService = () => {
   const { $api } = useNuxtApp()
   const responseError = ref<ResponseError | null>(null)
 
-  const { setAuthenticatedUser, setUnauthenticatedUser } = useAuthStore()
+  const { setAuthenticatedUser, setUser, setUnauthenticatedUser } = useAuthStore()
 
   const authenticate = async (request: AuthRequest) => {
     try {
-      console.log(request)
-      const response: ResponseSingleData<{ token: string; user: User }> = await $api(
-        'api/auth/login',
-        {
-          method: 'POST',
-          body: request,
-        },
-      )
-
-      console.log(response)
+      const response: ResponseSingleData<AuthUser> = await $api('api/auth/authenticate', {
+        method: 'POST',
+        body: request,
+      })
 
       await setAuthenticatedUser(response.payload.data)
       navigateTo('/')
     } catch (e) {
-      console.log(e)
+      // validation/error messages are already surfaced via the $api plugin's flash store handling
     }
+  }
+
+  const fetchMe = async () => {
+    const response: ResponseSingleData<User> = await $api('api/auth/me', {
+      method: 'GET',
+    })
+    await setUser(response.payload.data)
+  }
+
+  const refresh = async () => {
+    const response: ResponseSingleData<AuthUser> = await $api('api/auth/refresh', {
+      method: 'POST',
+    })
+    await setAuthenticatedUser(response.payload.data)
   }
 
   const logout = async () => {
     try {
-      const accessToken = useCookie('access_token').value
-      if (accessToken) {
-        await $api<ResponseData>('/api/auth/logout', {
+      if (useCookie('access_token').value) {
+        await $api<ResponseData>('api/auth/logout', {
           method: 'POST',
         })
-        await setUnauthenticatedUser()
-        navigateTo('/auth')
-        return
-      } else {
-        await setUnauthenticatedUser()
-        navigateTo('/auth')
-        return
       }
     } catch (e) {
-      if (isFetchResponseError(e)) {
-        const error = e._data as ResponseError
-        if (error.code === ResponseCode.ERR_ACTION_UNAUTHORIZED) {
-          await setUnauthenticatedUser()
-          navigateTo('/auth')
-        }
-      }
+      // ignore failures - local session is cleared below regardless of API outcome
+    } finally {
+      await setUnauthenticatedUser()
+      navigateTo('/auth')
     }
   }
 
   return {
     authenticate,
     logout,
+    fetchMe,
+    refresh,
     responseError,
   }
 }

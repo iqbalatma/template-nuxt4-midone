@@ -14,7 +14,7 @@ definePageMeta({
   public: true,
 })
 const formRequest = ref<AuthRequest>({
-  username: '',
+  email: '',
   password: '',
 })
 const flashStore = useFlashStore()
@@ -77,14 +77,14 @@ const { authenticate } = useAuthService()
                 <Input
                   :class="
                     cn('box block min-w-full px-5 py-6 xl:min-w-md', {
-                      'border-danger': flashStore.isKeyErrors('username'),
+                      'border-danger': flashStore.isKeyErrors('email'),
                     })
                   "
-                  type="text"
-                  v-model="formRequest.username"
-                  placeholder="Username"
+                  type="email"
+                  v-model="formRequest.email"
+                  placeholder="Email"
                 />
-                <FormFeedback feedbackKey="username" />
+                <FormFeedback feedbackKey="email" />
 
                 <Input
                   :class="
