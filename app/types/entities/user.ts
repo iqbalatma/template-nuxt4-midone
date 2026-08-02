@@ -1,16 +1,37 @@
-import type BaseEntity from '~/types/entities/base_entity'
+import type { RoleMaster } from '~/types/entities/role'
 
-export default interface User extends BaseEntity{
-    first_name: string
-    last_name: string
-    full_name: string
-    email: string
-    phone_number: string
+/**
+ * Mirrors `user.Resource` in the Go API - returned by GET /api/auth/me and
+ * GET /api/management/users. Note there is no `updated_at`, and `roles` uses
+ * the trimmed {id, name} shape.
+ */
+export default interface User {
+  id: string
+  first_name: string
+  last_name: string | null
+  email: string
+  phone_number: string | null
+  created_at: string
+  roles: RoleMaster[]
 }
 
 export interface AuthTokens {
-    access_token: string
-    refresh_token: string
+  access_token: string
+  refresh_token: string
 }
 
-export type AuthUser = User & { tokens: AuthTokens }
+/**
+ * Mirrors `auth.Resource` - returned by POST /api/auth/authenticate and
+ * /api/auth/refresh. Differs from `User`: it carries `full_name` but omits
+ * `created_at` and `roles`.
+ */
+export interface AuthProfile {
+  id: string
+  first_name: string
+  last_name: string | null
+  full_name: string
+  email: string
+  phone_number: string | null
+}
+
+export type AuthUser = AuthProfile & { tokens: AuthTokens }

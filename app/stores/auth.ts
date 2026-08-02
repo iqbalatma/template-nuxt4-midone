@@ -1,8 +1,9 @@
 import type User from "~/types/entities/user";
-import type { AuthUser } from "~/types/entities/user";
+import type { AuthProfile, AuthUser } from "~/types/entities/user";
 
 export const useAuthStore = defineStore("authStore", () => {
-    const user = ref<User | null>(null)
+    // Login/refresh yield an AuthProfile; /auth/me yields the fuller User
+    const user = ref<User | AuthProfile | null>(null)
     const accessToken = useCookie('access_token', {
         maxAge: 60 * 60 * 24 * 7,
         sameSite: 'lax',

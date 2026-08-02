@@ -17,10 +17,11 @@ definePageMeta({
 })
 
 const { getAll, deleteById, rolesCollection, loading } = useRoleService()
-const { permissionsCollection, getAll: getAllPermissions } = usePermissionService()
+// The role form only needs permissions as lookup options, so it reads the master endpoint
+const { permissionsMasterCollection, getAllMaster: getAllMasterPermissions } = usePermissionService()
 
 onMounted(async () => {
-  await Promise.all([getAll(), getAllPermissions()])
+  await Promise.all([getAll(), getAllMasterPermissions()])
 })
 
 const searchKey = ref('')
@@ -138,5 +139,5 @@ const onConfirmDelete = async () => {
     @submit="onConfirmDelete"
   />
 
-  <ModalFormRole ref="modalFormRef" :permissions="permissionsCollection" @submit="getAll()" />
+  <ModalFormRole ref="modalFormRef" :permissions="permissionsMasterCollection" @submit="getAll()" />
 </template>

@@ -30,22 +30,14 @@ export interface ResponseDataCollectionWithoutPagination<T> extends ResponseData
     }
 }
 
+/** Mirrors `utils.PaginationMeta` in the Go API - no Laravel-style *_url or links fields */
 export interface PaginationMeta {
     current_page: number,
-    first_page_url: string,
     from: number,
+    to: number,
     last_page: number,
-    last_page_url: string,
-    links: {
-        url: string | null,
-        label: string,
-        active: boolean,
-    }[],
-    next_page_url: string | null,
     path: string,
     per_page: number,
-    prev_page_url: string | null,
-    to: null|number,
     total: number
 }
 

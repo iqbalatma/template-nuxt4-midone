@@ -16,6 +16,12 @@ const mainMenu: (string | Menu)[] = [
     route_name: '/',
     title: 'Dashboard',
   },
+  'MANAGEMENT',
+  {
+    icon: 'UsersRound',
+    route_name: 'management/users',
+    title: 'Users',
+  },
   'RBAC',
   {
     icon: 'UserLock',

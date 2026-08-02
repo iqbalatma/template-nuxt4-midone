@@ -19,6 +19,11 @@ const mainMenu: Array<Menu> = [
     title: 'Dashboard',
   },
   {
+    icon: 'UsersRound',
+    route_name: 'management-users',
+    title: 'Users',
+  },
+  {
     icon: 'ShieldCheck',
     title: 'RBAC',
     sub_menu: [
