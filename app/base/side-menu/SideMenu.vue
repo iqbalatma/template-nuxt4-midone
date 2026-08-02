@@ -108,12 +108,15 @@ const toggleMenu = (key: string, event: MouseEvent) => {
   }
 }
 
+// '/' and the template's legacy 'dashboard-overview-1' both mean the index page
+const toPath = (routeName: string) =>
+  routeName === '/' || routeName === 'dashboard-overview-1' ? '/' : `/${routeName}`
+
 const linkTo = async (menu: Menu, event: MouseEvent) => {
   event.preventDefault()
   if (menu.route_name) {
     // Use path-based navigation for absolute reliability in Nuxt
-    const path = menu.route_name === 'dashboard-overview-1' ? '/' : `/${menu.route_name}`
-    await navigateTo(path)
+    await navigateTo(toPath(menu.route_name))
   }
 }
 </script>
@@ -160,7 +163,7 @@ const linkTo = async (menu: Menu, event: MouseEvent) => {
         <!-- Terminal Link (Level 1) -->
         <NuxtLink
           v-else
-          :to="menu.route_name === 'dashboard-overview-1' ? '/' : `/${menu.route_name}`"
+          :to="toPath(menu.route_name!)"
           :class="
             cn(
               'side-menu__link',

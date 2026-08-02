@@ -1,8 +1,14 @@
 import type BaseEntity from '~/types/entities/base_entity'
 import type Permission from '~/types/entities/permission'
 
-export default interface Role extends BaseEntity{
+export default interface Role extends BaseEntity {
   name: string
+  description: string | null
   is_mutable: boolean
   permissions: Permission[]
+}
+
+export interface RoleMaster {
+  id: string
+  name: string
 }

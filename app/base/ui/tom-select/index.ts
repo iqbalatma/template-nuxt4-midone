@@ -1,0 +1,1 @@
+export { default as TomSelect } from "./TomSelect.vue";

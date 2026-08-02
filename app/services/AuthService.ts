@@ -11,10 +11,12 @@ export interface AuthRequest {
 export const useAuthService = () => {
   const { $api } = useNuxtApp()
   const responseError = ref<ResponseError | null>(null)
+  const submitting = ref(false)
 
   const { setAuthenticatedUser, setUser, setUnauthenticatedUser } = useAuthStore()
 
-  const authenticate = async (request: AuthRequest) => {
+  const authenticate = async (request: AuthRequest): Promise<boolean> => {
+    submitting.value = true
     try {
       const response: ResponseSingleData<AuthUser> = await $api('api/auth/authenticate', {
         method: 'POST',
@@ -22,9 +24,14 @@ export const useAuthService = () => {
       })
 
       await setAuthenticatedUser(response.payload.data)
-      navigateTo('/')
+      await navigateTo('/')
+      return true
     } catch (e) {
       // validation/error messages are already surfaced via the $api plugin's flash store handling
+      responseError.value = (e as { _data?: ResponseError })?._data ?? null
+      return false
+    } finally {
+      submitting.value = false
     }
   }
 
@@ -35,6 +42,10 @@ export const useAuthService = () => {
     await setUser(response.payload.data)
   }
 
+  /**
+   * Manual refresh. The $api plugin already refreshes transparently on a 401,
+   * so this is only for explicit calls (e.g. a "keep me signed in" timer).
+   */
   const refresh = async () => {
     const response: ResponseSingleData<AuthUser> = await $api('api/auth/refresh', {
       method: 'POST',
@@ -49,11 +60,11 @@ export const useAuthService = () => {
           method: 'POST',
         })
       }
-    } catch (e) {
+    } catch {
       // ignore failures - local session is cleared below regardless of API outcome
     } finally {
       await setUnauthenticatedUser()
-      navigateTo('/auth')
+      await navigateTo('/auth')
     }
   }
 
@@ -63,5 +74,6 @@ export const useAuthService = () => {
     fetchMe,
     refresh,
     responseError,
+    submitting,
   }
 }

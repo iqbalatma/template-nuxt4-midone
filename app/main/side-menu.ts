@@ -12,9 +12,20 @@ export interface Menu {
 const mainMenu: (string | Menu)[] = [
   "MAIN MENU",
   {
-    icon: 'MessageSquare',
-    route_name: 'chat',
-    title: 'Chat',
+    icon: 'LayoutDashboard',
+    route_name: '/',
+    title: 'Dashboard',
+  },
+  'RBAC',
+  {
+    icon: 'UserLock',
+    route_name: 'rbac/roles',
+    title: 'Roles',
+  },
+  {
+    icon: 'Shield',
+    route_name: 'rbac/permissions',
+    title: 'Permissions',
   },
 ]
 
