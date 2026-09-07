@@ -11,11 +11,16 @@ interface Menu {
   params?: any
   badge?: number
   sub_menu?: Menu[]
+  permission?: string
 }
 
 const props = defineProps<{
   menu: (string | Menu)[]
 }>()
+
+// Entries the user has no permission for are dropped here rather than in each
+// theme, so all four themes get the same filtering from one place.
+const authorizedMenu = useAuthorizedMenu(() => props.menu)
 
 const route = useRoute()
 const router = useRouter()
@@ -25,9 +30,9 @@ const formattedMenu = ref<(string | Menu)[]>([])
 const openMenus = ref<Record<string, boolean>>({})
 
 watch(
-  () => props.menu,
+  authorizedMenu,
   () => {
-    formattedMenu.value = props.menu
+    formattedMenu.value = authorizedMenu.value
   },
   { immediate: true },
 )

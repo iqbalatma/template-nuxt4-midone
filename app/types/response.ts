@@ -7,6 +7,11 @@ export interface ResponseData {
 
 export interface ResponseError extends ResponseData {
     errors?: Record<string, string[]>,
+    /**
+     * Only present when the API runs with APP_DEBUG=true - it carries the raw
+     * cause behind the message. Never render it outside a developer view.
+     */
+    debug?: string,
 }
 
 export interface PayloadDataCollectionPaginated<T> {

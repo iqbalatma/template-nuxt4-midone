@@ -2,14 +2,14 @@
 import '@/assets/css/themes/rubick/top-menu.css'
 import { useSideMenu } from '@/composables/useSideMenu'
 import { useQuickSearch } from '@/composables/useQuickSearch'
-import fakers from '@/utils/faker'
 import { Lucide } from '@/base/ui/lucide'
 import { Breadcrumb } from '@/base/ui/breadcrumb'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { AvatarRoot, AvatarFallback } from '@/base/ui/avatar'
+import { useAuthUser } from '@/composables/useAuthUser'
 import mainMenu from '@/main/top-menu'
 import { TopMenu } from '@/base/top-menu'
 import { AccountDropdown } from '@/base/account-dropdown'
-import { NotificationDropdown } from '@/base/notification-dropdown'
+import { NotificationDropdown, NotificationBell } from '@/base/notification-dropdown'
 import { QuickSearchDialog } from '@/base/quick-search-dialog'
 
 const {
@@ -19,6 +19,8 @@ const {
 } = useSideMenu()
 
 const { quickSearchDialogOpen } = useQuickSearch()
+
+const { initials } = useAuthUser()
 </script>
 
 <template>
@@ -95,8 +97,7 @@ const { quickSearchDialogOpen } = useQuickSearch()
           <AvatarRoot
             class="rounded-full ring-(--color)/40 size-full [--color:var(--color-nav-foreground)]"
           >
-            <AvatarFallback>PA</AvatarFallback>
-            <AvatarImage :src="fakers[0]!['photos'][2]" alt="avatar" />
+            <AvatarFallback>{{ initials }}</AvatarFallback>
           </AvatarRoot>
           <AccountDropdown
             class="absolute right-0 top-full mt-2 origin-top-right"

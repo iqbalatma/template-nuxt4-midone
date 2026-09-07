@@ -5,6 +5,7 @@ import { CheckboxRoot, CheckboxControl, CheckboxLabel } from '~/base/ui/checkbox
 import { Input } from '~/base/ui/input'
 import logoUrl from '~/assets/images/logo.svg'
 import illustrationUrl from '~/assets/images/illustration.svg'
+import googleLogoUrl from '~/assets/images/google.svg'
 import { type AuthRequest, useAuthService } from '~/services/AuthService'
 import FormFeedback from '~/components/FormFeedback.vue'
 import SimpleAlert from '~/components/SimpleAlert.vue'
@@ -19,7 +20,7 @@ const formRequest = ref<AuthRequest>({
 })
 const flashStore = useFlashStore()
 
-const { authenticate } = useAuthService()
+const { authenticate, loginWithGoogle } = useAuthService()
 </script>
 <template>
   <div
@@ -105,7 +106,9 @@ const { authenticate } = useAuthService()
                       <CheckboxLabel>Remember me</CheckboxLabel>
                     </CheckboxRoot>
                   </div>
-                  <a class="opacity-70" href="">Forgot Password?</a>
+                  <NuxtLink class="opacity-70" to="/auth/forgot-password">
+                    Forgot Password?
+                  </NuxtLink>
                 </div>
               </div>
               <div class="mt-5 text-center xl:mt-10 xl:text-left">
@@ -115,7 +118,14 @@ const { authenticate } = useAuthService()
                   @click="authenticate(formRequest)"
                   >Login</Button
                 >
-                <Button class="box mt-4 w-full px-4 py-5" look="outline"> Register </Button>
+                <Button
+                  class="box mt-4 w-full px-4 py-5"
+                  look="outline"
+                  @click="loginWithGoogle()"
+                >
+                  <img class="mr-2 h-4 w-4" :src="googleLogoUrl" alt="" />
+                  Sign in with Google
+                </Button>
               </div>
               <div class="mt-10 text-center opacity-70 xl:mt-24 xl:text-left">
                 By signin up, you agree to our

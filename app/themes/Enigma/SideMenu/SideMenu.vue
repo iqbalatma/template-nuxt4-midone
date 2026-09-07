@@ -3,14 +3,14 @@ import '@/assets/css/themes/enigma/side-menu.css'
 import logo from '@/assets/images/logo.svg'
 import { useSideMenu } from '@/composables/useSideMenu'
 import { useQuickSearch } from '@/composables/useQuickSearch'
-import fakers from '@/utils/faker'
 import { Lucide } from '@/base/ui/lucide'
 import { Breadcrumb } from '@/base/ui/breadcrumb'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { AvatarRoot, AvatarFallback } from '@/base/ui/avatar'
+import { useAuthUser } from '@/composables/useAuthUser'
 import mainMenu from '@/main/side-menu'
 import { SideMenu } from '@/base/side-menu'
 import { AccountDropdown, AccountTrigger } from '@/base/account-dropdown'
-import { NotificationDropdown } from '@/base/notification-dropdown'
+import { NotificationDropdown, NotificationBell } from '@/base/notification-dropdown'
 import { QuickSearchDialog } from '@/base/quick-search-dialog'
 import {
   ScrollAreaRoot,
@@ -35,6 +35,8 @@ const {
 } = useSideMenu()
 
 const { quickSearchDialogOpen } = useQuickSearch()
+
+const { initials } = useAuthUser()
 </script>
 
 <template>
@@ -194,8 +196,7 @@ const { quickSearchDialogOpen } = useQuickSearch()
                   <AvatarRoot
                     class="ring-(--color)/40 size-full [--color:var(--color-nav-foreground)] rounded-full"
                   >
-                    <AvatarFallback>PA</AvatarFallback>
-                    <AvatarImage :src="fakers[0]!['photos'][0]" alt="avatar" />
+                    <AvatarFallback>{{ initials }}</AvatarFallback>
                   </AvatarRoot>
                   <AccountDropdown
                     class="absolute right-0 top-full mt-2 origin-top-right"

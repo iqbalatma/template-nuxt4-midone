@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Box } from '@/base/ui/box'
+import { Badge } from '@/base/ui/badge'
 import { Lucide } from '@/base/ui/lucide'
-import fakers from '@/utils/faker'
+import { useAuthUser } from '@/composables/useAuthUser'
 import { useAuthService } from '~/services/AuthService'
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const {logout} = useAuthService()
+const { fullName, email, roleNames } = useAuthUser()
 </script>
 
 <template>
@@ -25,8 +27,13 @@ const {logout} = useAuthService()
       :class="`text-foreground before:shadow-foreground/5 flex w-64 flex-col gap-2.5 px-6 py-5 before:rounded-2xl before:shadow-xl before:backdrop-blur after:rounded-2xl ${props.boxClass ?? ''}`"
     >
       <div class="flex flex-col gap-0.5">
-        <div class="font-medium">{{ fakers[0]!['users'][0]!['name'] }}</div>
-        <div class="mt-0.5 text-xs opacity-70">{{ fakers[0]!['jobs'][0] }}</div>
+        <div class="truncate font-medium">{{ fullName || '-' }}</div>
+        <div class="mt-0.5 truncate text-xs opacity-70">{{ email }}</div>
+        <div v-if="roleNames.length" class="mt-1.5 flex flex-wrap gap-1">
+          <Badge v-for="role in roleNames" :key="role" look="outline" variant="primary" class="text-[10px]">
+            {{ role }}
+          </Badge>
+        </div>
       </div>
       <div class="bg-foreground/5 h-px"></div>
       <div class="flex flex-col gap-0.5">

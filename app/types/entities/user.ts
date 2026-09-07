@@ -1,9 +1,8 @@
 import type { RoleMaster } from '~/types/entities/role'
 
 /**
- * Mirrors `user.Resource` in the Go API - returned by GET /api/auth/me and
- * GET /api/management/users. Note there is no `updated_at`, and `roles` uses
- * the trimmed {id, name} shape.
+ * Mirrors `user.Resource` in the Go API - returned by GET /api/management/users.
+ * Note there is no `updated_at`, and `roles` uses the trimmed {id, name} shape.
  */
 export default interface User {
   id: string
@@ -35,3 +34,13 @@ export interface AuthProfile {
 }
 
 export type AuthUser = AuthProfile & { tokens: AuthTokens }
+
+/**
+ * Mirrors `user.ProfileResource` - returned by GET /api/me and PATCH /api/me.
+ * `permissions` is the flattened, deduplicated list across every role the user
+ * holds; it is the only place the frontend learns what the user may do, and it
+ * is deliberately absent from the plain `User` shape the list endpoint returns.
+ */
+export interface Profile extends User {
+  permissions: string[]
+}

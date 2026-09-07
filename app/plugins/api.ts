@@ -86,7 +86,11 @@ export default defineNuxtPlugin(() => {
 
       if (!isRefreshable) {
         reportError(response)
-        if (response?._data?.code === ResponseCode.ERR_ACTION_UNAUTHORIZED) await forceLogout()
+        // Only a token failure ends the session. ERR_ACTION_UNAUTHORIZED is the
+        // API's 403 - authenticated but lacking a permission - and logging the
+        // user out over one forbidden screen would strand them on /auth with a
+        // perfectly good session.
+        if (response?._data?.code === ResponseCode.ERR_AUTHENTICATION) await forceLogout()
         throw response ?? error
       }
 

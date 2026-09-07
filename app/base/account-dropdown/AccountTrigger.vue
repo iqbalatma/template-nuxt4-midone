@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Lucide } from '@/base/ui/lucide'
-import fakers from '@/utils/faker'
+import { useAuthUser } from '@/composables/useAuthUser'
 
 interface Props {
   class?: string
@@ -10,6 +10,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const { fullName, email, primaryRole, initials } = useAuthUser()
 </script>
 
 <template>
@@ -17,22 +18,18 @@ const props = defineProps<Props>()
     <div :class="['flex cursor-pointer items-center transition', props.innerClass]">
       <div
         :class="[
-          'relative flex-none overflow-hidden rounded-full border-4',
+          'relative flex flex-none items-center justify-center overflow-hidden rounded-full border-4 bg-background/20 text-xs font-medium uppercase dark:bg-foreground/20',
           props.avatarClass ?? 'h-10 w-10 border-background/20 dark:border-foreground/20',
         ]"
       >
-        <img
-          class="absolute top-0 h-full w-full object-cover"
-          :src="fakers[0]!['photos'][0]"
-          alt="Midone - Admin Dashboard Template"
-        />
+        {{ initials }}
       </div>
       <div
         class="ms-3 flex w-full items-center overflow-hidden transition-opacity group-[.side-menu--collapsed.side-menu--on-hover]:ms-3 group-[.side-menu--collapsed.side-menu--on-hover]:w-full group-[.side-menu--collapsed.side-menu--on-hover]:opacity-100 xl:group-[.side-menu--collapsed]:ms-0 xl:group-[.side-menu--collapsed]:w-0 xl:group-[.side-menu--collapsed]:opacity-0"
       >
         <div :class="['w-28', props.textClass]">
-          <div class="w-full truncate font-medium">{{ fakers[0]!['users'][0]!['name'] }}</div>
-          <div class="w-full truncate text-xs opacity-60">Administrator</div>
+          <div class="w-full truncate font-medium">{{ fullName || email }}</div>
+          <div class="w-full truncate text-xs opacity-60">{{ primaryRole || '-' }}</div>
         </div>
         <Lucide class="me-4 ms-auto opacity-50 flex-none" icon="MoveRight" />
       </div>

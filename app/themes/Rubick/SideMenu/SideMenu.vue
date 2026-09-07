@@ -3,14 +3,14 @@ import '@/assets/css/themes/rubick/side-menu.css'
 import logo from '@/assets/images/logo.svg'
 import { useSideMenu } from '@/composables/useSideMenu'
 import { useQuickSearch } from '@/composables/useQuickSearch'
-import fakers from '@/utils/faker'
 import { Lucide } from '@/base/ui/lucide'
 import { Breadcrumb } from '@/base/ui/breadcrumb'
-import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
+import { AvatarRoot, AvatarFallback } from '@/base/ui/avatar'
+import { useAuthUser } from '@/composables/useAuthUser'
 import mainMenu from '@/main/side-menu'
 import { SideMenu } from '@/base/side-menu'
 import { AccountDropdown, AccountTrigger } from '@/base/account-dropdown'
-import { NotificationDropdown } from '@/base/notification-dropdown'
+import { NotificationDropdown, NotificationBell } from '@/base/notification-dropdown'
 import { QuickSearchDialog } from '@/base/quick-search-dialog'
 import {
   ScrollAreaRoot,
@@ -35,6 +35,8 @@ const {
 } = useSideMenu()
 
 const { quickSearchDialogOpen } = useQuickSearch()
+
+const { initials } = useAuthUser()
 </script>
 
 <template>
@@ -177,7 +179,7 @@ const { quickSearchDialogOpen } = useQuickSearch()
                 </div>
               </div>
               <div class="group/notifications relative flex h-9 items-center">
-                <Lucide icon="Bell" />
+                <NotificationBell />
                 <NotificationDropdown
                   class="absolute right-0 top-full mt-2 origin-top-right"
                   boxClass="absolute right-0 top-0 -mr-0.5 -mt-0.5"
@@ -185,8 +187,7 @@ const { quickSearchDialogOpen } = useQuickSearch()
               </div>
               <div class="group/profile relative size-9 flex-none">
                 <AvatarRoot class="size-full rounded-full">
-                  <AvatarFallback>PA</AvatarFallback>
-                  <AvatarImage :src="fakers[0]!['photos'][2]" alt="avatar" />
+                  <AvatarFallback>{{ initials }}</AvatarFallback>
                 </AvatarRoot>
                 <AccountDropdown
                   class="absolute right-0 top-full mt-2 origin-top-right"

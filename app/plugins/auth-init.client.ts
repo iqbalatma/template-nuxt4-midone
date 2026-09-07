@@ -9,7 +9,7 @@ export default defineNuxtPlugin(async () => {
     try {
       await fetchMe()
     } catch (e) {
-      // invalid/expired token - the $api plugin already clears the session on ERR_ACTION_UNAUTHORIZED
+      // invalid/expired token - the $api plugin already clears the session on ERR_AUTHENTICATION
     }
   }
 })
