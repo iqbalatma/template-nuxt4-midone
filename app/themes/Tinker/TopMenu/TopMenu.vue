@@ -4,23 +4,18 @@ import { useSideMenu } from '@/composables/useSideMenu'
 import { useQuickSearch } from '@/composables/useQuickSearch'
 import { Lucide } from '@/base/ui/lucide'
 import { Breadcrumb } from '@/base/ui/breadcrumb'
-import { AvatarRoot, AvatarFallback } from '@/base/ui/avatar'
-import { useAuthUser } from '@/composables/useAuthUser'
+import { useBreadcrumb } from '@/composables/useBreadcrumb'
 import mainMenu from '@/main/top-menu'
 import { TopMenu } from '@/base/top-menu'
 import { AccountDropdown } from '@/base/account-dropdown'
 import { NotificationDropdown, NotificationBell } from '@/base/notification-dropdown'
 import { QuickSearchDialog } from '@/base/quick-search-dialog'
 
-const {
-  mobileMenuOpen,
-  openMobileMenu,
-  closeMobileMenu,
-} = useSideMenu()
+const { mobileMenuOpen, openMobileMenu, closeMobileMenu } = useSideMenu()
 
-const { quickSearchDialogOpen } = useQuickSearch()
+const { quickSearchDialogOpen, shortcutLabel } = useQuickSearch()
 
-const { initials } = useAuthUser()
+const breadcrumb = useBreadcrumb()
 </script>
 
 <template>
@@ -33,9 +28,7 @@ const { initials } = useAuthUser()
     ]"
   >
     <div
-      :class="[
-        'border-(--color-nav-foreground)/20 relative z-30 flex h-16 items-center border-b',
-      ]"
+      :class="['border-(--color-nav-foreground)/20 relative z-30 flex h-16 items-center border-b']"
     >
       <a
         class="text-(--color-nav-foreground) border-(--color-nav-foreground)/20 hidden h-full items-center border-r px-7 xl:flex"
@@ -70,7 +63,7 @@ const { initials } = useAuthUser()
           />
         </div>
         <Breadcrumb
-          :items="['Apps', 'Dashboards', 'Overview']"
+          :items="breadcrumb"
           class="mr-auto hidden xl:flex [--background-image-chevron:var(--background-image-chevron-light)] [--color-base:--alpha(var(--color-nav-foreground)/70%)] [--color-link:var(--color-nav-foreground)] [&_li]:text-(--color-base) [&_li]:before:bg-(image:--background-image-chevron) [&_li]:before:opacity-70 [&_li:not(:last-child)>a]:text-(--color-link) [&_li]:before:size-2 [&_li]:before:-rotate-90 [&_li]:before:bg-center [&_li]:before:bg-no-repeat [&_li]:before:mr-4 [&_li]:before:ml-0 [&_li]:before:relative [&_li]:before:inset-y-0 [&_li]:before:my-auto [&_li]:first:before:hidden"
         />
         <div
@@ -79,25 +72,22 @@ const { initials } = useAuthUser()
         >
           <div class="flex items-center gap-3 opacity-70">
             <Lucide icon="Search" class="!size-4" />
-            ⌘K
+            {{ shortcutLabel }}
           </div>
         </div>
+        <DarkModeToggle class="[--color:var(--color-nav-foreground)] !size-4" />
+        <LanguageSwitcher />
         <div class="group/notifications relative flex h-9 items-center">
-          <Lucide
-            icon="Bell"
-            class="[--color:var(--color-nav-foreground)] !size-4"
-          />
+          <NotificationBell icon-class="[--color:var(--color-nav-foreground)] !size-4" />
           <NotificationDropdown
             class="absolute right-0 top-full mt-2 origin-top-right"
             boxClass="absolute right-0 top-0 -mr-0.5 -mt-0.5"
           />
         </div>
-        <div class="group/profile relative size-9 flex-none">
-          <AvatarRoot
+        <div class="group/profile relative size-9 flex-none cursor-pointer">
+          <UserAvatar
             class="rounded-full ring-1 ring-(--color)/40 border-3 border-(--color)/5 size-full [--color:var(--color-nav-foreground)]"
-          >
-            <AvatarFallback>{{ initials }}</AvatarFallback>
-          </AvatarRoot>
+          />
           <AccountDropdown
             class="absolute right-0 top-full mt-2 origin-top-right"
             boxClass="absolute right-0 top-0 -mr-0.5 -mt-0.5"

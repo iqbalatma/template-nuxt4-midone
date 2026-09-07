@@ -119,38 +119,42 @@ defineExpose({ handleModal })
     "
   >
     <DialogContent class="sm:max-w-250">
-      <DialogTitle>{{ modalType === 'create' ? 'Create Role' : 'Edit Role' }}</DialogTitle>
+      <DialogTitle>
+        {{ $t(modalType === 'create' ? 'account.roles.form.createTitle' : 'account.roles.form.editTitle') }}
+      </DialogTitle>
 
       <div class="mt-6 grid grid-cols-12 gap-4">
         <div class="col-span-12 md:col-span-5">
-          <Label for="role-name">Name</Label>
+          <Label for="role-name">{{ $t('common.name') }}<RequiredMark /></Label>
           <Input
             id="role-name"
+            :aria-invalid="flashStore.isKeyErrors('name')"
             v-model="form.name"
             class="mt-2"
-            placeholder="Enter role name"
+            :placeholder="$t('account.roles.form.namePlaceholder')"
             :disabled="!isMutable"
           />
           <FormFeedback feedbackKey="name" />
-          <SmallInfo v-if="!isMutable">System role name cannot be changed.</SmallInfo>
+          <SmallInfo v-if="!isMutable">{{ $t('account.roles.form.immutableNameHint') }}</SmallInfo>
         </div>
 
         <div class="col-span-12 md:col-span-7">
-          <Label for="role-description">Description</Label>
+          <Label for="role-description">{{ $t('common.description') }}</Label>
           <Textarea
             id="role-description"
+            :aria-invalid="flashStore.isKeyErrors('description')"
             v-model="form.description"
             class="mt-2"
             rows="2"
-            placeholder="Short description of this role"
+            :placeholder="$t('account.roles.form.descriptionPlaceholder')"
           />
           <FormFeedback feedbackKey="description" />
         </div>
 
         <div class="col-span-12">
           <div class="flex items-center justify-between">
-            <Label>Permissions</Label>
-            <SmallInfo>{{ form.permission_ids.length }} selected</SmallInfo>
+            <Label>{{ $t('account.roles.form.permissions') }}</Label>
+            <SmallInfo>{{ $t('common.selectedCount', { count: form.permission_ids.length }) }}</SmallInfo>
           </div>
 
           <div class="mt-2 max-h-96 space-y-4 overflow-y-auto pr-1">
@@ -185,12 +189,12 @@ defineExpose({ handleModal })
         <DialogCloseTrigger as-child @click="handleModal(false)">
           <Button look="outline" variant="ghost">
             <Lucide icon="X" />
-            Cancel
+            {{ $t('common.cancel') }}
           </Button>
         </DialogCloseTrigger>
         <Button variant="primary" :disabled="submitting" @click="onSubmit">
           <Lucide :icon="submitting ? 'LoaderCircle' : 'Save'" :class="{ 'animate-spin': submitting }" />
-          {{ submitting ? 'Saving...' : 'Save' }}
+          {{ submitting ? $t('common.saving') : $t('common.save') }}
         </Button>
       </div>
     </DialogContent>

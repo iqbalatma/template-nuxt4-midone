@@ -4,23 +4,18 @@ import { useSideMenu } from '@/composables/useSideMenu'
 import { useQuickSearch } from '@/composables/useQuickSearch'
 import { Lucide } from '@/base/ui/lucide'
 import { Breadcrumb } from '@/base/ui/breadcrumb'
-import { AvatarRoot, AvatarFallback } from '@/base/ui/avatar'
-import { useAuthUser } from '@/composables/useAuthUser'
+import { useBreadcrumb } from '@/composables/useBreadcrumb'
 import mainMenu from '@/main/top-menu'
 import { TopMenu } from '@/base/top-menu'
 import { AccountDropdown } from '@/base/account-dropdown'
 import { NotificationDropdown, NotificationBell } from '@/base/notification-dropdown'
 import { QuickSearchDialog } from '@/base/quick-search-dialog'
 
-const {
-  mobileMenuOpen,
-  openMobileMenu,
-  closeMobileMenu,
-} = useSideMenu()
+const { mobileMenuOpen, openMobileMenu, closeMobileMenu } = useSideMenu()
 
-const { quickSearchDialogOpen } = useQuickSearch()
+const { quickSearchDialogOpen, shortcutLabel } = useQuickSearch()
 
-const { initials } = useAuthUser()
+const breadcrumb = useBreadcrumb()
 </script>
 
 <template>
@@ -71,35 +66,32 @@ const { initials } = useAuthUser()
             icon="ChartNoAxesColumn"
           />
         </div>
-         <Breadcrumb
-                  class="mr-auto hidden xl:flex [&_ol]:text-(--color-nav-foreground)/70 [&_li]:last:text-(--color-nav-foreground)/90 [&_li]:hover:text-(--color-nav-foreground)/90"
-                  :items="['Apps', 'Dashboards', 'Overview']"
-                />
+        <Breadcrumb
+          class="mr-auto hidden xl:flex [&_ol]:text-(--color-nav-foreground)/70 [&_li]:last:text-(--color-nav-foreground)/90 [&_li]:hover:text-(--color-nav-foreground)/90"
+          :items="breadcrumb"
+        />
         <div
           class="quick-search-toggle bg-(--color-nav-foreground)/5 border-(--color-nav-foreground)/15 text-(--color-nav-foreground) hover:ring-foreground/5 flex h-9 cursor-pointer items-center rounded-full border px-4 ring-1 ring-transparent ring-offset-2 ring-offset-transparent outline-none"
           @click="quickSearchDialogOpen = true"
         >
           <div class="flex items-center gap-3 opacity-70">
             <Lucide icon="Search" class="!size-4" />
-            ⌘K
+            {{ shortcutLabel }}
           </div>
         </div>
+        <DarkModeToggle class="[--color:var(--color-nav-foreground)] !size-4" />
+        <LanguageSwitcher />
         <div class="group/notifications relative flex h-9 items-center">
-          <Lucide
-            icon="Bell"
-            class="[--color:var(--color-nav-foreground)] !size-4"
-          />
+          <NotificationBell icon-class="[--color:var(--color-nav-foreground)] !size-4" />
           <NotificationDropdown
             class="absolute right-0 top-full mt-2 origin-top-right"
             boxClass="absolute right-0 top-0 -mr-0.5 -mt-0.5"
           />
         </div>
-        <div class="group/profile relative size-9 flex-none">
-          <AvatarRoot
+        <div class="group/profile relative size-9 flex-none cursor-pointer">
+          <UserAvatar
             class="rounded-full ring-1 ring-(--color)/40 border-3 border-(--color)/5 size-full [--color:var(--color-nav-foreground)]"
-          >
-            <AvatarFallback>{{ initials }}</AvatarFallback>
-          </AvatarRoot>
+          />
           <AccountDropdown
             class="absolute right-0 top-full mt-2 origin-top-right"
             boxClass="absolute right-0 top-0 -mr-0.5 -mt-0.5"

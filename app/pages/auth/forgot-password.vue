@@ -1,15 +1,13 @@
 <script lang="ts" setup>
-import { Box } from '~/base/ui/box'
+import { Lucide } from '~/base/ui/lucide'
 import { Button } from '~/base/ui/button'
 import { Input } from '~/base/ui/input'
-import logoUrl from '~/assets/images/logo.svg'
 import { useAuthService } from '~/services/AuthService'
 import FormFeedback from '~/components/FormFeedback.vue'
 import SimpleAlert from '~/components/SimpleAlert.vue'
-import { cn } from '~/utils/cn'
 
 definePageMeta({
-  layout: false,
+  layout: 'auth',
   public: true,
 })
 
@@ -28,54 +26,55 @@ const submit = async () => {
 </script>
 
 <template>
-  <div class="bg-primary bg-noise relative h-screen">
-    <div class="container relative z-10 mx-auto flex h-full items-center justify-center px-5">
-      <Box class="w-full max-w-md px-5 py-8 sm:px-8">
-        <a class="mb-6 flex items-center" href="/auth">
-          <img class="w-6" :src="logoUrl" alt="" />
-          <span class="ml-3 text-xl font-medium">
-            Midone <span class="font-light opacity-70">Admin</span>
-          </span>
-        </a>
+  <form @submit.prevent="submit()">
+    <h1 class="text-2xl font-semibold">Forgot password</h1>
+    <p class="mt-1 text-sm opacity-50">
+      Enter the email address on your account and we will send you a link to choose a new password.
+    </p>
 
-        <h2 class="text-2xl font-semibold">Forgot password</h2>
-        <p class="mt-2 opacity-70">
-          Enter the email address on your account and we will send you a link to choose a new
-          password.
+    <div class="mt-8 flex flex-col gap-2">
+      <SimpleAlert />
+
+      <template v-if="!sent">
+        <Input
+          :class="
+            cn('block w-full rounded-lg px-4 py-6', {
+              'border-danger': flashStore.isKeyErrors('email'),
+            })
+          "
+          type="email"
+          autocomplete="email"
+          v-model="email"
+          placeholder="Email"
+        />
+        <FormFeedback feedbackKey="email" />
+      </template>
+
+      <div v-else class="flex items-start gap-3 rounded-lg border border-foreground/10 p-4">
+        <Lucide icon="MailCheck" class="mt-0.5 size-5 shrink-0 text-primary" />
+        <p class="text-sm opacity-70">
+          If that address belongs to an account, a reset link is on its way. The link expires
+          shortly — check the spam folder if it does not arrive.
         </p>
-
-        <div class="mt-6 flex flex-col gap-2">
-          <SimpleAlert />
-
-          <template v-if="!sent">
-            <Input
-              :class="
-                cn('box block min-w-full px-5 py-6', {
-                  'border-danger': flashStore.isKeyErrors('email'),
-                })
-              "
-              v-model="email"
-              type="email"
-              placeholder="Email"
-              @keyup.enter="submit()"
-            />
-            <FormFeedback feedbackKey="email" />
-          </template>
-        </div>
-
-        <div class="mt-6 flex flex-col gap-3">
-          <Button
-            v-if="!sent"
-            class="box w-full px-4 py-5"
-            variant="primary"
-            :disabled="submitting"
-            @click="submit()"
-          >
-            {{ submitting ? 'Sending…' : 'Send reset link' }}
-          </Button>
-          <NuxtLink class="text-primary text-center" to="/auth">Back to sign in</NuxtLink>
-        </div>
-      </Box>
+      </div>
     </div>
-  </div>
+
+    <div class="mt-8 flex flex-col gap-3">
+      <Button
+        v-if="!sent"
+        class="w-full rounded-lg px-4 py-5"
+        variant="primary"
+        type="submit"
+        :disabled="submitting"
+      >
+        {{ submitting ? 'Sending…' : 'Send reset link' }}
+        <Lucide icon="ArrowRight" class="size-4" />
+      </Button>
+
+      <NuxtLink class="flex items-center justify-center gap-2 text-sm opacity-70 hover:opacity-100" to="/auth">
+        <Lucide icon="ArrowLeft" class="size-4" />
+        Back to sign in
+      </NuxtLink>
+    </div>
+  </form>
 </template>

@@ -1,0 +1,9 @@
+{
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Everything the system has sent you",
+    "inbox": "Inbox",
+    "unreadCount": "({count} unread)",
+    "markAllRead": "Mark all read"
+  }
+}

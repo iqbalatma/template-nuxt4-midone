@@ -1,35 +1,33 @@
 <script setup lang="ts">
-import { computed, ref, useTemplateRef, watch } from 'vue'
+import { computed, ref, useTemplateRef } from 'vue'
 import { Box } from '~/base/ui/box'
 import { Badge } from '~/base/ui/badge'
 import { Button } from '~/base/ui/button'
+import { Input } from '~/base/ui/input'
 import { Lucide } from '~/base/ui/lucide'
 import { Table, TableBody, TableHeader, TableRow } from '~/base/ui/table'
 import type { ModalDelete } from '#components'
 import ModalFormUser from '~/components/features/ModalFormUser.vue'
 import { useUserService } from '~/services/UserService'
 import { useRoleService } from '~/services/RoleService'
-import { getDefaultPerPage } from '~/utils/helper'
+import { useServerList } from '~/composables/useServerList'
 
 definePageMeta({
-  title: 'Users',
-  pageSubTitle: 'Data list of registered users',
+  title: 'account.users.title',
+  pageSubTitle: 'account.users.subtitle',
 })
-
-const route = useRoute()
 
 const { getAllPaginated, deleteById, usersCollection, loading } = useUserService()
 // The form only needs roles as lookup options
 const { rolesMasterCollection, getAllMaster: getAllMasterRoles } = useRoleService()
 
-const fetchUsers = () =>
-  getAllPaginated({
-    page: Number(route.query['page']) || 1,
-    per_page: Number(route.query['per_page']) || getDefaultPerPage(),
-  })
-
-// ServerSidePagination drives page/per_page through the URL, so refetch on query change
-watch(() => route.query, fetchUsers, { immediate: true, deep: true })
+// ?search= is also where the navbar quick search lands, so opening a user from
+// there shows the same filtered list a link to it would.
+const { filters, refresh: fetchUsers } = useServerList({
+  filters: { search: '' },
+  debounce: ['search'],
+  fetch: (page, per_page, applied) => getAllPaginated({ page, per_page, ...applied }),
+})
 
 onMounted(() => getAllMasterRoles())
 
@@ -51,24 +49,37 @@ const onConfirmDelete = async () => {
 <template>
   <div class="grid grid-cols-12 gap-6">
     <Box class="col-span-12 overflow-auto p-5 lg:overflow-visible">
-      <div class="mb-4 flex items-center justify-between">
+      <div class="mb-4 flex items-center justify-between gap-3">
         <Button variant="primary" @click="modalFormRef?.handleModal(true)">
           <Lucide icon="Plus" />
-          Add User
+          {{ $t('account.users.add') }}
         </Button>
+
+        <div class="relative w-full sm:w-64">
+          <Input
+            v-model="filters.search"
+            type="search"
+            :placeholder="$t('account.users.searchPlaceholder')"
+            class="w-full pr-8"
+          />
+          <Lucide
+            class="text-foreground/40 absolute inset-y-0 right-0 my-auto mr-2.5 size-4"
+            icon="Search"
+          />
+        </div>
       </div>
 
       <ServerSidePagination :meta="meta" :loading="loading">
         <Table class="-mt-2" variant="boxed">
           <TableHeader>
             <TableRow>
-              <TH icon="Hash">No.</TH>
-              <TH icon="User">Name</TH>
-              <TH icon="Mail">Email</TH>
-              <TH icon="Phone">Phone</TH>
-              <TH icon="UserCog">Roles</TH>
-              <TH icon="Calendar">Created At</TH>
-              <TH icon="Settings">Actions</TH>
+              <TH icon="Hash">{{ $t('common.no') }}</TH>
+              <TH icon="User">{{ $t('common.name') }}</TH>
+              <TH icon="Mail">{{ $t('common.email') }}</TH>
+              <TH icon="Phone">{{ $t('common.phone') }}</TH>
+              <TH icon="UserCog">{{ $t('common.roles') }}</TH>
+              <TH icon="Calendar">{{ $t('common.createdAt') }}</TH>
+              <TH icon="Settings">{{ $t('common.actions') }}</TH>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -123,8 +134,8 @@ const onConfirmDelete = async () => {
 
   <ModalDelete
     ref="modalDeleteRef"
-    title="Delete User"
-    message="Are you sure want to delete this user ? This action cannot be undone."
+    :title="$t('account.users.deleteTitle')"
+    :message="$t('account.users.deleteMessage')"
     @submit="onConfirmDelete"
   />
 

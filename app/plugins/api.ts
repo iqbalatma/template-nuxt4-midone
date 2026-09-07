@@ -27,8 +27,18 @@ const flushPending = (token: string | null) => {
 export default defineNuxtPlugin(() => {
   const config: RuntimeConfig = useRuntimeConfig()
 
-  const buildHeaders = (token: string | null, extra?: HeadersInit): HeadersInit => ({
-    'Content-Type': 'application/json',
+  /**
+   * A FormData body carries its own `multipart/form-data` Content-Type with the
+   * boundary in it, and only the browser can write that. Forcing
+   * application/json over it makes the API parse the boundary as JSON and
+   * answer `invalid character '-' in numeric literal`.
+   */
+  const buildHeaders = (
+    token: string | null,
+    extra?: HeadersInit,
+    body?: unknown,
+  ): HeadersInit => ({
+    ...(body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
     Accept: 'application/json',
     Authorization: token ? `Bearer ${token}` : '',
     ...((extra as Record<string, string>) ?? {}),
@@ -74,7 +84,7 @@ export default defineNuxtPlugin(() => {
       ...options,
       baseURL: config.public.apiBase,
       credentials: 'include',
-      headers: buildHeaders(token, options.headers as HeadersInit),
+      headers: buildHeaders(token, options.headers as HeadersInit, options.body),
     })
 
     try {
@@ -121,7 +131,8 @@ export default defineNuxtPlugin(() => {
           return await $fetch<T>(url, buildOptions(token))
         } catch (retryError: unknown) {
           // The freshly minted token still got rejected - surface it like any other failure
-          const retryResponse = (retryError as { response?: FetchResponse<ResponseError> })?.response
+          const retryResponse = (retryError as { response?: FetchResponse<ResponseError> })
+            ?.response
           reportError(retryResponse)
           throw retryResponse ?? retryError
         }

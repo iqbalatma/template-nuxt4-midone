@@ -11,7 +11,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const {logout} = useAuthService()
+const { logout } = useAuthService()
 const { fullName, email, roleNames } = useAuthUser()
 </script>
 
@@ -30,29 +30,39 @@ const { fullName, email, roleNames } = useAuthUser()
         <div class="truncate font-medium">{{ fullName || '-' }}</div>
         <div class="mt-0.5 truncate text-xs opacity-70">{{ email }}</div>
         <div v-if="roleNames.length" class="mt-1.5 flex flex-wrap gap-1">
-          <Badge v-for="role in roleNames" :key="role" look="outline" variant="primary" class="text-[10px]">
+          <Badge
+            v-for="role in roleNames"
+            :key="role"
+            look="outline"
+            variant="primary"
+            class="text-[10px]"
+          >
             {{ role }}
           </Badge>
         </div>
       </div>
       <div class="bg-foreground/5 h-px"></div>
       <div class="flex flex-col gap-0.5">
-        <a class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5" href="">
-          <Lucide icon="Users" /> Profile
-        </a>
-        <a class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5" href="">
-          <Lucide icon="ShieldAlert" /> Add Account
-        </a>
-        <a class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5" href="">
-          <Lucide icon="FileLock" /> Reset Password
-        </a>
-        <a class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5" href="">
-          <Lucide icon="FileQuestion" /> Help
-        </a>
+        <NuxtLink
+          class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5"
+          to="/profile/detail"
+        >
+          <Lucide icon="UserRound" /> Profile
+        </NuxtLink>
+        <NuxtLink
+          class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5"
+          to="/profile/password"
+        >
+          <Lucide icon="KeyRound" /> Update Password
+        </NuxtLink>
       </div>
       <div class="bg-foreground/5 h-px"></div>
       <div class="flex flex-col gap-0.5">
-        <a class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5" href="#" @click.prevent="logout()">
+        <a
+          class="hover:bg-foreground/5 -mx-3 flex gap-2.5 rounded-lg px-4 py-1.5"
+          href="#"
+          @click.prevent="logout()"
+        >
           <Lucide icon="Power" /> Logout
         </a>
       </div>

@@ -17,7 +17,9 @@ const {
 
 const service = useMachine(popover.machine, {
   ...props,
-  open,
+  get open() {
+    return open;
+  },
   closeOnInteractOutside,
   id: crypto.randomUUID(),
 });

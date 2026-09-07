@@ -1,0 +1,54 @@
+{
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: {date}",
+    "intro": "This policy explains what personal data this application collects, why it is collected, and what you can do about it. It applies to every part of the application and to the API behind it.",
+    "back": "Back to home",
+    "sections": {
+      "collect": {
+        "title": "Data we collect",
+        "body": "Account details you give us — name, email address, phone number — and data created by using the application, such as the roles assigned to you, your notifications, and a log of requests that changed something (the endpoint, the time, and your account)."
+      },
+      "use": {
+        "title": "How we use it",
+        "body": "To sign you in, to decide what you are allowed to see, to send you the notifications you are entitled to, and to keep an audit trail so a change can be traced back to the account that made it. We do not sell your data or use it for advertising."
+      },
+      "legalBasis": {
+        "title": "Why we are allowed to use it",
+        "body": "We process this data to provide the service you or your organisation asked for, and to meet our own security and record-keeping obligations."
+      },
+      "cookies": {
+        "title": "Cookies and local storage",
+        "body": "We use cookies to keep you signed in and to refresh your session, and your browser's local storage to remember your language, theme, and permissions so the interface draws correctly before the server answers. None of it is used to track you across other sites."
+      },
+      "sharing": {
+        "title": "Sharing",
+        "body": "Your data stays with us and the service providers that host and operate the application on our behalf. We share it beyond that only when the law requires it. If you sign in with Google, we receive your name and email address from Google, and nothing else."
+      },
+      "retention": {
+        "title": "How long we keep it",
+        "body": "Account data is kept while the account exists. Activity logs and notifications are kept for as long as we need them to investigate incidents, then deleted."
+      },
+      "security": {
+        "title": "Security",
+        "body": "Passwords are stored hashed, never in plain text. Traffic is encrypted in transit, and access to data is limited by the same permission system the application shows you. No system is perfectly secure, and we do not claim otherwise."
+      },
+      "rights": {
+        "title": "Your rights",
+        "body": "You can view and correct your own details from your profile, and ask us to export or delete your account data. Where your account belongs to an organisation, some requests may have to go through its administrator."
+      },
+      "children": {
+        "title": "Children",
+        "body": "The application is not intended for children, and we do not knowingly collect their data."
+      },
+      "changes": {
+        "title": "Changes to this policy",
+        "body": "If this policy changes, the date at the top changes with it. Significant changes will be announced in the application."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "Questions about this policy, or about your data, can be sent to the address published by the operator of this application."
+      }
+    }
+  }
+}

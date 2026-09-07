@@ -17,7 +17,9 @@ const {
 
 const service = useMachine(menu.machine, {
   ...props,
-  open,
+  get open() {
+    return open;
+  },
   closeOnSelect,
   id: crypto.randomUUID(),
 });

@@ -5,8 +5,7 @@ import { useSideMenu } from '@/composables/useSideMenu'
 import { useQuickSearch } from '@/composables/useQuickSearch'
 import { Lucide } from '@/base/ui/lucide'
 import { Breadcrumb } from '@/base/ui/breadcrumb'
-import { AvatarRoot, AvatarFallback } from '@/base/ui/avatar'
-import { useAuthUser } from '@/composables/useAuthUser'
+import { useBreadcrumb } from '@/composables/useBreadcrumb'
 import mainMenu from '@/main/side-menu'
 import { SideMenu } from '@/base/side-menu'
 import { AccountDropdown, AccountTrigger } from '@/base/account-dropdown'
@@ -19,7 +18,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaCorner,
-} from "@/base/ui/scroll-area";
+} from '@/base/ui/scroll-area'
 
 const {
   compactMenu,
@@ -34,9 +33,9 @@ const {
   onScrollContent,
 } = useSideMenu()
 
-const { quickSearchDialogOpen } = useQuickSearch()
+const { quickSearchDialogOpen, shortcutLabel } = useQuickSearch()
 
-const { initials } = useAuthUser()
+const breadcrumb = useBreadcrumb()
 </script>
 
 <template>
@@ -114,11 +113,15 @@ const { initials } = useAuthUser()
           />
         </AccountTrigger>
         <ScrollAreaRoot class="flex-1 min-h-0">
-          <ScrollAreaViewport :class="[
-            'pl-4 pr-4 xl:pr-14 pb-3',
-            '[-webkit-mask-image:_linear-gradient(to_top,_rgba(0,_0,_0,_0),_black_30px),_linear-gradient(to_bottom,_rgba(0,_0,_0,_0),_black_30px)]',
-            '[-webkit-mask-composite:_destination-in]',
-          ].join(' ')">
+          <ScrollAreaViewport
+            :class="
+              [
+                'pl-4 pr-4 xl:pr-14 pb-3',
+                '[-webkit-mask-image:_linear-gradient(to_top,_rgba(0,_0,_0,_0),_black_30px),_linear-gradient(to_bottom,_rgba(0,_0,_0,_0),_black_30px)]',
+                '[-webkit-mask-composite:_destination-in]',
+              ].join(' ')
+            "
+          >
             <ScrollAreaContent class="!min-w-auto">
               <SideMenu :menu="mainMenu" />
             </ScrollAreaContent>
@@ -173,7 +176,7 @@ const { initials } = useAuthUser()
                 </div>
                 <Breadcrumb
                   class="mr-auto hidden xl:flex [&_ol]:text-(--color-nav-foreground)/70 [&_li]:last:text-(--color-nav-foreground)/90 [&_li]:hover:text-(--color-nav-foreground)/90"
-                  :items="['Apps', 'Dashboards', 'Overview']"
+                  :items="breadcrumb"
                 />
                 <div
                   class="quick-search-toggle bg-(--color-nav-foreground)/5 border-(--color-nav-foreground)/15 text-(--color-nav-foreground) hover:ring-foreground/5 flex h-9 cursor-pointer items-center rounded-full border px-4 ring-1 ring-transparent ring-offset-2 ring-offset-transparent outline-none"
@@ -181,22 +184,24 @@ const { initials } = useAuthUser()
                 >
                   <div class="items-center gap-3 opacity-70 flex">
                     <Lucide icon="Search" />
-                    ⌘K
+                    {{ shortcutLabel }}
                   </div>
                 </div>
+                <DarkModeToggle class="[--color:var(--color-nav-foreground)]" />
+                <LanguageSwitcher
+                  icon-class="[--color:var(--color-nav-foreground)] cursor-pointer"
+                />
                 <div class="group/notifications relative flex h-9 items-center">
-                  <Lucide class="[--color:var(--color-nav-foreground)]" icon="Bell" />
+                  <NotificationBell icon-class="[--color:var(--color-nav-foreground)]" />
                   <NotificationDropdown
                     class="absolute right-0 top-full mt-2 origin-top-right"
                     boxClass="absolute right-0 top-0 -mr-0.5 -mt-0.5"
                   />
                 </div>
-                <div class="group/profile relative size-9 flex-none">
-                  <AvatarRoot
+                <div class="group/profile relative size-9 flex-none cursor-pointer">
+                  <UserAvatar
                     class="rounded-full ring-(--color)/40 size-full [--color:var(--color-nav-foreground)]"
-                  >
-                    <AvatarFallback>{{ initials }}</AvatarFallback>
-                  </AvatarRoot>
+                  />
                   <AccountDropdown
                     class="absolute right-0 top-full mt-2 origin-top-right"
                     boxClass="absolute right-0 top-0 -mr-0.5 -mt-0.5"
@@ -214,4 +219,3 @@ const { initials } = useAuthUser()
     </div>
   </div>
 </template>
-

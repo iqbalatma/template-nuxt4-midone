@@ -1,0 +1,58 @@
+{
+  "terms": {
+    "title": "Terms and Conditions",
+    "lastUpdated": "Last updated: {date}",
+    "intro": "These terms govern your use of this application. By signing in or using it, you accept them. If you do not, do not use the application.",
+    "back": "Back to home",
+    "sections": {
+      "accounts": {
+        "title": "Your account",
+        "body": "An account is issued to one person and is not to be shared. You are responsible for what happens under it, including what anyone you hand your credentials to does. Tell the operator promptly if you believe your account has been used without your permission."
+      },
+      "access": {
+        "title": "Access and permissions",
+        "body": "What you may see and do is decided by the roles assigned to your account. Access may be granted, changed, or withdrawn by the organisation that owns the account, at its discretion and without notice to you."
+      },
+      "acceptableUse": {
+        "title": "Acceptable use",
+        "body": "Do not attempt to bypass authentication or permission checks, probe or disrupt the service, scrape it in bulk, upload malicious content, or use it to break the law or someone else's rights. Automated access is allowed only through the interfaces we provide for it."
+      },
+      "data": {
+        "title": "Data you put in",
+        "body": "You keep whatever rights you already hold in the data you enter. You give us permission to store and process it so we can operate the service, and you confirm you are allowed to provide it in the first place."
+      },
+      "availability": {
+        "title": "Availability and changes",
+        "body": "The service is provided as it stands. We may change, suspend, or remove features, and there will be planned and unplanned downtime. Unless a separate agreement says otherwise, no particular uptime is promised."
+      },
+      "suspension": {
+        "title": "Suspension and termination",
+        "body": "Access may be suspended or ended if these terms are broken, if the account's organisation asks for it, or if the service is discontinued. Your data is handled after that as described in the Privacy Policy."
+      },
+      "thirdParty": {
+        "title": "Third-party services",
+        "body": "Signing in with Google and any other integration you use is governed by that provider's own terms as well as these. We are not responsible for services we do not operate."
+      },
+      "disclaimer": {
+        "title": "No warranty",
+        "body": "The service is provided \"as is\", without warranties of any kind, to the extent the law allows. We do not promise it will be uninterrupted, error-free, or fit for a particular purpose of yours."
+      },
+      "liability": {
+        "title": "Limitation of liability",
+        "body": "To the extent the law allows, we are not liable for indirect or consequential loss, lost profits, or lost data arising from your use of the service. Nothing here limits liability that cannot legally be limited."
+      },
+      "changes": {
+        "title": "Changes to these terms",
+        "body": "These terms may change. The date at the top changes with them, and continuing to use the application after a change means you accept the new version."
+      },
+      "governingLaw": {
+        "title": "Governing law",
+        "body": "These terms are governed by the law of the place where the operator of this application is established, and its courts hear any dispute about them."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "Questions about these terms can be sent to the address published by the operator of this application."
+      }
+    }
+  }
+}

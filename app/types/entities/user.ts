@@ -1,6 +1,19 @@
 import type { RoleMaster } from '~/types/entities/role'
 
 /**
+ * Mirrors `media.Resource`. `url` and every entry in `conversions` are
+ * root-relative paths served by the API host, not this one - prefix them with
+ * `apiBase` before putting them in an <img> (see useAuthUser's avatarUrl).
+ */
+export interface Media {
+  id: string
+  url: string
+  conversions: Record<string, string>
+  mime_type: string
+  human_size: string
+}
+
+/**
  * Mirrors `user.Resource` in the Go API - returned by GET /api/management/users.
  * Note there is no `updated_at`, and `roles` uses the trimmed {id, name} shape.
  */
@@ -12,6 +25,8 @@ export default interface User {
   phone_number: string | null
   created_at: string
   roles: RoleMaster[]
+  /** Null until the user uploads one; the avatar collection is single-file. */
+  avatar: Media | null
 }
 
 export interface AuthTokens {

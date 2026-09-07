@@ -1,0 +1,54 @@
+{
+  "privacyPolicy": {
+    "title": "Kebijakan Privasi",
+    "lastUpdated": "Terakhir diperbarui: {date}",
+    "intro": "Kebijakan ini menjelaskan data pribadi apa yang dikumpulkan aplikasi ini, untuk apa data tersebut dipakai, dan apa yang bisa Anda lakukan terhadapnya. Berlaku untuk seluruh bagian aplikasi dan API di belakangnya.",
+    "back": "Kembali ke beranda",
+    "sections": {
+      "collect": {
+        "title": "Data yang kami kumpulkan",
+        "body": "Data akun yang Anda berikan — nama, alamat email, nomor telepon — dan data yang tercipta saat Anda memakai aplikasi, seperti peran yang diberikan kepada Anda, notifikasi Anda, serta catatan permintaan yang mengubah data (endpoint, waktu, dan akun Anda)."
+      },
+      "use": {
+        "title": "Bagaimana data dipakai",
+        "body": "Untuk memasukkan Anda ke sistem, menentukan apa yang boleh Anda akses, mengirim notifikasi yang menjadi hak Anda, dan menjaga jejak audit agar setiap perubahan dapat ditelusuri ke akun yang melakukannya. Kami tidak menjual data Anda dan tidak memakainya untuk iklan."
+      },
+      "legalBasis": {
+        "title": "Dasar penggunaan data",
+        "body": "Data ini kami olah untuk menyediakan layanan yang Anda atau organisasi Anda minta, serta untuk memenuhi kewajiban keamanan dan pencatatan kami sendiri."
+      },
+      "cookies": {
+        "title": "Cookie dan penyimpanan lokal",
+        "body": "Kami memakai cookie untuk menjaga sesi Anda tetap masuk dan memperbaruinya, serta local storage peramban untuk mengingat bahasa, tema, dan hak akses Anda agar tampilan sudah benar sebelum server menjawab. Tidak ada yang dipakai untuk melacak Anda di situs lain."
+      },
+      "sharing": {
+        "title": "Pembagian data",
+        "body": "Data Anda hanya berada pada kami dan penyedia layanan yang menjalankan aplikasi ini untuk kami. Di luar itu kami hanya membagikannya bila diwajibkan hukum. Jika Anda masuk dengan Google, kami hanya menerima nama dan alamat email Anda dari Google."
+      },
+      "retention": {
+        "title": "Berapa lama data disimpan",
+        "body": "Data akun disimpan selama akun masih ada. Log aktivitas dan notifikasi disimpan selama masih dibutuhkan untuk menelusuri insiden, setelah itu dihapus."
+      },
+      "security": {
+        "title": "Keamanan",
+        "body": "Kata sandi disimpan dalam bentuk hash, tidak pernah sebagai teks biasa. Lalu lintas data dienkripsi, dan akses ke data dibatasi oleh sistem hak akses yang sama seperti yang Anda lihat di aplikasi. Tidak ada sistem yang sepenuhnya aman, dan kami tidak mengklaim sebaliknya."
+      },
+      "rights": {
+        "title": "Hak Anda",
+        "body": "Anda dapat melihat dan memperbaiki data Anda sendiri melalui halaman profil, serta meminta ekspor atau penghapusan data akun Anda. Bila akun Anda milik sebuah organisasi, sebagian permintaan mungkin harus melalui administratornya."
+      },
+      "children": {
+        "title": "Anak-anak",
+        "body": "Aplikasi ini tidak ditujukan untuk anak-anak, dan kami tidak dengan sengaja mengumpulkan data mereka."
+      },
+      "changes": {
+        "title": "Perubahan kebijakan",
+        "body": "Jika kebijakan ini berubah, tanggal di bagian atas ikut berubah. Perubahan penting akan diumumkan di dalam aplikasi."
+      },
+      "contact": {
+        "title": "Kontak",
+        "body": "Pertanyaan tentang kebijakan ini atau tentang data Anda dapat dikirim ke alamat yang dipublikasikan oleh pengelola aplikasi ini."
+      }
+    }
+  }
+}

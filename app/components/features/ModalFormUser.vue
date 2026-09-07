@@ -117,75 +117,82 @@ defineExpose({ handleModal })
     "
   >
     <DialogContent class="sm:max-w-200">
-      <DialogTitle>{{ modalType === 'create' ? 'Create User' : 'Edit User' }}</DialogTitle>
+      <DialogTitle>
+        {{ $t(modalType === 'create' ? 'account.users.form.createTitle' : 'account.users.form.editTitle') }}
+      </DialogTitle>
 
       <div class="mt-6 grid grid-cols-12 gap-4">
         <div class="col-span-12 md:col-span-6">
-          <Label for="user-first-name">First Name</Label>
+          <Label for="user-first-name">{{ $t('account.users.form.firstName') }}<RequiredMark /></Label>
           <Input
             id="user-first-name"
+            :aria-invalid="flashStore.isKeyErrors('first_name')"
             v-model="form.first_name"
             class="mt-2"
-            placeholder="Enter first name"
+            :placeholder="$t('account.users.form.firstNamePlaceholder')"
           />
           <FormFeedback feedbackKey="first_name" />
         </div>
 
         <div class="col-span-12 md:col-span-6">
-          <Label for="user-last-name">Last Name</Label>
+          <Label for="user-last-name">{{ $t('account.users.form.lastName') }}</Label>
           <Input
             id="user-last-name"
+            :aria-invalid="flashStore.isKeyErrors('last_name')"
             v-model="form.last_name"
             class="mt-2"
-            placeholder="Optional"
+            :placeholder="$t('account.users.form.optional')"
           />
           <FormFeedback feedbackKey="last_name" />
         </div>
 
         <div class="col-span-12 md:col-span-6">
-          <Label for="user-email">Email</Label>
+          <Label for="user-email">{{ $t('common.email') }}<RequiredMark /></Label>
           <Input
             id="user-email"
+            :aria-invalid="flashStore.isKeyErrors('email')"
             v-model="form.email"
             type="email"
             class="mt-2"
-            placeholder="name@example.com"
+            :placeholder="$t('account.users.form.emailPlaceholder')"
           />
           <FormFeedback feedbackKey="email" />
         </div>
 
         <div class="col-span-12 md:col-span-6">
-          <Label for="user-phone">Phone Number</Label>
+          <Label for="user-phone">{{ $t('account.users.form.phone') }}</Label>
           <Input
             id="user-phone"
+            :aria-invalid="flashStore.isKeyErrors('phone_number')"
             v-model="form.phone_number"
             class="mt-2"
-            placeholder="Optional"
+            :placeholder="$t('account.users.form.optional')"
           />
           <FormFeedback feedbackKey="phone_number" />
         </div>
 
         <div v-if="modalType === 'create'" class="col-span-12 md:col-span-6">
-          <Label for="user-password">Password</Label>
+          <Label for="user-password">{{ $t('account.users.form.password') }}<RequiredMark /></Label>
           <Input
             id="user-password"
+            :aria-invalid="flashStore.isKeyErrors('password')"
             v-model="form.password"
             type="password"
             class="mt-2"
-            placeholder="Minimum 8 characters"
+            :placeholder="$t('account.users.form.passwordPlaceholder')"
           />
           <FormFeedback feedbackKey="password" />
-          <SmallInfo>Password can only be set when creating the user.</SmallInfo>
+          <SmallInfo>{{ $t('account.users.form.passwordHint') }}</SmallInfo>
         </div>
 
         <div class="col-span-12" :class="modalType === 'create' ? 'md:col-span-6' : ''">
-          <Label>Roles</Label>
+          <Label>{{ $t('common.roles') }}</Label>
           <div class="mt-2">
             <TomSelect
               :model-value="form.role_ids"
               :options="roleOptions"
               :multiple="true"
-              placeholder="Select roles"
+              :placeholder="$t('account.users.form.rolesPlaceholder')"
               @update:model-value="onRolesChange"
             />
           </div>
@@ -197,7 +204,7 @@ defineExpose({ handleModal })
         <DialogCloseTrigger as-child @click="handleModal(false)">
           <Button look="outline" variant="ghost">
             <Lucide icon="X" />
-            Cancel
+            {{ $t('common.cancel') }}
           </Button>
         </DialogCloseTrigger>
         <Button variant="primary" :disabled="submitting" @click="onSubmit">
@@ -205,7 +212,7 @@ defineExpose({ handleModal })
             :icon="submitting ? 'LoaderCircle' : 'Save'"
             :class="{ 'animate-spin': submitting }"
           />
-          {{ submitting ? 'Saving...' : 'Save' }}
+          {{ submitting ? $t('common.saving') : $t('common.save') }}
         </Button>
       </div>
     </DialogContent>

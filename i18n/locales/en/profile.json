@@ -1,0 +1,31 @@
+{
+  "profile": {
+    "nav": {
+      "detailTitle": "Detail",
+      "detailDescription": "Your name and contact details",
+      "passwordTitle": "Password",
+      "passwordDescription": "Change your sign-in password"
+    },
+    "detail": {
+      "title": "Profile",
+      "subtitle": "Your own details",
+      "noRole": "No role assigned",
+      "firstNamePlaceholder": "Enter first name",
+      "emailPlaceholder": "name{'@'}example.com",
+      "avatarHint": "JPG, PNG or WebP, up to 2 MB."
+    },
+    "password": {
+      "title": "Update Password",
+      "subtitle": "Change the password you sign in with",
+      "notice": "The current password is asked for even though you are already signed in — a session left open should not be enough to lock the owner out of the account.",
+      "current": "Current Password",
+      "currentPlaceholder": "Enter your current password",
+      "new": "New Password",
+      "newPlaceholder": "Minimum 8 characters",
+      "confirm": "Confirm New Password",
+      "confirmPlaceholder": "Repeat the new password",
+      "oauthHint": "Signed in with Google and never set a password?",
+      "oauthLink": "Set one by email"
+    }
+  }
+}

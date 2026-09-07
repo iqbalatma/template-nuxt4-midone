@@ -21,7 +21,9 @@ const {
 
 const service = useMachine(datepicker.machine, {
   ...props,
-  open,
+  get open() {
+    return open;
+  },
   id: crypto.randomUUID(),
 });
 

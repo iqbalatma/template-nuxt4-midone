@@ -1,0 +1,10 @@
+{
+  "quickSearch": {
+    "placeholder": "Search pages or users...",
+    "hint": "Start typing to search pages and users.",
+    "empty": "No results for \"{query}\".",
+    "pages": "Pages",
+    "users": "Users",
+    "seeAll": "See All"
+  }
+}

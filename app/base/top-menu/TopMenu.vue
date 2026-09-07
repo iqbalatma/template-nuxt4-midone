@@ -95,7 +95,7 @@ const toggleMenu = (key: string, event: MouseEvent) => {
             <Lucide v-if="menu.icon" :icon="menu.icon" />
           </div>
           <div class="top-menu__link__title">
-            {{ menu.title }}
+            {{ menu.title ? $t(menu.title) : '' }}
             <Lucide
               v-if="menu.sub_menu"
               :class="[
@@ -127,7 +127,7 @@ const toggleMenu = (key: string, event: MouseEvent) => {
                 <Lucide v-if="subMenu.icon" :icon="subMenu.icon" />
               </div>
               <div class="top-menu__link__title">
-                {{ subMenu.title }}
+                {{ subMenu.title ? $t(subMenu.title) : '' }}
                 <Lucide
                   v-if="subMenu.sub_menu"
                   :class="[

@@ -1,0 +1,9 @@
+{
+  "notifications": {
+    "title": "Notifikasi",
+    "subtitle": "Semua yang dikirim sistem untuk Anda",
+    "inbox": "Kotak Masuk",
+    "unreadCount": "({count} belum dibaca)",
+    "markAllRead": "Tandai semua dibaca"
+  }
+}

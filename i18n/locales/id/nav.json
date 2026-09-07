@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "groups": {
+      "mainMenu": "Menu Utama",
+      "management": "Manajemen"
+    },
+    "items": {
+      "dashboard": "Dasbor",
+      "notifications": "Notifikasi",
+      "account": "Akun",
+      "users": "Pengguna",
+      "roles": "Peran",
+      "permissions": "Hak Akses",
+      "system": "Sistem",
+      "audits": "Log Aktivitas",
+      "jobLogs": "Riwayat Job",
+      "cache": "Cache"
+    }
+  }
+}

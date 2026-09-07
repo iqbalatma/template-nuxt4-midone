@@ -1,0 +1,57 @@
+{
+  "system": {
+    "nav": {
+      "auditsTitle": "Log Aktivitas",
+      "auditsDescription": "Setiap permintaan yang mengubah data",
+      "jobLogsTitle": "Riwayat Job",
+      "jobLogsDescription": "Riwayat job latar belakang",
+      "cacheTitle": "Cache",
+      "cacheDescription": "Data cache, bisa dihapus kapan saja"
+    },
+    "audits": {
+      "title": "Log Aktivitas",
+      "subtitle": "Setiap permintaan yang mengubah sesuatu",
+      "searchPlaceholder": "Path…",
+      "allMethods": "Semua metode",
+      "allUsers": "Semua pengguna",
+      "statusCodePlaceholder": "Kode status",
+      "dateFrom": "Tanggal mulai",
+      "dateTo": "Tanggal akhir",
+      "columnUser": "Pengguna",
+      "columnRequest": "Permintaan",
+      "columnIp": "IP",
+      "anonymous": "anonim",
+      "liveEmpty": "Belum ada aktivitas.",
+      "detail": {
+        "request": "Permintaan",
+        "response": "Respons"
+      }
+    },
+    "jobLogs": {
+      "title": "Riwayat Job",
+      "subtitle": "Riwayat pekerjaan latar belakang terjadwal",
+      "registeredJobs": "Job terdaftar",
+      "everyInterval": "setiap {interval}",
+      "noJobs": "Belum ada job terdaftar.",
+      "allJobs": "Semua job",
+      "allStatuses": "Semua status",
+      "statusSuccess": "Berhasil",
+      "statusFailed": "Gagal",
+      "columnJob": "Job",
+      "columnMessage": "Pesan",
+      "columnStarted": "Mulai",
+      "columnFinished": "Selesai",
+      "liveEmpty": "Belum ada eksekusi."
+    },
+    "cache": {
+      "title": "Cache",
+      "subtitle": "Apa yang sedang disimpan API di memori saat ini",
+      "notice": "Cache berada di dalam proses API. Menghapusnya di sini setara dengan mengirim SIGHUP ke proses tersebut — perubahan data lewat aplikasi ini sudah otomatis menghapus cache terkait.",
+      "clearAll": "Hapus semua",
+      "columnKey": "Key",
+      "columnItems": "Item",
+      "columnExpires": "Kedaluwarsa dalam",
+      "drop": "Hapus"
+    }
+  }
+}

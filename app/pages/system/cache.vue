@@ -10,8 +10,8 @@ import { useAuthStore } from '~/stores/auth'
 import { Permission } from '~/enums/Permission'
 
 definePageMeta({
-  title: 'Cache',
-  pageSubTitle: 'What the API is holding in memory right now',
+  title: 'system.cache.title',
+  pageSubTitle: 'system.cache.subtitle',
 })
 
 const { entries, loading, clearingKey, getAll, clear } = useCacheService()
@@ -39,14 +39,11 @@ const formatTtl = (seconds: number) => {
   <div class="grid grid-cols-12 gap-6">
     <Box class="col-span-12 p-5">
       <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <p class="text-sm opacity-70">
-          The cache lives in the API process. Clearing it here is the same reach as sending that
-          process SIGHUP &mdash; writes made through this app already drop what they change.
-        </p>
+        <p class="text-sm opacity-70">{{ $t('system.cache.notice') }}</p>
         <div class="flex gap-2">
           <Button look="outline" :disabled="loading" @click="getAll()">
             <Lucide icon="RefreshCw" />
-            Refresh
+            {{ $t('common.refresh') }}
           </Button>
           <Button
             v-if="canClear"
@@ -55,7 +52,7 @@ const formatTtl = (seconds: number) => {
             @click="onClear()"
           >
             <Lucide icon="Trash2" />
-            Clear everything
+            {{ $t('system.cache.clearAll') }}
           </Button>
         </div>
       </div>
@@ -63,10 +60,10 @@ const formatTtl = (seconds: number) => {
       <Table class="-mt-2" variant="boxed">
         <TableHeader>
           <TableRow>
-            <TH icon="Key">Key</TH>
-            <TH icon="Layers">Items</TH>
-            <TH icon="Clock">Expires in</TH>
-            <TH v-if="canClear" icon="Settings">Actions</TH>
+            <TH icon="Key">{{ $t('system.cache.columnKey') }}</TH>
+            <TH icon="Layers">{{ $t('system.cache.columnItems') }}</TH>
+            <TH icon="Clock">{{ $t('system.cache.columnExpires') }}</TH>
+            <TH v-if="canClear" icon="Settings">{{ $t('common.actions') }}</TH>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -83,7 +80,7 @@ const formatTtl = (seconds: number) => {
                 :disabled="clearingKey === entry.key"
                 @click="onClear(entry.key)"
               >
-                Drop
+                {{ $t('system.cache.drop') }}
               </Button>
             </TD>
           </TableRow>

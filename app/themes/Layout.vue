@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router'
 import { onMounted, computed } from 'vue'
 
 const route = useRoute()
+const { t } = useI18n()
 const Component = computed(() => getTheme(themeStore.theme).component)
 
 const themeStore = useThemeStore()
@@ -20,7 +21,7 @@ onMounted(() => {
 })
 
 useHead({
-  title: route.meta.title ?? 'Atma Dev',
+  title: computed(() => (route.meta.title ? t(route.meta.title as string) : 'Atma Dev')),
 })
 </script>
 
@@ -30,8 +31,8 @@ useHead({
     <Component>
       <SimpleAlert />
 
-      <h2 class="text-lg font-medium" v-if="route.meta.title">{{ route.meta.title }}</h2>
-      <p class="text-xs" v-if="route.meta.pageSubTitle">{{ route.meta.pageSubTitle }}</p>
+      <h2 class="text-lg font-medium" v-if="route.meta.title">{{ t(route.meta.title as string) }}</h2>
+      <p class="text-xs" v-if="route.meta.pageSubTitle">{{ t(route.meta.pageSubTitle as string) }}</p>
 
       <div class="mt-5">
         <slot />

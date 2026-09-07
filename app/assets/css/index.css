@@ -63,8 +63,10 @@
   --color-warning: var(--color-yellow-400);
   --color-warning-foreground: var(--color-yellow-50);
 
-  --color-background: black;
-  --color-foreground: white;
+  /* Not pure black/white - every surface is mixed off --color-background,
+     so lifting it softens the whole dark theme, not just the page. */
+  --color-background: #131722;
+  --color-foreground: var(--color-slate-300);
 }
 
 @layer components {

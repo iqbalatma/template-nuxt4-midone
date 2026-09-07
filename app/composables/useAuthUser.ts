@@ -21,7 +21,26 @@ export const useAuthUser = () => {
   const email = computed(() => user.value?.email ?? '')
   const phoneNumber = computed(() => user.value?.phone_number ?? '')
 
-  const roles = computed(() => (user.value && 'roles' in user.value ? (user.value.roles ?? []) : []))
+  /**
+   * Absolute URL of the avatar, or '' when there is none - the store may hold
+   * the thinner `AuthProfile` from login, which carries no avatar at all.
+   * `thumb` (150px) is what every avatar in the chrome renders at; the original
+   * is only worth downloading on a page that shows it large.
+   *
+   * media.Resource URLs are root-relative and served by the API host, so they
+   * need `apiBase` in front of them or the browser asks this app for a file it
+   * does not have.
+   */
+  const avatarUrl = computed(() => {
+    const avatar = user.value && 'avatar' in user.value ? user.value.avatar : null
+    const path = avatar?.conversions?.['thumb'] ?? avatar?.url
+    if (!path) return ''
+    return `${useRuntimeConfig().public.apiBase}${path}`
+  })
+
+  const roles = computed(() =>
+    user.value && 'roles' in user.value ? (user.value.roles ?? []) : [],
+  )
   const roleNames = computed(() => roles.value.map((role) => role.name))
 
   // Used wherever there is only room for a single line of role text
@@ -46,6 +65,7 @@ export const useAuthUser = () => {
     fullName,
     email,
     phoneNumber,
+    avatarUrl,
     roles,
     roleNames,
     primaryRole,

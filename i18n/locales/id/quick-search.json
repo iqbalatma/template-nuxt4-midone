@@ -1,0 +1,10 @@
+{
+  "quickSearch": {
+    "placeholder": "Cari halaman atau pengguna...",
+    "hint": "Mulai ketik untuk mencari halaman dan pengguna.",
+    "empty": "Tidak ada hasil untuk \"{query}\".",
+    "pages": "Halaman",
+    "users": "Pengguna",
+    "seeAll": "Lihat Semua"
+  }
+}

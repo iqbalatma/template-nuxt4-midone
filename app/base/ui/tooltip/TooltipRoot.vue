@@ -20,7 +20,9 @@ const service = useMachine(tooltip.machine, {
   },
   closeDelay: 0,
   openDelay: 0,
-  open,
+  get open() {
+    return open;
+  },
   disabled,
   id: crypto.randomUUID(),
 });

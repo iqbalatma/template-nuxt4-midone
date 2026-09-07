@@ -131,7 +131,7 @@ const linkTo = async (menu: Menu, event: MouseEvent) => {
     <template v-for="(menu, menuKey) in formattedMenu" :key="menuKey">
       <!-- BEGIN: First Child -->
       <li v-if="typeof menu === 'string'" class="side-menu__group-label">
-        {{ menu }}
+        {{ $t(menu) }}
       </li>
       <li v-else>
         <!-- Toggle Sub-menu (Level 1) -->
@@ -151,7 +151,7 @@ const linkTo = async (menu: Menu, event: MouseEvent) => {
             class="side-menu__link__icon"
             :icon="menu.icon"
           />
-          <div class="side-menu__link__title">{{ menu.title }}</div>
+          <div class="side-menu__link__title">{{ menu.title ? $t(menu.title) : '' }}</div>
           <div v-if="menu.badge" class="side-menu__link__badge">
             {{ menu.badge }}
           </div>
@@ -181,7 +181,7 @@ const linkTo = async (menu: Menu, event: MouseEvent) => {
             class="side-menu__link__icon"
             :icon="menu.icon"
           />
-          <div class="side-menu__link__title">{{ menu.title }}</div>
+          <div class="side-menu__link__title">{{ menu.title ? $t(menu.title) : '' }}</div>
           <div v-if="menu.badge" class="side-menu__link__badge">
             {{ menu.badge }}
           </div>
@@ -211,7 +211,7 @@ const linkTo = async (menu: Menu, event: MouseEvent) => {
                 :icon="subMenu.icon"
               />
               <div class="side-menu__link__title">
-                {{ subMenu.title }}
+                {{ subMenu.title ? $t(subMenu.title) : '' }}
               </div>
               <div v-if="subMenu.badge" class="side-menu__link__badge">
                 {{ subMenu.badge }}
@@ -243,7 +243,7 @@ const linkTo = async (menu: Menu, event: MouseEvent) => {
                 :icon="subMenu.icon"
               />
               <div class="side-menu__link__title">
-                {{ subMenu.title }}
+                {{ subMenu.title ? $t(subMenu.title) : '' }}
               </div>
               <div v-if="subMenu.badge" class="side-menu__link__badge">
                 {{ subMenu.badge }}

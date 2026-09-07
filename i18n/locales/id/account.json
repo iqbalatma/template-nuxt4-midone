@@ -1,0 +1,60 @@
+{
+  "account": {
+    "nav": {
+      "usersTitle": "Pengguna",
+      "usersDescription": "Akun terdaftar",
+      "rolesTitle": "Peran",
+      "rolesDescription": "Kumpulan hak akses",
+      "permissionsTitle": "Hak Akses",
+      "permissionsDescription": "Yang boleh dilakukan sebuah peran"
+    },
+    "users": {
+      "title": "Pengguna",
+      "subtitle": "Daftar data pengguna terdaftar",
+      "add": "Tambah Pengguna",
+      "searchPlaceholder": "Cari nama atau email…",
+      "deleteTitle": "Hapus Pengguna",
+      "deleteMessage": "Apakah Anda yakin ingin menghapus pengguna ini ? Tindakan ini tidak dapat dibatalkan.",
+      "form": {
+        "createTitle": "Tambah Pengguna",
+        "editTitle": "Ubah Pengguna",
+        "firstName": "Nama Depan",
+        "firstNamePlaceholder": "Masukkan nama depan",
+        "lastName": "Nama Belakang",
+        "optional": "Opsional",
+        "emailPlaceholder": "nama{'@'}contoh.com",
+        "phone": "Nomor Telepon",
+        "password": "Kata Sandi",
+        "passwordPlaceholder": "Minimal 8 karakter",
+        "passwordHint": "Kata sandi hanya bisa diatur saat membuat pengguna.",
+        "rolesPlaceholder": "Pilih peran"
+      }
+    },
+    "roles": {
+      "title": "Peran",
+      "subtitle": "Daftar data peran untuk pengguna",
+      "add": "Tambah Peran",
+      "columnPermissions": "Hak Akses",
+      "columnMutable": "Dapat Diubah",
+      "mutable": "Dapat Diubah",
+      "immutable": "Tidak Dapat Diubah",
+      "morePermissions": "+{count} lainnya",
+      "deleteTitle": "Hapus Peran",
+      "deleteMessage": "Apakah Anda yakin ingin menghapus peran ini ? Pengguna yang memakainya akan kehilangan hak aksesnya.",
+      "form": {
+        "createTitle": "Tambah Peran",
+        "editTitle": "Ubah Peran",
+        "namePlaceholder": "Masukkan nama peran",
+        "immutableNameHint": "Nama peran sistem tidak dapat diubah.",
+        "descriptionPlaceholder": "Deskripsi singkat peran ini",
+        "permissions": "Hak Akses"
+      }
+    },
+    "permissions": {
+      "title": "Hak Akses",
+      "subtitle": "Daftar hak akses yang tersedia untuk diberikan ke sebuah peran",
+      "readOnlyNotice": "Hak akses ditentukan oleh backend dan tidak dapat diubah di sini.",
+      "allGroups": "Semua grup"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "terms": {
+    "title": "Syarat dan Ketentuan",
+    "lastUpdated": "Terakhir diperbarui: {date}",
+    "intro": "Syarat ini mengatur penggunaan Anda atas aplikasi ini. Dengan masuk atau memakainya, Anda menyetujuinya. Jika tidak setuju, jangan gunakan aplikasi ini.",
+    "back": "Kembali ke beranda",
+    "sections": {
+      "accounts": {
+        "title": "Akun Anda",
+        "body": "Akun diberikan untuk satu orang dan tidak untuk dibagikan. Anda bertanggung jawab atas segala hal yang terjadi melalui akun Anda, termasuk tindakan siapa pun yang Anda beri kredensialnya. Segera beri tahu pengelola bila Anda menduga akun Anda dipakai tanpa izin."
+      },
+      "access": {
+        "title": "Akses dan hak akses",
+        "body": "Apa yang boleh Anda lihat dan lakukan ditentukan oleh peran yang diberikan pada akun Anda. Akses dapat diberikan, diubah, atau dicabut oleh organisasi pemilik akun, sesuai kebijakannya dan tanpa pemberitahuan kepada Anda."
+      },
+      "acceptableUse": {
+        "title": "Penggunaan yang wajar",
+        "body": "Dilarang mencoba menembus autentikasi atau pemeriksaan hak akses, menguji atau mengganggu layanan, mengambil data secara massal, mengunggah konten berbahaya, atau memakainya untuk melanggar hukum maupun hak orang lain. Akses otomatis hanya diperbolehkan melalui antarmuka yang kami sediakan untuk itu."
+      },
+      "data": {
+        "title": "Data yang Anda masukkan",
+        "body": "Hak yang sudah Anda miliki atas data yang Anda masukkan tetap menjadi milik Anda. Anda memberi kami izin untuk menyimpan dan mengolahnya demi menjalankan layanan, dan Anda menyatakan berhak menyediakan data tersebut."
+      },
+      "availability": {
+        "title": "Ketersediaan dan perubahan",
+        "body": "Layanan diberikan sebagaimana adanya. Kami dapat mengubah, menghentikan sementara, atau menghapus fitur, dan akan ada waktu henti terencana maupun tidak terencana. Kecuali diatur perjanjian terpisah, tidak ada jaminan tingkat ketersediaan tertentu."
+      },
+      "suspension": {
+        "title": "Penangguhan dan penghentian",
+        "body": "Akses dapat ditangguhkan atau dihentikan bila syarat ini dilanggar, bila organisasi pemilik akun memintanya, atau bila layanan dihentikan. Penanganan data setelah itu mengikuti Kebijakan Privasi."
+      },
+      "thirdParty": {
+        "title": "Layanan pihak ketiga",
+        "body": "Masuk dengan Google dan integrasi lain yang Anda pakai tunduk pada syarat penyedia tersebut selain syarat ini. Kami tidak bertanggung jawab atas layanan yang tidak kami operasikan."
+      },
+      "disclaimer": {
+        "title": "Tanpa jaminan",
+        "body": "Layanan diberikan \"sebagaimana adanya\", tanpa jaminan dalam bentuk apa pun sejauh diizinkan hukum. Kami tidak menjanjikan layanan bebas gangguan, bebas kesalahan, atau sesuai untuk tujuan tertentu Anda."
+      },
+      "liability": {
+        "title": "Batasan tanggung jawab",
+        "body": "Sejauh diizinkan hukum, kami tidak bertanggung jawab atas kerugian tidak langsung atau turunan, kehilangan keuntungan, maupun kehilangan data akibat penggunaan layanan ini. Tidak ada bagian di sini yang membatasi tanggung jawab yang secara hukum tidak dapat dibatasi."
+      },
+      "changes": {
+        "title": "Perubahan syarat",
+        "body": "Syarat ini dapat berubah. Tanggal di bagian atas ikut berubah, dan terus memakai aplikasi setelah perubahan berarti Anda menerima versi yang baru."
+      },
+      "governingLaw": {
+        "title": "Hukum yang berlaku",
+        "body": "Syarat ini tunduk pada hukum tempat pengelola aplikasi ini berkedudukan, dan pengadilan di tempat tersebut yang menyelesaikan sengketa mengenainya."
+      },
+      "contact": {
+        "title": "Kontak",
+        "body": "Pertanyaan mengenai syarat ini dapat dikirim ke alamat yang dipublikasikan oleh pengelola aplikasi ini."
+      }
+    }
+  }
+}

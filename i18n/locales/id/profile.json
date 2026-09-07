@@ -1,0 +1,31 @@
+{
+  "profile": {
+    "nav": {
+      "detailTitle": "Detail",
+      "detailDescription": "Nama dan kontak Anda",
+      "passwordTitle": "Kata Sandi",
+      "passwordDescription": "Ubah kata sandi masuk Anda"
+    },
+    "detail": {
+      "title": "Profil",
+      "subtitle": "Detail data Anda sendiri",
+      "noRole": "Belum ada peran",
+      "firstNamePlaceholder": "Masukkan nama depan",
+      "emailPlaceholder": "nama{'@'}contoh.com",
+      "avatarHint": "JPG, PNG atau WebP, maksimal 2 MB."
+    },
+    "password": {
+      "title": "Ubah Kata Sandi",
+      "subtitle": "Ubah kata sandi yang Anda pakai untuk masuk",
+      "notice": "Kata sandi saat ini tetap diminta walaupun Anda sudah masuk — sesi yang dibiarkan terbuka tidak boleh cukup untuk mengunci pemilik akun.",
+      "current": "Kata Sandi Saat Ini",
+      "currentPlaceholder": "Masukkan kata sandi saat ini",
+      "new": "Kata Sandi Baru",
+      "newPlaceholder": "Minimal 8 karakter",
+      "confirm": "Konfirmasi Kata Sandi Baru",
+      "confirmPlaceholder": "Ulangi kata sandi baru",
+      "oauthHint": "Masuk dengan Google dan belum pernah membuat kata sandi?",
+      "oauthLink": "Buat lewat email"
+    }
+  }
+}

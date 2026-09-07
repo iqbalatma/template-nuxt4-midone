@@ -1,0 +1,57 @@
+{
+  "system": {
+    "nav": {
+      "auditsTitle": "Activity Log",
+      "auditsDescription": "Every mutating request",
+      "jobLogsTitle": "Job Runs",
+      "jobLogsDescription": "Background job history",
+      "cacheTitle": "Cache",
+      "cacheDescription": "Cached reads, clear on demand"
+    },
+    "audits": {
+      "title": "Activity Log",
+      "subtitle": "Every request that changed something",
+      "searchPlaceholder": "Path…",
+      "allMethods": "All methods",
+      "allUsers": "All users",
+      "statusCodePlaceholder": "Status code",
+      "dateFrom": "From date",
+      "dateTo": "To date",
+      "columnUser": "User",
+      "columnRequest": "Request",
+      "columnIp": "IP",
+      "anonymous": "anonymous",
+      "liveEmpty": "No activity yet.",
+      "detail": {
+        "request": "Request",
+        "response": "Response"
+      }
+    },
+    "jobLogs": {
+      "title": "Job Runs",
+      "subtitle": "History of scheduled background work",
+      "registeredJobs": "Registered jobs",
+      "everyInterval": "every {interval}",
+      "noJobs": "No jobs registered.",
+      "allJobs": "All jobs",
+      "allStatuses": "All statuses",
+      "statusSuccess": "Success",
+      "statusFailed": "Failed",
+      "columnJob": "Job",
+      "columnMessage": "Message",
+      "columnStarted": "Started",
+      "columnFinished": "Finished",
+      "liveEmpty": "No runs yet."
+    },
+    "cache": {
+      "title": "Cache",
+      "subtitle": "What the API is holding in memory right now",
+      "notice": "The cache lives in the API process. Clearing it here is the same reach as sending that process SIGHUP — writes made through this app already drop what they change.",
+      "clearAll": "Clear everything",
+      "columnKey": "Key",
+      "columnItems": "Items",
+      "columnExpires": "Expires in",
+      "drop": "Drop"
+    }
+  }
+}

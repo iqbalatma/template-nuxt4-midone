@@ -1,0 +1,60 @@
+{
+  "account": {
+    "nav": {
+      "usersTitle": "Users",
+      "usersDescription": "Registered accounts",
+      "rolesTitle": "Roles",
+      "rolesDescription": "Permission sets",
+      "permissionsTitle": "Permissions",
+      "permissionsDescription": "What a role may do"
+    },
+    "users": {
+      "title": "Users",
+      "subtitle": "Data list of registered users",
+      "add": "Add User",
+      "searchPlaceholder": "Search name or email…",
+      "deleteTitle": "Delete User",
+      "deleteMessage": "Are you sure want to delete this user ? This action cannot be undone.",
+      "form": {
+        "createTitle": "Create User",
+        "editTitle": "Edit User",
+        "firstName": "First Name",
+        "firstNamePlaceholder": "Enter first name",
+        "lastName": "Last Name",
+        "optional": "Optional",
+        "emailPlaceholder": "name{'@'}example.com",
+        "phone": "Phone Number",
+        "password": "Password",
+        "passwordPlaceholder": "Minimum 8 characters",
+        "passwordHint": "Password can only be set when creating the user.",
+        "rolesPlaceholder": "Select roles"
+      }
+    },
+    "roles": {
+      "title": "Roles",
+      "subtitle": "Data list of roles for user",
+      "add": "Add Role",
+      "columnPermissions": "Permissions",
+      "columnMutable": "Mutable",
+      "mutable": "Mutable",
+      "immutable": "Immutable",
+      "morePermissions": "+{count} more",
+      "deleteTitle": "Delete Role",
+      "deleteMessage": "Are you sure want to delete this role ? Users assigned to it will lose its permissions.",
+      "form": {
+        "createTitle": "Create Role",
+        "editTitle": "Edit Role",
+        "namePlaceholder": "Enter role name",
+        "immutableNameHint": "System role name cannot be changed.",
+        "descriptionPlaceholder": "Short description of this role",
+        "permissions": "Permissions"
+      }
+    },
+    "permissions": {
+      "title": "Permissions",
+      "subtitle": "Data list of existing permissions to assign to a role",
+      "readOnlyNotice": "Permissions are defined by the backend and cannot be edited here.",
+      "allGroups": "All groups"
+    }
+  }
+}

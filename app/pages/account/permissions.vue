@@ -9,8 +9,8 @@ import { usePermissionService } from '~/services/PermissionService'
 import type Permission from '~/types/entities/permission'
 
 definePageMeta({
-  title: 'Permissions',
-  pageSubTitle: 'Data list of existing permissions to assign to a role',
+  title: 'account.permissions.title',
+  pageSubTitle: 'account.permissions.subtitle',
 })
 
 const { getAll, permissionsCollection, permissionsByGroup, loading } = usePermissionService()
@@ -54,7 +54,7 @@ const filteredPermissions = computed<Permission[]>(() => {
         <!-- Permissions are seeded by the backend, so this page is read-only -->
         <div class="flex items-center gap-2 text-sm text-foreground/60">
           <Lucide icon="Info" class="h-4 w-4" />
-          Permissions are defined by the backend and cannot be edited here.
+          {{ $t('account.permissions.readOnlyNotice') }}
         </div>
 
         <div class="flex items-center gap-3">
@@ -62,7 +62,7 @@ const filteredPermissions = computed<Permission[]>(() => {
             <TomSelect
               :model-value="selectedGroup"
               :options="groupOptions"
-              placeholder="All groups"
+              :placeholder="$t('account.permissions.allGroups')"
               @update:model-value="onGroupChange"
             />
           </div>
@@ -72,16 +72,16 @@ const filteredPermissions = computed<Permission[]>(() => {
 
       <div v-if="loading" class="flex items-center justify-center gap-3 py-16 text-foreground/50">
         <Lucide icon="LoaderCircle" class="h-5 w-5 animate-spin" />
-        <span class="text-sm">Loading...</span>
+        <span class="text-sm">{{ $t('common.loading') }}</span>
       </div>
 
       <ClientSidePagination v-else :data="filteredPermissions" v-slot="{ data, start }">
         <TableHeader>
           <TableRow>
-            <TH icon="Hash">No.</TH>
-            <TH icon="Key">Name</TH>
-            <TH icon="AlignLeft">Description</TH>
-            <TH icon="Layers">Group</TH>
+            <TH icon="Hash">{{ $t('common.no') }}</TH>
+            <TH icon="Key">{{ $t('common.name') }}</TH>
+            <TH icon="AlignLeft">{{ $t('common.description') }}</TH>
+            <TH icon="Layers">{{ $t('common.group') }}</TH>
           </TableRow>
         </TableHeader>
         <TableBody>

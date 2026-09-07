@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "groups": {
+      "mainMenu": "Main Menu",
+      "management": "Management"
+    },
+    "items": {
+      "dashboard": "Dashboard",
+      "notifications": "Notifications",
+      "account": "Account",
+      "users": "Users",
+      "roles": "Roles",
+      "permissions": "Permissions",
+      "system": "System",
+      "audits": "Activity Log",
+      "jobLogs": "Job Runs",
+      "cache": "Cache"
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { Lucide } from '@/base/ui/lucide'
 import { useThemeStore, type Themes } from '@/stores/theme'
 import { useColorSchemeStore, type ColorSchemes } from '@/stores/color-scheme'
 import { useDarkModeStore } from '@/stores/dark-mode'
+import { useDarkMode } from '@/composables/useDarkMode'
 import { ref } from 'vue'
 
 const themeSwitcherSheet = ref(false)
@@ -34,17 +35,7 @@ const switchColorScheme = (colorScheme: ColorSchemes) => {
 }
 setColorSchemeClass()
 
-const setDarkModeClass = () => {
-  const el = document.querySelectorAll('html')[0]
-  useDarkModeStore().darkModeValue ? el?.classList.add('dark') : el?.classList.remove('dark')
-}
-const darkModeStore = useDarkModeStore()
-const switchDarkMode = (darkMode: boolean) => {
-  useDarkModeStore().setDarkMode(darkMode)
-  setDarkModeClass()
-  setThemeSwitcherSheet(false)
-}
-setDarkModeClass()
+useDarkMode().syncDarkMode()
 
 const themes: Array<Themes['name']> = ['rubick', 'icewall', 'tinker', 'enigma']
 const layouts: Array<Themes['layout']> = ['side-menu', 'top-menu']
@@ -165,51 +156,6 @@ const themeImages = import.meta.glob<{
                         : 'ring-1 ring-foreground/10',
                     ]"
                   ></a>
-                </div>
-              </div>
-            </div>
-            <div class="border-b border-dashed border-foreground/15 my-5"></div>
-            <div>
-              <div class="text-base font-medium">Appearance</div>
-              <div class="mt-0.5 opacity-70">Choose your appearance</div>
-              <div class="mt-5 grid grid-cols-2 gap-x-5 gap-y-4">
-                <div>
-                  <a
-                    @click="
-                      (event: MouseEvent) => {
-                        event.preventDefault()
-                        switchDarkMode(false)
-                      }
-                    "
-                    :class="[
-                      'h-12 cursor-pointer bg-background block rounded-(--radius) transition-all duration-100 ring-offset-4 ring-offset-background hover:scale-[105%]',
-                      !darkModeStore.darkModeValue
-                        ? 'ring-2 ring-foreground/20'
-                        : 'ring-1 ring-foreground/10',
-                    ]"
-                  >
-                    <div class="h-full overflow-hidden rounded-(--radius) bg-slate-200"></div>
-                  </a>
-                  <div class="mt-2.5 text-center text-xs capitalize">Light</div>
-                </div>
-                <div>
-                  <a
-                    @click="
-                      (event: MouseEvent) => {
-                        event.preventDefault()
-                        switchDarkMode(true)
-                      }
-                    "
-                    :class="[
-                      'h-12 cursor-pointer bg-background block rounded-(--radius) transition-all duration-100 ring-offset-4 ring-offset-background hover:scale-[105%]',
-                      darkModeStore.darkModeValue
-                        ? 'ring-2 ring-foreground/20'
-                        : 'ring-1 ring-foreground/10',
-                    ]"
-                  >
-                    <div class="h-full overflow-hidden rounded-(--radius) bg-slate-900"></div>
-                  </a>
-                  <div class="mt-2.5 text-center text-xs capitalize">Dark</div>
                 </div>
               </div>
             </div>

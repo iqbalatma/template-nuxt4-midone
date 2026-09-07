@@ -21,6 +21,8 @@ export interface UserRequest {
 export interface UserFilter {
   page?: number
   per_page?: number
+  /** Matches first name, last name or email (see user.Repository.GetAllPaginated). */
+  search?: string
 }
 
 export const useUserService = () => {
@@ -40,6 +42,9 @@ export const useUserService = () => {
           query: {
             page: filter.page ?? 1,
             per_page: filter.per_page ?? 10,
+            // Left off entirely when empty: the API treats a blank search as
+            // no filter, and an empty param would still land in the URL.
+            search: filter.search || undefined,
           },
         },
       )

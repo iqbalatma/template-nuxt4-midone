@@ -8,8 +8,8 @@ import { useNotificationStore } from '~/stores/notification'
 import { getDefaultPerPage } from '~/utils/helper'
 
 definePageMeta({
-  title: 'Notifications',
-  pageSubTitle: 'Everything the system has sent you',
+  title: 'notifications.title',
+  pageSubTitle: 'notifications.subtitle',
 })
 
 const route = useRoute()
@@ -48,14 +48,14 @@ const onReadAll = async () => {
     <Box class="col-span-12 p-5">
       <div class="mb-4 flex items-center justify-between">
         <div class="font-medium">
-          Inbox
+          {{ $t('notifications.inbox') }}
           <span v-if="store.unreadCount > 0" class="text-primary ml-1 text-sm">
-            ({{ store.unreadCount }} unread)
+            {{ $t('notifications.unreadCount', { count: store.unreadCount }) }}
           </span>
         </div>
         <Button look="outline" :disabled="store.unreadCount === 0" @click="onReadAll()">
           <Lucide icon="CheckCheck" />
-          Mark all read
+          {{ $t('notifications.markAllRead') }}
         </Button>
       </div>
 

@@ -3,7 +3,7 @@ import { TableCell } from '~/base/ui/table'
 </script>
 
 <template>
-  <TableCell class="border-slate-100 dark:border-darkmode-400 py-3.5">
+  <TableCell class="border-foreground/10 py-3.5">
     <slot></slot>
   </TableCell>
 </template>

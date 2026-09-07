@@ -26,7 +26,9 @@ const service = useMachine(combobox.machine, {
   onOpenChange,
   onInputValueChange,
   onValueChange,
-  open,
+  get open() {
+    return open;
+  },
   ...props,
   id: crypto.randomUUID(),
 });

@@ -1,8 +1,9 @@
-import { type Icon } from '@/base/ui/lucide'
+import type { Icon } from '@/base/ui/lucide'
 import { Permission } from '~/enums/Permission'
 
 export interface Menu {
   icon?: Icon
+  /** i18n key, resolved with $t at render time (see base/side-menu). */
   title?: string
   route_name?: string
   params?: any
@@ -18,54 +19,35 @@ export interface Menu {
 }
 
 const mainMenu: (string | Menu)[] = [
-  "MAIN MENU",
+  'nav.groups.mainMenu',
   {
     icon: 'LayoutDashboard',
     route_name: '/',
-    title: 'Dashboard',
-  },
-  'MANAGEMENT',
-  {
-    icon: 'UsersRound',
-    route_name: 'management/users',
-    title: 'Users',
-    permission: Permission.UserIndex,
-  },
-  {
-    icon: 'ScrollText',
-    route_name: 'management/audits',
-    title: 'Audit Trail',
-    permission: Permission.AuditIndex,
-  },
-  {
-    icon: 'Timer',
-    route_name: 'management/job-logs',
-    title: 'Job Runs',
-    permission: Permission.JobLogIndex,
-  },
-  {
-    icon: 'DatabaseZap',
-    route_name: 'management/cache',
-    title: 'Cache',
-    permission: Permission.CacheShow,
+    title: 'nav.items.dashboard',
   },
   {
     icon: 'Bell',
     route_name: 'notifications',
-    title: 'Notifications',
+    title: 'nav.items.notifications',
   },
-  'RBAC',
+  'nav.groups.management',
   {
-    icon: 'UserLock',
-    route_name: 'rbac/roles',
-    title: 'Roles',
-    permission: Permission.RoleIndex,
+    // /account is a shell page: it owns no list of its own, it just frames
+    // users/roles/permissions. One entry here rather than three, because they
+    // are one job. The permission is the one its landing page needs — see
+    // app/pages/account.vue.
+    icon: 'UserRoundCog',
+    route_name: 'account',
+    title: 'nav.items.account',
+    permission: Permission.UserIndex,
   },
   {
-    icon: 'Shield',
-    route_name: 'rbac/permissions',
-    title: 'Permissions',
-    permission: Permission.PermissionIndex,
+    // Same shape as /account: activity log, job runs and the read cache are
+    // operator screens, not features. See app/pages/system.vue.
+    icon: 'Settings',
+    route_name: 'system',
+    title: 'nav.items.system',
+    permission: Permission.AuditIndex,
   },
 ]
 

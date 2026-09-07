@@ -12,8 +12,8 @@ import { usePermissionService } from '~/services/PermissionService'
 import type Role from '~/types/entities/role'
 
 definePageMeta({
-  title: 'Roles',
-  pageSubTitle: 'Data list of roles for user',
+  title: 'account.roles.title',
+  pageSubTitle: 'account.roles.subtitle',
 })
 
 const { getAll, deleteById, rolesCollection, loading } = useRoleService()
@@ -56,24 +56,24 @@ const onConfirmDelete = async () => {
       <div class="mb-4 flex items-center justify-between">
         <Button variant="primary" @click="modalFormRef?.handleModal(true)">
           <Lucide icon="Plus" />
-          Add Role
+          {{ $t('account.roles.add') }}
         </Button>
         <ClientSideFilter v-model="searchKey" />
       </div>
 
       <div v-if="loading" class="flex items-center justify-center gap-3 py-16 text-foreground/50">
         <Lucide icon="LoaderCircle" class="h-5 w-5 animate-spin" />
-        <span class="text-sm">Loading...</span>
+        <span class="text-sm">{{ $t('common.loading') }}</span>
       </div>
 
       <ClientSidePagination v-else :data="filteredRoles" v-slot="{ data, start }">
         <TableHeader>
           <TableRow>
-            <TH icon="Hash">No.</TH>
-            <TH icon="UserCog">Name</TH>
-            <TH icon="ShieldCheck">Permissions</TH>
-            <TH icon="Lock">Mutable</TH>
-            <TH icon="Settings">Actions</TH>
+            <TH icon="Hash">{{ $t('common.no') }}</TH>
+            <TH icon="UserCog">{{ $t('common.name') }}</TH>
+            <TH icon="ShieldCheck">{{ $t('account.roles.columnPermissions') }}</TH>
+            <TH icon="Lock">{{ $t('account.roles.columnMutable') }}</TH>
+            <TH icon="Settings">{{ $t('common.actions') }}</TH>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -99,7 +99,7 @@ const onConfirmDelete = async () => {
                   look="outline"
                   :content="(role.permissions ?? []).map((p) => p.name).join(', ')"
                 >
-                  +{{ hiddenPermissionCount(role) }} more
+                  {{ $t('account.roles.morePermissions', { count: hiddenPermissionCount(role) }) }}
                 </Badge>
                 <span v-if="(role.permissions ?? []).length === 0" class="text-sm text-foreground/40">
                   &mdash;
@@ -109,7 +109,7 @@ const onConfirmDelete = async () => {
             <TD>
               <Badge :variant="role.is_mutable ? 'success' : 'ghost'" look="outline">
                 <Lucide :icon="role.is_mutable ? 'LockOpen' : 'Lock'" />
-                {{ role.is_mutable ? 'Mutable' : 'Immutable' }}
+                {{ role.is_mutable ? $t('account.roles.mutable') : $t('account.roles.immutable') }}
               </Badge>
             </TD>
             <TD>
@@ -134,8 +134,8 @@ const onConfirmDelete = async () => {
 
   <ModalDelete
     ref="modalDeleteRef"
-    title="Delete Role"
-    message="Are you sure want to delete this role ? Users assigned to it will lose its permissions."
+    :title="$t('account.roles.deleteTitle')"
+    :message="$t('account.roles.deleteMessage')"
     @submit="onConfirmDelete"
   />
 

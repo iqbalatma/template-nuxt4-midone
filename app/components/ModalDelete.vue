@@ -10,8 +10,8 @@ const props = withDefaults(
     message?: string
   }>(),
   {
-    title: 'Delete',
-    message: 'Are you sure want to delete this data ?',
+    title: '',
+    message: '',
   },
 )
 
@@ -43,18 +43,18 @@ defineExpose({ handleModal })
     "
   >
     <DialogContent>
-      <DialogTitle>{{ props.title }}</DialogTitle>
-      <div class="mt-4 grid gap-4">{{ props.message }}</div>
+      <DialogTitle>{{ props.title || $t('common.deleteTitle') }}</DialogTitle>
+      <div class="mt-4 grid gap-4">{{ props.message || $t('common.deleteConfirmMessage') }}</div>
       <div class="mt-7 flex justify-end gap-2">
         <DialogCloseTrigger as-child @click="handleModal(false)">
           <Button look="outline" variant="ghost">
             <Lucide icon="X" />
-            Cancel
+            {{ $t('common.cancel') }}
           </Button>
         </DialogCloseTrigger>
         <Button variant="danger" @click="onConfirm()">
           <Lucide icon="Trash" />
-          Confirm
+          {{ $t('common.confirm') }}
         </Button>
       </div>
     </DialogContent>

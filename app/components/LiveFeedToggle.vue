@@ -11,7 +11,7 @@ const paused = defineModel<boolean>('paused', { required: true })
   <button
     type="button"
     class="border-foreground/10 hover:bg-foreground/5 flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm"
-    :title="paused ? 'Resume live updates' : 'Pause live updates'"
+    :title="paused ? $t('common.resumeLiveUpdates') : $t('common.pauseLiveUpdates')"
     @click="paused = !paused"
   >
     <span
@@ -19,7 +19,7 @@ const paused = defineModel<boolean>('paused', { required: true })
       :class="connected && !paused ? 'bg-success animate-pulse' : 'bg-foreground/30'"
     />
     <span class="opacity-70">
-      {{ !connected ? 'Offline' : paused ? 'Paused' : 'Live' }}
+      {{ !connected ? $t('common.offline') : paused ? $t('common.paused') : $t('common.live') }}
     </span>
     <Lucide :icon="paused ? 'Play' : 'Pause'" class="h-3.5 w-3.5 opacity-70" />
   </button>
