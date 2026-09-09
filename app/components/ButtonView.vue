@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import { Button } from '~/base/ui/button'
 import { Lucide } from '~/base/ui/lucide'
 
 const emit = defineEmits(['click-view'])
 </script>
 
 <template>
-  <a class="mr-3 flex items-center" href="#" @click.prevent="emit('click-view')">
-    <Lucide class="mr-1 h-4 w-4" icon="Eye" />
-    View
-  </a>
+  <Button size="sm" look="outline" variant="ghost" @click="emit('click-view')">
+    <Lucide icon="Eye" />
+    {{ $t('common.view') }}
+  </Button>
 </template>

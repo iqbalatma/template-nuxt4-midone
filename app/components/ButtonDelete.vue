@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import { Button } from '~/base/ui/button'
 import { Lucide } from '~/base/ui/lucide'
 
 const emit = defineEmits(['click-delete'])
 </script>
 
 <template>
-  <a class="mr-3 flex items-center text-danger" href="#" @click.prevent="emit('click-delete')">
-    <Lucide class="mr-1 h-4 w-4" icon="Trash" />
-    Delete
-  </a>
+  <Button size="sm" look="outline" variant="danger" @click="emit('click-delete')">
+    <Lucide icon="Trash" />
+    {{ $t('common.delete') }}
+  </Button>
 </template>

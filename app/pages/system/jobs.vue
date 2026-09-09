@@ -7,6 +7,8 @@ import { Lucide } from '~/base/ui/lucide'
 import { Table, TableBody, TableHeader, TableRow } from '~/base/ui/table'
 import { useJobLogService } from '~/services/JobLogService'
 import { useQueueService } from '~/services/QueueService'
+import { useAuthStore } from '~/stores/auth'
+import { Permission } from '~/enums/Permission'
 import { jobStatusVariant } from '~/utils/badge'
 import { formatAge, formatDuration } from '~/utils/helper'
 import type { JobStatsRange } from '~/types/entities/job_log'
@@ -25,6 +27,12 @@ definePageMeta({
 const { stats: runStats, getStats: fetchRunStats } = useJobLogService()
 const { stats: queueStats, getStats: fetchQueueStats } = useQueueService()
 
+// The queue half of this dashboard is a separate capability from the job-log
+// half, so someone who only has job-log.index gets the run numbers and no
+// 403 for the board they were never allowed to see.
+const { hasPermission } = useAuthStore()
+const canViewQueue = computed(() => hasPermission(Permission.QueueIndex))
+
 const range = ref<JobStatsRange>('24h')
 const loading = ref(false)
 
@@ -33,7 +41,10 @@ const ranges: JobStatsRange[] = ['24h', '7d', '30d']
 const load = async () => {
   loading.value = true
   try {
-    await Promise.all([fetchRunStats(range.value), fetchQueueStats()])
+    await Promise.all([
+      fetchRunStats(range.value),
+      canViewQueue.value ? fetchQueueStats() : Promise.resolve(),
+    ])
   } finally {
     loading.value = false
   }
@@ -128,47 +139,49 @@ const backlogVariant = computed(() => {
 
     <!-- Queue: what is waiting right now. Separate heading because it is a
          different question, not a different cut of the same numbers. -->
-    <div class="col-span-12 -mb-2">
-      <p class="text-sm font-medium opacity-70">{{ $t('system.jobs.queueHeading') }}</p>
-    </div>
+    <template v-if="canViewQueue">
+      <div class="col-span-12 -mb-2">
+        <p class="text-sm font-medium opacity-70">{{ $t('system.jobs.queueHeading') }}</p>
+      </div>
 
-    <StatTile
-      class="col-span-6 xl:col-span-3"
-      icon="Hourglass"
-      :label="$t('system.jobs.pending')"
-      :value="queueStats ? String(queueStats.pending) : '—'"
-      :hint="
-        queueStats && queueStats.delayed > 0
-          ? $t('system.jobs.delayedHint', { count: queueStats.delayed })
-          : ''
-      "
-    />
-    <StatTile
-      class="col-span-6 xl:col-span-3"
-      icon="Play"
-      :label="$t('system.jobs.running')"
-      :value="queueStats ? String(queueStats.running) : '—'"
-      :variant="queueStats && queueStats.running > 0 ? 'primary' : 'secondary'"
-    />
-    <StatTile
-      class="col-span-6 xl:col-span-3"
-      icon="TriangleAlert"
-      :label="$t('system.jobs.queueFailed')"
-      :value="queueStats ? String(queueStats.failed) : '—'"
-      :variant="queueStats && queueStats.failed > 0 ? 'danger' : 'secondary'"
-    />
-    <!-- The number that actually says whether workers are keeping up: it climbs
-         the moment they stop, however many jobs are in the table. -->
-    <StatTile
-      class="col-span-6 xl:col-span-3"
-      icon="Clock"
-      :label="$t('system.jobs.backlogAge')"
-      :value="formatAge(queueStats?.oldest_pending_seconds)"
-      :variant="backlogVariant"
-      :hint="$t('system.jobs.backlogHint')"
-    />
+      <StatTile
+        class="col-span-6 xl:col-span-3"
+        icon="Hourglass"
+        :label="$t('system.jobs.pending')"
+        :value="queueStats ? String(queueStats.pending) : '—'"
+        :hint="
+          queueStats && queueStats.delayed > 0
+            ? $t('system.jobs.delayedHint', { count: queueStats.delayed })
+            : ''
+        "
+      />
+      <StatTile
+        class="col-span-6 xl:col-span-3"
+        icon="Play"
+        :label="$t('system.jobs.running')"
+        :value="queueStats ? String(queueStats.running) : '—'"
+        :variant="queueStats && queueStats.running > 0 ? 'primary' : 'secondary'"
+      />
+      <StatTile
+        class="col-span-6 xl:col-span-3"
+        icon="TriangleAlert"
+        :label="$t('system.jobs.queueFailed')"
+        :value="queueStats ? String(queueStats.failed) : '—'"
+        :variant="queueStats && queueStats.failed > 0 ? 'danger' : 'secondary'"
+      />
+      <!-- The number that actually says whether workers are keeping up: it climbs
+           the moment they stop, however many jobs are in the table. -->
+      <StatTile
+        class="col-span-6 xl:col-span-3"
+        icon="Clock"
+        :label="$t('system.jobs.backlogAge')"
+        :value="formatAge(queueStats?.oldest_pending_seconds)"
+        :variant="backlogVariant"
+        :hint="$t('system.jobs.backlogHint')"
+      />
+    </template>
 
-    <Box class="col-span-12 p-5 xl:col-span-8">
+    <Box class="col-span-12 p-5" :class="canViewQueue ? 'xl:col-span-8' : ''">
       <div class="mb-4 flex items-center justify-between gap-3">
         <p class="font-medium">{{ $t('system.jobs.trendTitle') }}</p>
         <div class="flex items-center gap-3 text-xs opacity-70">
@@ -187,7 +200,7 @@ const backlogVariant = computed(() => {
     </Box>
 
     <!-- Queue depth per job: which handler the backlog is actually made of. -->
-    <Box class="col-span-12 p-5 xl:col-span-4">
+    <Box v-if="canViewQueue" class="col-span-12 p-5 xl:col-span-4">
       <p class="mb-4 font-medium">{{ $t('system.jobs.queueByJob') }}</p>
       <div
         v-if="!queueStats || queueStats.by_name.length === 0"

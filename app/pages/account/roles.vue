@@ -37,8 +37,7 @@ const filteredRoles = computed<Role[]>(() => {
 
   return rolesCollection.value.filter(
     (role) =>
-      role.name.toLowerCase().includes(key) ||
-      (role.description ?? '').toLowerCase().includes(key),
+      role.name.toLowerCase().includes(key) || (role.description ?? '').toLowerCase().includes(key),
   )
 })
 
@@ -47,7 +46,8 @@ const modalDeleteRef = useTemplateRef<InstanceType<typeof ModalDelete> | null>('
 const selectedRoleId = ref('')
 
 const PERMISSION_PREVIEW_LIMIT = 3
-const visiblePermissions = (role: Role) => (role.permissions ?? []).slice(0, PERMISSION_PREVIEW_LIMIT)
+const visiblePermissions = (role: Role) =>
+  (role.permissions ?? []).slice(0, PERMISSION_PREVIEW_LIMIT)
 const hiddenPermissionCount = (role: Role) =>
   Math.max(0, (role.permissions ?? []).length - PERMISSION_PREVIEW_LIMIT)
 
@@ -107,7 +107,10 @@ const onConfirmDelete = async () => {
                 >
                   {{ $t('account.roles.morePermissions', { count: hiddenPermissionCount(role) }) }}
                 </Badge>
-                <span v-if="(role.permissions ?? []).length === 0" class="text-sm text-foreground/40">
+                <span
+                  v-if="(role.permissions ?? []).length === 0"
+                  class="text-sm text-foreground/40"
+                >
                   &mdash;
                 </span>
               </div>
@@ -119,7 +122,7 @@ const onConfirmDelete = async () => {
               </Badge>
             </TD>
             <TD>
-              <div class="flex items-center gap-1">
+              <div class="flex items-center gap-2">
                 <ButtonEdit @click-edit="modalFormRef?.handleModal(true, role)" />
                 <ButtonDelete
                   v-if="role.is_mutable"

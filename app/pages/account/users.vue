@@ -133,7 +133,7 @@ const onConfirmDelete = async () => {
                 </div>
               </TD>
               <TD>
-                <div class="flex items-center gap-1">
+                <div class="flex items-center gap-2">
                   <ButtonEdit @click-edit="modalFormRef?.handleModal(true, user)" />
                   <ButtonDelete
                     @click-delete="
