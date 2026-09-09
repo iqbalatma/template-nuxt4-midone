@@ -21,7 +21,7 @@ import {
   TableRow,
   TableCell,
 } from '@/base/ui/table'
-import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
+import { TomSelect } from '@/base/ui/tom-select'
 import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
 import {
   CarouselRoot,
@@ -64,6 +64,10 @@ import {
 import { Map } from '@/base/ui/map'
 import { Lucide } from '@/base/ui/lucide'
 import { Line1, Line2, Pie1, Donut1, Donut2 } from '@/base/chart-presets'
+
+const perPageOptions = [10, 25, 35, 50]
+const perPageItems = perPageOptions.map((option) => ({ id: option, name: String(option) }))
+const perPage = ref(perPageOptions[0])
 
 const pc = ref(false)
 const electronic = ref(false)
@@ -164,12 +168,13 @@ const sport = ref(false)
       </PaginationContext>
       <PaginationNextTrigger>Next</PaginationNextTrigger>
     </PaginationRoot>
-    <NativeSelect class="box mt-3 w-20 sm:mt-0">
-      <NativeSelectOption>10</NativeSelectOption>
-      <NativeSelectOption>25</NativeSelectOption>
-      <NativeSelectOption>35</NativeSelectOption>
-      <NativeSelectOption>50</NativeSelectOption>
-    </NativeSelect>
+    <TomSelect
+      v-model="perPage"
+      class="mt-3 w-24 sm:mt-0"
+      :options="perPageItems"
+      :placeholder="String(perPageOptions[0])"
+      aria-label="Rows per page"
+    />
   </div>
   <!-- END: Weekly Top Products -->
 </template>

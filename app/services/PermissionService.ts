@@ -4,7 +4,7 @@ import type Permission from '~/types/entities/permission'
 export const usePermissionService = () => {
   const { $api } = useNuxtApp()
   const permissionsCollection = ref<Permission[]>([])
-  const permissionsMasterCollection = ref<Permission[]>([])
+  const permissionOptionsCollection = ref<Permission[]>([])
   const loading = ref(false)
 
   /** Backing data for the permissions listing page */
@@ -24,12 +24,12 @@ export const usePermissionService = () => {
   }
 
   /** Lookup list for form inputs (e.g. picking permissions on a role) */
-  const getAllMaster = async () => {
+  const getAllOptions = async () => {
     const response = await $api<ResponseDataCollectionWithoutPagination<Permission>>(
-      'api/master/permissions',
+      'api/options/permissions',
       { method: 'GET' },
     )
-    permissionsMasterCollection.value = response.payload.data
+    permissionOptionsCollection.value = response.payload.data
   }
 
   /** Permissions bucketed by their `group` column, for grouped checkbox lists */
@@ -46,10 +46,10 @@ export const usePermissionService = () => {
 
   return {
     permissionsCollection,
-    permissionsMasterCollection,
+    permissionOptionsCollection,
     permissionsByGroup,
     loading,
     getAll,
-    getAllMaster,
+    getAllOptions,
   }
 }

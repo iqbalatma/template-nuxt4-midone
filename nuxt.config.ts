@@ -28,6 +28,7 @@ export default defineNuxtConfig({
         name: 'English',
         files: [
           'en/common.json',
+          'en/auth.json',
           'en/nav.json',
           'en/account.json',
           'en/system.json',
@@ -43,6 +44,7 @@ export default defineNuxtConfig({
         name: 'Bahasa Indonesia',
         files: [
           'id/common.json',
+          'id/auth.json',
           'id/nav.json',
           'id/account.json',
           'id/system.json',

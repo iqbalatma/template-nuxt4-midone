@@ -27,9 +27,9 @@ const submit = async () => {
 
 <template>
   <form @submit.prevent="submit()">
-    <h1 class="text-2xl font-semibold">Forgot password</h1>
+    <h1 class="text-2xl font-semibold">{{ $t('auth.forgotPassword.title') }}</h1>
     <p class="mt-1 text-sm opacity-50">
-      Enter the email address on your account and we will send you a link to choose a new password.
+      {{ $t('auth.forgotPassword.subtitle') }}
     </p>
 
     <div class="mt-8 flex flex-col gap-2">
@@ -45,7 +45,7 @@ const submit = async () => {
           type="email"
           autocomplete="email"
           v-model="email"
-          placeholder="Email"
+          :placeholder="$t('auth.forgotPassword.email')"
         />
         <FormFeedback feedbackKey="email" />
       </template>
@@ -53,8 +53,7 @@ const submit = async () => {
       <div v-else class="flex items-start gap-3 rounded-lg border border-foreground/10 p-4">
         <Lucide icon="MailCheck" class="mt-0.5 size-5 shrink-0 text-primary" />
         <p class="text-sm opacity-70">
-          If that address belongs to an account, a reset link is on its way. The link expires
-          shortly — check the spam folder if it does not arrive.
+          {{ $t('auth.forgotPassword.sent') }}
         </p>
       </div>
     </div>
@@ -67,13 +66,13 @@ const submit = async () => {
         type="submit"
         :disabled="submitting"
       >
-        {{ submitting ? 'Sending…' : 'Send reset link' }}
+        {{ submitting ? $t('auth.forgotPassword.submitting') : $t('auth.forgotPassword.submit') }}
         <Lucide icon="ArrowRight" class="size-4" />
       </Button>
 
       <NuxtLink class="flex items-center justify-center gap-2 text-sm opacity-70 hover:opacity-100" to="/auth">
         <Lucide icon="ArrowLeft" class="size-4" />
-        Back to sign in
+        {{ $t('auth.forgotPassword.backToSignIn') }}
       </NuxtLink>
     </div>
   </form>

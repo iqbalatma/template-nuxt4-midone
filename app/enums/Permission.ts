@@ -23,8 +23,18 @@ export enum Permission {
   PermissionUpdate = 'permission.update',
   PermissionDelete = 'permission.delete',
 
+  OptionRoleIndex = 'option.role.index',
+  OptionPermissionIndex = 'option.permission.index',
+
   AuditIndex = 'management.audit.index',
   JobLogIndex = 'management.job-log.index',
   CacheShow = 'management.cache.show',
   CacheDestroy = 'management.cache.destroy',
+
+  // Reading a board and acting on it are separate: a retry re-runs whatever
+  // the job does, which is not the same capability as looking at a list.
+  QueueIndex = 'management.queue.index',
+  QueueManage = 'management.queue.manage',
+  ScheduleIndex = 'management.schedule.index',
+  ScheduleManage = 'management.schedule.manage',
 }

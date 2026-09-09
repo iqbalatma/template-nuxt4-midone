@@ -6,7 +6,13 @@
       "jobLogsTitle": "Riwayat Job",
       "jobLogsDescription": "Riwayat job latar belakang",
       "cacheTitle": "Cache",
-      "cacheDescription": "Data cache, bisa dihapus kapan saja"
+      "cacheDescription": "Data cache, bisa dihapus kapan saja",
+      "jobsTitle": "Dasbor Job",
+      "jobsDescription": "Tingkat keberhasilan, durasi, antrean",
+      "queueTitle": "Antrean",
+      "queueDescription": "Job menunggu, berjalan, dan gagal",
+      "schedulesTitle": "Jadwal",
+      "schedulesDescription": "Kapan setiap job berkala dijalankan"
     },
     "audits": {
       "title": "Log Aktivitas",
@@ -29,9 +35,8 @@
     },
     "jobLogs": {
       "title": "Riwayat Job",
-      "subtitle": "Riwayat pekerjaan latar belakang terjadwal",
+      "subtitle": "Setiap percobaan pekerjaan latar belakang, terjadwal maupun antrean",
       "registeredJobs": "Job terdaftar",
-      "everyInterval": "setiap {interval}",
       "noJobs": "Belum ada job terdaftar.",
       "allJobs": "Semua job",
       "allStatuses": "Semua status",
@@ -41,7 +46,12 @@
       "columnMessage": "Pesan",
       "columnStarted": "Mulai",
       "columnFinished": "Selesai",
-      "liveEmpty": "Belum ada eksekusi."
+      "liveEmpty": "Belum ada eksekusi.",
+      "statusSkipped": "Dilewati",
+      "type": {
+        "schedule": "terjadwal",
+        "queue": "antrean"
+      }
     },
     "cache": {
       "title": "Cache",
@@ -52,6 +62,100 @@
       "columnItems": "Item",
       "columnExpires": "Kedaluwarsa dalam",
       "drop": "Hapus"
+    },
+    "jobs": {
+      "title": "Dasbor Job",
+      "subtitle": "Bagaimana pekerjaan latar belakang berjalan, dan berapa yang menunggu",
+      "runsHeading": "Eksekusi",
+      "queueHeading": "Antrean saat ini",
+      "range": {
+        "24h": "24 jam",
+        "7d": "7 hari",
+        "30d": "30 hari"
+      },
+      "totalRuns": "Total eksekusi",
+      "successRate": "Tingkat keberhasilan",
+      "successRateHint": "{skipped} dilewati, tidak dihitung",
+      "failedRuns": "Eksekusi gagal",
+      "avgDuration": "Durasi rata-rata",
+      "slowestHint": "terlama {value}",
+      "pending": "Menunggu",
+      "delayedHint": "{count} menunggu jeda atau percobaan ulang",
+      "running": "Berjalan",
+      "queueFailed": "Gagal",
+      "backlogAge": "Usia antrean",
+      "backlogHint": "Job terlama yang belum diambil worker",
+      "trendTitle": "Eksekusi dari waktu ke waktu",
+      "legendSuccess": "Berhasil",
+      "legendFailed": "Gagal",
+      "legendSkipped": "Dilewati",
+      "queueByJob": "Antrean per job",
+      "queueEmpty": "Antrean kosong.",
+      "failedCount": "{count} gagal",
+      "skippedCount": "{count} dilewati",
+      "perJobTitle": "Per job",
+      "columnRuns": "Eksekusi",
+      "columnFailed": "Gagal",
+      "columnAvg": "Rata-rata",
+      "columnMax": "Terlama",
+      "columnLastRun": "Terakhir jalan"
+    },
+    "queue": {
+      "title": "Antrean",
+      "subtitle": "Pekerjaan yang dijalankan di luar siklus request",
+      "status": {
+        "pending": "Menunggu",
+        "running": "Berjalan",
+        "success": "Berhasil",
+        "failed": "Gagal",
+        "canceled": "Dibatalkan"
+      },
+      "allJobs": "Semua job",
+      "allStatuses": "Semua status",
+      "allQueues": "Semua antrean",
+      "columnDetail": "Detail",
+      "columnDispatched": "Dikirim",
+      "availableAt": "jalan pada {time}",
+      "retry": "Ulangi",
+      "cancel": "Batalkan",
+      "retryAllFailed": "Ulangi yang gagal ({count})",
+      "retryAllTitle": "Ulangi job yang gagal",
+      "retryAllMessage": "Masukkan kembali {count} job gagal ke antrean? Setiap job dijalankan ulang dari awal, jadi apa pun efeknya — mengirim email, memanggil API — akan terjadi lagi.",
+      "purgeFinished": "Bersihkan yang selesai",
+      "purgeTitle": "Bersihkan job yang selesai",
+      "purgeMessage": "Hapus semua job berhasil dan dibatalkan dari daftar? Job yang gagal tetap disimpan, jadi tidak ada yang masih perlu ditindaklanjuti ikut terhapus.",
+      "liveEmpty": "Belum ada antrean."
+    },
+    "schedules": {
+      "title": "Jadwal",
+      "subtitle": "Kapan setiap job berkala dijalankan",
+      "notice": "Setiap job di sini didaftarkan di kode API; yang bisa diubah hanya jadwal dan status aktifnya.",
+      "columnCron": "Cron",
+      "columnNextRun": "Jalan berikutnya",
+      "columnLastRun": "Terakhir jalan",
+      "enabled": "Aktif",
+      "disabled": "Nonaktif",
+      "enable": "Aktifkan",
+      "disable": "Nonaktifkan",
+      "runNow": "Jalankan sekarang",
+      "notScheduled": "Nonaktif — tidak ada jadwal",
+      "never": "Ekspresi ini tidak pernah terpicu",
+      "neverRan": "Belum pernah dijalankan",
+      "form": {
+        "title": "Jadwal untuk {name}",
+        "cron": "Ekspresi cron",
+        "cronHint": "Lima kolom: menit jam tanggal bulan hari.",
+        "examples": "Contoh",
+        "example": {
+          "everyFiveMinutes": "tiap 5 menit",
+          "hourly": "tiap jam",
+          "dailyAt3": "tiap hari 03:00",
+          "weeklyMonday": "tiap Senin tengah malam",
+          "monthly": "tanggal 1 tiap bulan"
+        },
+        "enabled": "Aktif",
+        "enabledHint": "Saat nonaktif, jadwal tidak akan menjalankannya. Anda tetap bisa menjalankan manual."
+      }
     }
   }
 }

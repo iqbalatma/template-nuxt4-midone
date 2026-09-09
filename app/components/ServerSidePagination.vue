@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { Box } from '~/base/ui/box'
 import { Lucide } from '~/base/ui/lucide'
-import { NativeSelect, NativeSelectOption } from '~/base/ui/native-select'
+import { TomSelect } from '~/base/ui/tom-select'
 import {
   PaginationContext,
   PaginationEllipsis,
@@ -14,7 +14,7 @@ import {
 import type { PaginationMeta } from '~/types/response'
 import { getDefaultPerPage } from '~/utils/helper'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     meta: PaginationMeta
     loading?: boolean
@@ -29,6 +29,10 @@ withDefaults(
   },
 )
 
+const perPageItems = computed(() =>
+  props.perPageOptions.map((option) => ({ id: option, name: String(option) })),
+)
+
 const route = useRoute()
 
 const currentPage = computed(() => Number(route.query['page']) || 1)
@@ -39,8 +43,13 @@ const handlePageChange = (details: { page: number }) => {
   navigateTo({ query: { ...route.query, page: details.page } })
 }
 
-const handlePerPageChange = (event: Event) => {
-  const perPage = (event.target as HTMLSelectElement).value
+// TomSelect always emits strings, and its placeholder option emits an empty
+// one. Bailing on anything that is not a real change also stops the round trip
+// the modelValue watcher would otherwise make: it re-sets the control from the
+// URL, which fires change again with the value we just navigated to.
+const handlePerPageChange = (value: string | string[]) => {
+  const perPage = Number(Array.isArray(value) ? value[0] : value)
+  if (!perPage || perPage === currentPerPage.value) return
   navigateTo({ query: { ...route.query, page: 1, per_page: perPage } })
 }
 </script>
@@ -95,15 +104,14 @@ const handlePerPageChange = (event: Event) => {
           <span class="hidden text-sm text-foreground/50 md:inline">
             Showing {{ meta.from }}&ndash;{{ meta.to }} of {{ meta.total }} entries
           </span>
-          <NativeSelect
-            class="box w-20"
-            :value="currentPerPage"
-            @change="handlePerPageChange"
-          >
-            <NativeSelectOption v-for="option in perPageOptions" :key="option" :value="option">
-              {{ option }}
-            </NativeSelectOption>
-          </NativeSelect>
+          <TomSelect
+            class="w-24"
+            :model-value="currentPerPage"
+            :options="perPageItems"
+            :placeholder="String(currentPerPage)"
+            aria-label="Rows per page"
+            @update:model-value="handlePerPageChange"
+          />
         </div>
       </div>
     </template>

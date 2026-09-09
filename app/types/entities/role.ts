@@ -8,7 +8,7 @@ export default interface Role extends BaseEntity {
   permissions: Permission[]
 }
 
-export interface RoleMaster {
+export interface RoleOption {
   id: string
   name: string
 }

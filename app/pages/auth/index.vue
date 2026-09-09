@@ -24,8 +24,8 @@ const { authenticate, loginWithGoogle, submitting } = useAuthService()
 
 <template>
   <form @submit.prevent="authenticate(formRequest)">
-    <h1 class="text-2xl font-semibold">Sign In</h1>
-    <p class="mt-1 text-sm opacity-50">Enter your credentials to continue.</p>
+    <h1 class="text-2xl font-semibold">{{ $t('auth.login.title') }}</h1>
+    <p class="mt-1 text-sm opacity-50">{{ $t('auth.login.subtitle') }}</p>
 
     <div class="mt-8 flex flex-col gap-2">
       <SimpleAlert />
@@ -39,7 +39,7 @@ const { authenticate, loginWithGoogle, submitting } = useAuthService()
         type="email"
         autocomplete="email"
         v-model="formRequest.email"
-        placeholder="Email"
+        :placeholder="$t('auth.login.email')"
       />
       <FormFeedback feedbackKey="email" />
 
@@ -52,7 +52,7 @@ const { authenticate, loginWithGoogle, submitting } = useAuthService()
         type="password"
         autocomplete="current-password"
         v-model="formRequest.password"
-        placeholder="Password"
+        :placeholder="$t('auth.login.password')"
       />
       <FormFeedback feedbackKey="password" />
 
@@ -60,11 +60,11 @@ const { authenticate, loginWithGoogle, submitting } = useAuthService()
         <div class="mr-auto flex-row items-center">
           <CheckboxRoot>
             <CheckboxControl />
-            <CheckboxLabel>Remember me</CheckboxLabel>
+            <CheckboxLabel>{{ $t('auth.login.rememberMe') }}</CheckboxLabel>
           </CheckboxRoot>
         </div>
         <NuxtLink class="opacity-70 hover:opacity-100" to="/auth/forgot-password">
-          Forgot Password?
+          {{ $t('auth.login.forgotPassword') }}
         </NuxtLink>
       </div>
     </div>
@@ -76,7 +76,7 @@ const { authenticate, loginWithGoogle, submitting } = useAuthService()
         type="submit"
         :disabled="submitting"
       >
-        {{ submitting ? 'Signing in...' : 'Login' }}
+        {{ submitting ? $t('auth.login.submitting') : $t('auth.login.submit') }}
         <Lucide icon="ArrowRight" class="size-4" />
       </Button>
 
@@ -85,7 +85,7 @@ const { authenticate, loginWithGoogle, submitting } = useAuthService()
           <div class="w-full border-t border-foreground/10"></div>
         </div>
         <span class="relative bg-background px-3 text-xs uppercase tracking-wide opacity-40">
-          or
+          {{ $t('auth.login.or') }}
         </span>
       </div>
 
@@ -96,12 +96,12 @@ const { authenticate, loginWithGoogle, submitting } = useAuthService()
         @click="loginWithGoogle()"
       >
         <img class="h-4 w-4" :src="googleLogoUrl" alt="" />
-        Sign in with Google
+        {{ $t('auth.login.google') }}
       </Button>
     </div>
 
     <p class="mt-10 text-xs opacity-50">
-      By signing in, you agree to our
+      {{ $t('auth.login.agreePrefix') }}
       <NuxtLink class="text-primary" to="/terms-and-conditions">{{ $t('terms.title') }}</NuxtLink>
       &amp;
       <NuxtLink class="text-primary" to="/privacy-policy">{{ $t('privacyPolicy.title') }}</NuxtLink>

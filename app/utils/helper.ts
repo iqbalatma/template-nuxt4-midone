@@ -101,6 +101,32 @@ const diffTimeByNow = (time: string) => {
   }
 }
 
+/**
+ * Renders a duration the API reports in (fractional) milliseconds.
+ *
+ * Sub-millisecond is shown as "<1 ms" rather than "0 ms": most background jobs
+ * here finish in microseconds, and a column of zeroes reads as "not measured"
+ * when it actually means "instant".
+ */
+const formatDuration = (ms: number | null | undefined) => {
+  if (ms === null || ms === undefined) return '—'
+  if (ms < 1) return '<1 ms'
+  if (ms < 1000) return `${Math.round(ms)} ms`
+  if (ms < 60_000) return `${(ms / 1000).toFixed(1)} s`
+  return `${Math.floor(ms / 60_000)}m ${Math.round((ms % 60_000) / 1000)}s`
+}
+
+/** Renders an age in seconds — the queue's backlog figure. */
+const formatAge = (seconds: number | null | undefined) => {
+  if (seconds === null || seconds === undefined) return '—'
+  if (seconds < 60) return `${seconds}s`
+  const minutes = Math.floor(seconds / 60)
+  if (minutes < 60) return `${minutes}m ${seconds % 60}s`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}h ${minutes % 60}m`
+  return `${Math.floor(hours / 24)}d ${hours % 24}h`
+}
+
 const isset = (obj: object | string) => {
   if (obj !== null && obj !== undefined) {
     if (typeof obj === 'object' || Array.isArray(obj)) {
@@ -222,6 +248,8 @@ export {
   onlyNumber,
   formatCurrency,
   timeAgo,
+  formatDuration,
+  formatAge,
   diffTimeByNow,
   isset,
   toSimpleRaw,

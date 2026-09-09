@@ -6,21 +6,9 @@ import logoUrl from '~/assets/images/logo.svg'
 // password). The brand copy is deliberately generic - it sits next to three
 // different forms, so anything sign-in specific would read wrong on two of them.
 const features = [
-  {
-    icon: 'LayoutDashboard' as const,
-    title: 'One dashboard',
-    description: 'Every metric that matters, on a single screen.',
-  },
-  {
-    icon: 'Workflow' as const,
-    title: 'Automated workflows',
-    description: 'Background jobs and audits you can watch live.',
-  },
-  {
-    icon: 'ShieldCheck' as const,
-    title: 'Granular access',
-    description: 'Roles and permissions enforced end to end.',
-  },
+  { icon: 'LayoutDashboard' as const, key: 'dashboard' },
+  { icon: 'Workflow' as const, key: 'workflows' },
+  { icon: 'ShieldCheck' as const, key: 'access' },
 ]
 </script>
 
@@ -53,23 +41,26 @@ const features = [
 
       <div class="relative">
         <h2 class="text-4xl font-semibold leading-tight">
-          Everything your team runs on, <br />
-          in a single place.
+          {{ $t('auth.brand.heading') }}
         </h2>
         <p class="mt-3 max-w-sm text-white/50">
-          Manage all your accounts, orders and reports in one place.
+          {{ $t('auth.brand.subheading') }}
         </p>
 
         <div class="mt-10 flex flex-col gap-4">
-          <div v-for="feature in features" :key="feature.title" class="flex items-start gap-3">
+          <div v-for="feature in features" :key="feature.key" class="flex items-start gap-3">
             <div
               class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white/10"
             >
               <Lucide :icon="feature.icon" class="size-4" />
             </div>
             <div>
-              <div class="text-sm font-medium">{{ feature.title }}</div>
-              <div class="text-sm text-white/40">{{ feature.description }}</div>
+              <div class="text-sm font-medium">
+                {{ $t(`auth.brand.features.${feature.key}.title`) }}
+              </div>
+              <div class="text-sm text-white/40">
+                {{ $t(`auth.brand.features.${feature.key}.description`) }}
+              </div>
             </div>
           </div>
         </div>
@@ -80,7 +71,20 @@ const features = [
     <!-- END: Left brand panel -->
 
     <!-- BEGIN: Right form panel -->
-    <div class="flex w-full flex-col items-center justify-center bg-background px-6 py-16 lg:w-1/2">
+    <!-- `light` pins this half to the light palette whatever the saved
+         appearance is. It sits against a brand panel that is dark by design, so
+         a dark form beside it loses the split the layout is built on - and the
+         `text-foreground` is not redundant: colour inherits its *computed*
+         value from <body>, so the palette has to be re-applied here to take. -->
+    <div
+      class="light relative flex w-full flex-col items-center justify-center bg-background px-6 py-16 text-foreground lg:w-1/2"
+    >
+      <!-- The switcher belongs to the shell, not the sign-in form: a reader who
+           lands on forgot-password in the wrong language needs it just as much. -->
+      <div class="absolute right-6 top-6">
+        <LanguageSwitcher />
+      </div>
+
       <div class="w-full max-w-sm">
         <NuxtLink to="/" class="mb-10 flex items-center gap-2 lg:hidden">
           <img class="h-6 w-6" :src="logoUrl" alt="Midone Admin" />

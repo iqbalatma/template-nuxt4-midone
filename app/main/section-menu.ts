@@ -49,6 +49,30 @@ export const systemMenus: SectionMenu[] = [
     icon: 'ScrollText',
     permission: Permission.AuditIndex,
   },
+  // The dashboard first among the background-job screens: it is the one that
+  // says whether anything is wrong, and the other three are where you go once
+  // it says something is.
+  {
+    title: 'system.nav.jobsTitle',
+    description: 'system.nav.jobsDescription',
+    to: '/system/jobs',
+    icon: 'ChartColumn',
+    permission: Permission.JobLogIndex,
+  },
+  {
+    title: 'system.nav.queueTitle',
+    description: 'system.nav.queueDescription',
+    to: '/system/queue',
+    icon: 'Layers',
+    permission: Permission.QueueIndex,
+  },
+  {
+    title: 'system.nav.schedulesTitle',
+    description: 'system.nav.schedulesDescription',
+    to: '/system/schedules',
+    icon: 'CalendarClock',
+    permission: Permission.ScheduleIndex,
+  },
   {
     title: 'system.nav.jobLogsTitle',
     description: 'system.nav.jobLogsDescription',

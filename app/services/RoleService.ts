@@ -4,7 +4,7 @@ import type {
   ResponseSingleData,
 } from '~/types/response'
 import type Role from '~/types/entities/role'
-import type { RoleMaster } from '~/types/entities/role'
+import type { RoleOption } from '~/types/entities/role'
 import { useFlashStore } from '~/stores/flash'
 
 export interface RoleRequest {
@@ -16,7 +16,7 @@ export interface RoleRequest {
 export const useRoleService = () => {
   const { $api } = useNuxtApp()
   const rolesCollection = ref<Role[]>([])
-  const rolesMasterCollection = ref<RoleMaster[]>([])
+  const roleOptionsCollection = ref<RoleOption[]>([])
   const loading = ref(false)
   const submitting = ref(false)
   const flashStore = useFlashStore()
@@ -34,12 +34,12 @@ export const useRoleService = () => {
   }
 
   /** Trimmed id/name list, for select inputs (e.g. assigning roles to a user) */
-  const getAllMaster = async () => {
-    const response = await $api<ResponseDataCollectionWithoutPagination<RoleMaster>>(
-      'api/master/roles',
+  const getAllOptions = async () => {
+    const response = await $api<ResponseDataCollectionWithoutPagination<RoleOption>>(
+      'api/options/roles',
       { method: 'GET' },
     )
-    rolesMasterCollection.value = response.payload.data
+    roleOptionsCollection.value = response.payload.data
   }
 
   const addNew = async (request: RoleRequest): Promise<boolean> => {
@@ -92,11 +92,11 @@ export const useRoleService = () => {
 
   return {
     rolesCollection,
-    rolesMasterCollection,
+    roleOptionsCollection,
     loading,
     submitting,
     getAll,
-    getAllMaster,
+    getAllOptions,
     addNew,
     updateById,
     deleteById,

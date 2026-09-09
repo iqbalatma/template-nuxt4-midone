@@ -21,7 +21,6 @@ import {
   TableRow,
   TableCell,
 } from '@/base/ui/table'
-import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
 import { AvatarRoot, AvatarFallback, AvatarImage } from '@/base/ui/avatar'
 import {
   CarouselRoot,

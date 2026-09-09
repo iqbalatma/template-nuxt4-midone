@@ -2,7 +2,7 @@
 import { Box } from '@/base/ui/box'
 import { Button } from '@/base/ui/button'
 import { Lucide, type Icon } from '@/base/ui/lucide'
-import { NativeSelect, NativeSelectOption } from '@/base/ui/native-select'
+import { TomSelect } from '@/base/ui/tom-select'
 import { Line1, Donut1 } from '@/base/chart-presets'
 import { Transactions } from '@/base/transactions'
 import { RecentActivities } from '@/base/recent-activities'
@@ -35,6 +35,8 @@ const summaryTiles: SummaryTile[] = [
 ]
 
 const salesReportPeriods = ['This Month', 'Last Month', 'This Year']
+const salesReportPeriodItems = salesReportPeriods.map((period) => ({ id: period, name: period }))
+const salesReportPeriod = ref(salesReportPeriods[0])
 </script>
 
 <template>
@@ -86,11 +88,13 @@ const salesReportPeriods = ['This Month', 'Last Month', 'This Year']
         <div class="col-span-12 mt-8 lg:col-span-8">
           <div class="flex h-10 items-center">
             <h2 class="me-5 truncate text-lg font-medium">Sales Report</h2>
-            <NativeSelect class="box ms-auto w-auto">
-              <NativeSelectOption v-for="period in salesReportPeriods" :key="period">
-                {{ period }}
-              </NativeSelectOption>
-            </NativeSelect>
+            <TomSelect
+              v-model="salesReportPeriod"
+              class="ms-auto w-40"
+              :options="salesReportPeriodItems"
+              :placeholder="salesReportPeriods[0]"
+              aria-label="Sales report period"
+            />
           </div>
           <Box class="mt-12 p-5 sm:mt-5">
             <div class="flex flex-col md:flex-row md:items-center">

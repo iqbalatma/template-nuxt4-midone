@@ -8,13 +8,13 @@ import { Input } from '~/base/ui/input'
 import { Lucide } from '~/base/ui/lucide'
 import { TomSelect } from '~/base/ui/tom-select'
 import type User from '~/types/entities/user'
-import type { RoleMaster } from '~/types/entities/role'
+import type { RoleOption } from '~/types/entities/role'
 import { type UserRequest, useUserService } from '~/services/UserService'
 
 const props = defineProps({
   roles: {
     required: true,
-    type: Array as PropType<RoleMaster[]>,
+    type: Array as PropType<RoleOption[]>,
   },
 })
 

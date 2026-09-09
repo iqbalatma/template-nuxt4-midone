@@ -1,7 +1,7 @@
 <script setup lang="ts" generic="T">
 import { computed, ref, watch } from 'vue'
 import { Table } from '~/base/ui/table'
-import { NativeSelect, NativeSelectOption } from '~/base/ui/native-select'
+import { TomSelect } from '~/base/ui/tom-select'
 import {
   PaginationContext,
   PaginationRoot,
@@ -27,6 +27,7 @@ defineSlots<{
 }>()
 
 const perPageOptions = [10, 20, 50, 100]
+const perPageItems = perPageOptions.map((option) => ({ id: option, name: String(option) }))
 const currentPage = ref(1)
 const perPage = ref(getDefaultPerPage())
 
@@ -45,6 +46,12 @@ watch([() => props.data, perPage], () => {
 
 const handlePageChange = (details: { page: number }) => {
   currentPage.value = details.page
+}
+
+// TomSelect emits strings, and an empty one for its placeholder option.
+const handlePerPageChange = (value: string | string[]) => {
+  const next = Number(Array.isArray(value) ? value[0] : value)
+  if (next) perPage.value = next
 }
 </script>
 
@@ -79,15 +86,14 @@ const handlePageChange = (details: { page: number }) => {
         <span class="hidden text-sm text-slate-500 md:inline">
           Showing {{ start }} to {{ end }} of {{ data.length }} entries
         </span>
-        <NativeSelect
-          class="box w-20"
-          :value="perPage"
-          @change="perPage = Number(($event.target as HTMLSelectElement).value)"
-        >
-          <NativeSelectOption v-for="option in perPageOptions" :key="option" :value="option">
-            {{ option }}
-          </NativeSelectOption>
-        </NativeSelect>
+        <TomSelect
+          class="w-24"
+          :model-value="perPage"
+          :options="perPageItems"
+          :placeholder="String(perPage)"
+          aria-label="Rows per page"
+          @update:model-value="handlePerPageChange"
+        />
       </div>
     </div>
   </template>

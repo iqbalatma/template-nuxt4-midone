@@ -9,6 +9,8 @@ import type { ModalDelete } from '#components'
 import ModalFormRole from '~/components/features/ModalFormRole.vue'
 import { useRoleService } from '~/services/RoleService'
 import { usePermissionService } from '~/services/PermissionService'
+import { useAuthStore } from '~/stores/auth'
+import { Permission } from '~/enums/Permission'
 import type Role from '~/types/entities/role'
 
 definePageMeta({
@@ -17,11 +19,15 @@ definePageMeta({
 })
 
 const { getAll, deleteById, rolesCollection, loading } = useRoleService()
-// The role form only needs permissions as lookup options, so it reads the master endpoint
-const { permissionsMasterCollection, getAllMaster: getAllMasterPermissions } = usePermissionService()
+// The role form only needs permissions as lookup options, so it reads the options endpoint
+const { permissionOptionsCollection, getAllOptions: getPermissionOptions } = usePermissionService()
+// Same reason as the user list: the options endpoint answers to its own
+// permission, so a role reader without it gets the page rather than a 403.
+const { hasPermission } = useAuthStore()
+const canPickPermissions = computed(() => hasPermission(Permission.OptionPermissionIndex))
 
 onMounted(async () => {
-  await Promise.all([getAll(), getAllMasterPermissions()])
+  await Promise.all([getAll(), canPickPermissions.value ? getPermissionOptions() : null])
 })
 
 const searchKey = ref('')
@@ -139,5 +145,5 @@ const onConfirmDelete = async () => {
     @submit="onConfirmDelete"
   />
 
-  <ModalFormRole ref="modalFormRef" :permissions="permissionsMasterCollection" @submit="getAll()" />
+  <ModalFormRole ref="modalFormRef" :permissions="permissionOptionsCollection" @submit="getAll()" />
 </template>

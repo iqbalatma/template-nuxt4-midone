@@ -11,6 +11,8 @@ import ModalFormUser from '~/components/features/ModalFormUser.vue'
 import { useUserService } from '~/services/UserService'
 import { useRoleService } from '~/services/RoleService'
 import { useServerList } from '~/composables/useServerList'
+import { useAuthStore } from '~/stores/auth'
+import { Permission } from '~/enums/Permission'
 
 definePageMeta({
   title: 'account.users.title',
@@ -19,7 +21,12 @@ definePageMeta({
 
 const { getAllPaginated, deleteById, usersCollection, loading } = useUserService()
 // The form only needs roles as lookup options
-const { rolesMasterCollection, getAllMaster: getAllMasterRoles } = useRoleService()
+const { roleOptionsCollection, getAllOptions: getRoleOptions } = useRoleService()
+// Asked for only when allowed: the endpoint is gated on its own permission, so
+// fetching regardless would greet everyone who may edit users but not read the
+// role list with a 403 toast on a page that otherwise loaded fine.
+const { hasPermission } = useAuthStore()
+const canPickRoles = computed(() => hasPermission(Permission.OptionRoleIndex))
 
 // ?search= is also where the navbar quick search lands, so opening a user from
 // there shows the same filtered list a link to it would.
@@ -29,7 +36,9 @@ const { filters, refresh: fetchUsers } = useServerList({
   fetch: (page, per_page, applied) => getAllPaginated({ page, per_page, ...applied }),
 })
 
-onMounted(() => getAllMasterRoles())
+onMounted(() => {
+  if (canPickRoles.value) getRoleOptions()
+})
 
 const users = computed(() => usersCollection.value.data)
 const meta = computed(() => usersCollection.value.meta)
@@ -56,9 +65,20 @@ const onConfirmDelete = async () => {
         </Button>
 
         <div class="relative w-full sm:w-64">
+          <!-- The only always-visible text input on the page, so a password
+               manager (or Chrome's own autofill) picks it as the "username"
+               field and drops the saved login email into it on load. That write
+               reaches `filters.search` through v-model and gets pushed to the
+               URL, filtering the list nobody asked to filter. -->
           <Input
             v-model="filters.search"
             type="search"
+            name="user-search"
+            autocomplete="off"
+            data-1p-ignore
+            data-lpignore="true"
+            data-bwignore
+            data-form-type="other"
             :placeholder="$t('account.users.searchPlaceholder')"
             class="w-full pr-8"
           />
@@ -139,5 +159,5 @@ const onConfirmDelete = async () => {
     @submit="onConfirmDelete"
   />
 
-  <ModalFormUser ref="modalFormRef" :roles="rolesMasterCollection" @submit="fetchUsers()" />
+  <ModalFormUser ref="modalFormRef" :roles="roleOptionsCollection" @submit="fetchUsers()" />
 </template>

@@ -1,4 +1,4 @@
-import type { RoleMaster } from '~/types/entities/role'
+import type { RoleOption } from '~/types/entities/role'
 
 /**
  * Mirrors `media.Resource`. `url` and every entry in `conversions` are
@@ -24,7 +24,7 @@ export default interface User {
   email: string
   phone_number: string | null
   created_at: string
-  roles: RoleMaster[]
+  roles: RoleOption[]
   /** Null until the user uploads one; the avatar collection is single-file. */
   avatar: Media | null
 }

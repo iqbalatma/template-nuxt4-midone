@@ -23,6 +23,10 @@ const { t } = useI18n()
 const statusOptions = computed(() => [
   { id: 'success', name: t('system.jobLogs.statusSuccess') },
   { id: 'failed', name: t('system.jobLogs.statusFailed') },
+  // A scheduled run that never started because the previous one was still
+  // going. Filterable on its own because "why did this job run half as often
+  // as its schedule says" is exactly the question it answers.
+  { id: 'skipped', name: t('system.jobLogs.statusSkipped') },
 ])
 const meta = computed(() => logsCollection.value.meta)
 
@@ -36,20 +40,26 @@ onMounted(() => getDefinitions())
 
 <template>
   <div class="grid grid-cols-12 gap-6">
-    <!-- The registered jobs, not their runs: a job that has never fired still
-         shows up here, which is how you tell "not scheduled" from "never ran". -->
+    <!-- What can appear in this table, not what has: a job that has never fired
+         still shows up, which is how you tell "not registered" from "never ran".
+         It carries no schedule any more — when a scheduled job runs is editable
+         now, and a copy of it here would be the stale one. /system/schedules
+         owns that. -->
     <Box class="col-span-12 p-5">
       <div class="mb-3 font-medium">{{ $t('system.jobLogs.registeredJobs') }}</div>
       <div class="flex flex-wrap gap-3">
         <div
           v-for="definition in definitions"
-          :key="definition.name"
+          :key="`${definition.type}:${definition.name}`"
           class="border-foreground/10 flex items-center gap-2 rounded-xl border px-3 py-2"
         >
-          <Lucide icon="Timer" class="text-foreground/40 h-4 w-4" />
+          <Lucide
+            :icon="definition.type === 'queue' ? 'Layers' : 'Timer'"
+            class="text-foreground/40 h-4 w-4"
+          />
           <span class="font-medium">{{ definition.name }}</span>
           <Badge variant="secondary" look="outline">
-            {{ $t('system.jobLogs.everyInterval', { interval: definition.interval }) }}
+            {{ $t(`system.jobLogs.type.${definition.type}`) }}
           </Badge>
         </div>
         <span v-if="definitions.length === 0" class="text-foreground/40 text-sm">

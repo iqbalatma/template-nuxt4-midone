@@ -3,7 +3,10 @@
 
 @source "../..";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* `.light` opts a subtree back out of dark mode, even under a dark <html>.
+   Both halves of it are needed: this stops every `dark:` utility inside from
+   matching, and the `.light` token block below puts the light palette back. */
+@custom-variant dark (&:where(.dark, .dark *):not(:where(.light, .light *)));
 
 @theme {
   --radius: 0.625rem;
@@ -69,6 +72,32 @@
   --color-foreground: var(--color-slate-300);
 }
 
+/* Mirrors @theme. A custom property inherits, so escaping .dark means writing
+   the light values back - and it also pins the palette against the colour
+   schemes below, which is what makes this surface look the same every visit. */
+.light {
+  --color-primary: var(--color-blue-900);
+  --color-primary-foreground: var(--color-blue-50);
+
+  --color-secondary: var(--color-slate-600);
+  --color-secondary-foreground: var(--color-slate-50);
+
+  --color-success: var(--color-emerald-900);
+  --color-success-foreground: var(--color-emerald-50);
+
+  --color-danger: var(--color-red-900);
+  --color-danger-foreground: var(--color-red-50);
+
+  --color-pending: var(--color-orange-900);
+  --color-pending-foreground: var(--color-orange-50);
+
+  --color-warning: var(--color-yellow-900);
+  --color-warning-foreground: var(--color-yellow-50);
+
+  --color-background: var(--color-slate-50);
+  --color-foreground: var(--color-slate-700);
+}
+
 @layer components {
   .image-fit {
     position: relative;
@@ -106,6 +135,12 @@ select {
 .dark {
   select {
     @apply bg-chevron-light;
+  }
+}
+
+.light {
+  select {
+    @apply bg-chevron-dark;
   }
 }
 

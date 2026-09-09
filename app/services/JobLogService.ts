@@ -1,9 +1,10 @@
 import type JobLog from '~/types/entities/job_log'
-import type { JobDefinition } from '~/types/entities/job_log'
+import type { JobDefinition, JobStats, JobStatsRange } from '~/types/entities/job_log'
 import type {
   PayloadDataCollectionPaginated,
   ResponseDataCollectionWithPagination,
   ResponseDataCollectionWithoutPagination,
+  ResponseSingleData,
 } from '~/types/response'
 import { createDefaultPaginated } from '~/utils/helper'
 
@@ -19,6 +20,7 @@ export const useJobLogService = () => {
   const { $api } = useNuxtApp()
   const logsCollection = ref<PayloadDataCollectionPaginated<JobLog>>(createDefaultPaginated())
   const definitions = ref<JobDefinition[]>([])
+  const stats = ref<JobStats | null>(null)
   const loading = ref(false)
 
   const getAllPaginated = async (filter: JobLogFilter = {}) => {
@@ -44,8 +46,10 @@ export const useJobLogService = () => {
   }
 
   /**
-   * The registered jobs, not their runs. Static server-side - it mirrors what
-   * main.go wired into the scheduler, so a job that never ran still appears.
+   * The jobs that can appear in this table, not their runs — derived on the API
+   * from the scheduler's registrations plus the queue's handlers, so a job that
+   * has never run is still offered as a filter and its empty list is a real
+   * answer.
    */
   const getDefinitions = async () => {
     const response = await $api<ResponseDataCollectionWithoutPagination<JobDefinition>>(
@@ -55,11 +59,26 @@ export const useJobLogService = () => {
     definitions.value = response.payload.data
   }
 
+  /**
+   * Run analytics over a fixed window. The range keys are the API's, not a free
+   * start/end pair: each one carries its own bucket size, so letting the client
+   * pick an arbitrary window would mean picking that size here too.
+   */
+  const getStats = async (range: JobStatsRange = '24h', type = '') => {
+    const response = await $api<ResponseSingleData<JobStats>>('api/management/job-logs/stats', {
+      method: 'GET',
+      query: { range, ...(type ? { type } : {}) },
+    })
+    stats.value = response.payload.data
+  }
+
   return {
     logsCollection,
     definitions,
+    stats,
     loading,
     getAllPaginated,
     getDefinitions,
+    getStats,
   }
 }

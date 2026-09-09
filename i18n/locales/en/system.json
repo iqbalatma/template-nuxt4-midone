@@ -6,7 +6,13 @@
       "jobLogsTitle": "Job Runs",
       "jobLogsDescription": "Background job history",
       "cacheTitle": "Cache",
-      "cacheDescription": "Cached reads, clear on demand"
+      "cacheDescription": "Cached reads, clear on demand",
+      "jobsTitle": "Jobs Dashboard",
+      "jobsDescription": "Success rate, durations, queue depth",
+      "queueTitle": "Queue",
+      "queueDescription": "Waiting, running and failed jobs",
+      "schedulesTitle": "Schedules",
+      "schedulesDescription": "When each periodic job runs"
     },
     "audits": {
       "title": "Activity Log",
@@ -29,9 +35,8 @@
     },
     "jobLogs": {
       "title": "Job Runs",
-      "subtitle": "History of scheduled background work",
+      "subtitle": "Every attempt at background work, scheduled or queued",
       "registeredJobs": "Registered jobs",
-      "everyInterval": "every {interval}",
       "noJobs": "No jobs registered.",
       "allJobs": "All jobs",
       "allStatuses": "All statuses",
@@ -41,7 +46,12 @@
       "columnMessage": "Message",
       "columnStarted": "Started",
       "columnFinished": "Finished",
-      "liveEmpty": "No runs yet."
+      "liveEmpty": "No runs yet.",
+      "statusSkipped": "Skipped",
+      "type": {
+        "schedule": "schedule",
+        "queue": "queue"
+      }
     },
     "cache": {
       "title": "Cache",
@@ -52,6 +62,100 @@
       "columnItems": "Items",
       "columnExpires": "Expires in",
       "drop": "Drop"
+    },
+    "jobs": {
+      "title": "Jobs Dashboard",
+      "subtitle": "How background work is going, and how much is waiting",
+      "runsHeading": "Runs",
+      "queueHeading": "Queue right now",
+      "range": {
+        "24h": "24h",
+        "7d": "7d",
+        "30d": "30d"
+      },
+      "totalRuns": "Total runs",
+      "successRate": "Success rate",
+      "successRateHint": "{skipped} skipped, not counted",
+      "failedRuns": "Failed runs",
+      "avgDuration": "Average duration",
+      "slowestHint": "slowest {value}",
+      "pending": "Pending",
+      "delayedHint": "{count} waiting on a delay or backoff",
+      "running": "Running",
+      "queueFailed": "Failed",
+      "backlogAge": "Backlog age",
+      "backlogHint": "Oldest job workers have not started",
+      "trendTitle": "Runs over time",
+      "legendSuccess": "Success",
+      "legendFailed": "Failed",
+      "legendSkipped": "Skipped",
+      "queueByJob": "Queue by job",
+      "queueEmpty": "Nothing in the queue.",
+      "failedCount": "{count} failed",
+      "skippedCount": "{count} skipped",
+      "perJobTitle": "Per job",
+      "columnRuns": "Runs",
+      "columnFailed": "Failed",
+      "columnAvg": "Average",
+      "columnMax": "Slowest",
+      "columnLastRun": "Last run"
+    },
+    "queue": {
+      "title": "Queue",
+      "subtitle": "Work dispatched to run outside a request",
+      "status": {
+        "pending": "Pending",
+        "running": "Running",
+        "success": "Success",
+        "failed": "Failed",
+        "canceled": "Canceled"
+      },
+      "allJobs": "All jobs",
+      "allStatuses": "All statuses",
+      "allQueues": "All queues",
+      "columnDetail": "Detail",
+      "columnDispatched": "Dispatched",
+      "availableAt": "runs at {time}",
+      "retry": "Retry",
+      "cancel": "Cancel",
+      "retryAllFailed": "Retry failed ({count})",
+      "retryAllTitle": "Retry failed jobs",
+      "retryAllMessage": "Requeue all {count} failed jobs? Each one runs again from the start, so whatever it does — sending an email, calling an API — happens again.",
+      "purgeFinished": "Clear finished",
+      "purgeTitle": "Clear finished jobs",
+      "purgeMessage": "Delete every successful and canceled job from the list? Failed jobs are kept, so nothing you still have to act on is removed.",
+      "liveEmpty": "Nothing queued yet."
+    },
+    "schedules": {
+      "title": "Schedules",
+      "subtitle": "When each periodic job runs",
+      "notice": "Each job here is registered in the API's code; only its schedule and whether it is enabled can be changed.",
+      "columnCron": "Cron",
+      "columnNextRun": "Next run",
+      "columnLastRun": "Last run",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "enable": "Enable",
+      "disable": "Disable",
+      "runNow": "Run now",
+      "notScheduled": "Disabled — nothing scheduled",
+      "never": "This expression never fires",
+      "neverRan": "Has not run yet",
+      "form": {
+        "title": "Schedule for {name}",
+        "cron": "Cron expression",
+        "cronHint": "Five fields: minute hour day-of-month month day-of-week.",
+        "examples": "Examples",
+        "example": {
+          "everyFiveMinutes": "every 5 minutes",
+          "hourly": "hourly",
+          "dailyAt3": "daily at 03:00",
+          "weeklyMonday": "Mondays at midnight",
+          "monthly": "1st of the month"
+        },
+        "enabled": "Enabled",
+        "enabledHint": "When off, the clock will not start this job. You can still run it by hand."
+      }
     }
   }
 }

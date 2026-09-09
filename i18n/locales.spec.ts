@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 
-const DOMAINS = ['common', 'nav', 'account', 'system', 'quick-search', 'profile', 'notifications', 'privacy-policy', 'terms']
+const DOMAINS = ['common', 'auth', 'nav', 'account', 'system', 'quick-search', 'profile', 'notifications', 'privacy-policy', 'terms']
 
 const load = (locale: string) =>
   Object.assign(

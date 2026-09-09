@@ -38,8 +38,8 @@ const submit = async () => {
 
 <template>
   <form @submit.prevent="submit()">
-    <h1 class="text-2xl font-semibold">Choose a new password</h1>
-    <p class="mt-1 text-sm opacity-50">Pick something you have not used here before.</p>
+    <h1 class="text-2xl font-semibold">{{ $t('auth.resetPassword.title') }}</h1>
+    <p class="mt-1 text-sm opacity-50">{{ $t('auth.resetPassword.subtitle') }}</p>
 
     <div class="mt-8 flex flex-col gap-2">
       <SimpleAlert />
@@ -52,9 +52,10 @@ const submit = async () => {
       >
         <Lucide icon="TriangleAlert" class="text-danger mt-0.5 size-5 shrink-0" />
         <p class="opacity-70">
-          This reset link is missing its token. Request a new one from the
-          <NuxtLink class="text-primary" to="/auth/forgot-password">forgot password</NuxtLink>
-          page.
+          {{ $t('auth.resetPassword.missingTokenPrefix')
+          }}<NuxtLink class="text-primary" to="/auth/forgot-password">{{
+            $t('auth.resetPassword.missingTokenLink')
+          }}</NuxtLink>{{ $t('auth.resetPassword.missingTokenSuffix') }}
         </p>
       </div>
 
@@ -68,7 +69,7 @@ const submit = async () => {
           type="password"
           autocomplete="new-password"
           v-model="form.password"
-          placeholder="New password"
+          :placeholder="$t('auth.resetPassword.password')"
         />
         <FormFeedback feedbackKey="password" />
 
@@ -77,9 +78,9 @@ const submit = async () => {
           type="password"
           autocomplete="new-password"
           v-model="form.password_confirm"
-          placeholder="Confirm new password"
+          :placeholder="$t('auth.resetPassword.passwordConfirm')"
         />
-        <p v-if="mismatch" class="text-danger text-sm">Both passwords must match.</p>
+        <p v-if="mismatch" class="text-danger text-sm">{{ $t('auth.resetPassword.mismatch') }}</p>
         <FormFeedback feedbackKey="password_confirm" />
       </template>
     </div>
@@ -92,13 +93,13 @@ const submit = async () => {
         type="submit"
         :disabled="submitting || mismatch"
       >
-        {{ submitting ? 'Saving…' : 'Reset password' }}
+        {{ submitting ? $t('auth.resetPassword.submitting') : $t('auth.resetPassword.submit') }}
         <Lucide icon="ArrowRight" class="size-4" />
       </Button>
 
       <NuxtLink class="flex items-center justify-center gap-2 text-sm opacity-70 hover:opacity-100" to="/auth">
         <Lucide icon="ArrowLeft" class="size-4" />
-        Back to sign in
+        {{ $t('auth.forgotPassword.backToSignIn') }}
       </NuxtLink>
     </div>
   </form>

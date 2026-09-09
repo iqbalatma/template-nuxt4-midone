@@ -77,8 +77,8 @@ answers 403.
 
 ## WebSockets
 
-Three read-only feeds: `/api/notifications/ws`, `/api/management/audits/ws`,
-`/api/management/job-logs/ws`.
+Four read-only feeds: `/api/notifications/ws`, `/api/management/audits/ws`,
+`/api/management/job-logs/ws` and `/api/management/queue/ws`.
 
 **The access token does not work on them.** A browser handshake cannot set an
 Authorization header, so the token travels in the query string — and the web
@@ -99,8 +99,16 @@ notification older than the loaded page still has to light up the bell.
   control frame by re-running `fetchMe`, so a role change reaches the menu
   without a reload. Control frames carry an `event` key; a notification never
   does.
-- `useLiveFeed` — the generic one behind the audits and job-runs pages, with a
-  `paused` flag so a reader can freeze incoming rows without dropping the socket.
+- `useLiveFeed` — the generic one behind the audits, job-runs and queue pages,
+  with a `paused` flag so a reader can freeze incoming rows without dropping the
+  socket.
+
+The queue feed is the odd one: `job-logs/ws` carries a *finished attempt*, so a
+job that is dispatched and then waits never appears on it, while `queue/ws`
+carries every transition — dispatched, claimed, settled. That means a frame is
+usually an update to a row already on screen, so `LiveQueueFeed` removes the
+existing row by id before prepending. Appending blindly shows the same job three
+times.
 
 Both reconnect on a fixed delay and stop when `wsToken()` returns null, which
 means the session is gone and retrying would loop.
@@ -120,7 +128,8 @@ whatever the URL asked for until the reader changes it.
 ## Shell pages
 
 Three of them: `/account` (users, roles, permissions), `/system` (activity log,
-job runs, cache) and `/profile` (own details, own password). Each is one side-menu entry. `app/pages/account.vue` and
+jobs dashboard, queue, schedules, job runs, cache) and `/profile` (own details,
+own password). Each is one side-menu entry. `app/pages/account.vue` and
 `app/pages/system.vue` are the parent routes: they render `SectionNav`
 (left-hand nav + `<NuxtPage/>`), and the matching `index.vue` redirects to the
 first entry, since a shell has no content of its own.
@@ -168,6 +177,78 @@ back as an `ERR_INVALID_ACTION` message, not a per-field error. Media URLs are
 `apiBase` in front of the 150px `thumb` conversion. `components/UserAvatar.vue`
 is the only thing that renders it, so all eight theme headers and the account
 trigger show the picture at once.
+
+## Background job screens
+
+Four entries under `/system`, in the order you would use them: **Jobs**
+(dashboard), **Queue**, **Schedules**, **Job Runs**. The dashboard is the one
+that says whether anything is wrong; the other three are where you go once it
+says something is.
+
+They mirror `app/queue` and `app/scheduler` in the API — read that repo's
+CLAUDE.md for what the numbers mean.
+
+### The dashboard reads two endpoints, on purpose
+
+`job-logs/stats` is how the work that already ran went; `queue/stats` is how
+much is waiting now. Neither substitutes for the other — a queue can have a
+perfect success rate and still be an hour behind — so `system/jobs.vue` fetches
+both in one `Promise.all` and shows them as two labelled groups rather than one
+undifferentiated row of numbers.
+
+`success_rate` ignores skipped runs, so the tile's hint says how many were
+skipped. It is tinted grey rather than red when the window has no runs at all: a
+quiet night reports 0%, and colouring that as an outage cries wolf.
+
+`oldest_pending_seconds` is the queue tile worth watching — it climbs the moment
+workers stop, however many jobs are in the table. `delayed` is shown as a hint
+under `pending` because a big pending number made of scheduled retries is not a
+backlog.
+
+Durations arrive as **fractional** milliseconds (most jobs finish in
+microseconds). `formatDuration` renders anything under 1ms as `<1 ms` rather
+than `0 ms`, which reads as "not measured".
+
+### The chart
+
+`JobTrendChart` remounts the canvas via `:key` on data *and* theme. The base
+`Chart` component builds its chart once on mount and never watches its config,
+and `getColor` reads CSS custom properties at construction — so without the
+theme in the key, a chart built in light mode keeps light-mode colours after a
+toggle.
+
+The API fills empty buckets, so the chart must plot them: a sparse series hides
+an outage by drawing the points either side next to each other.
+
+### Destructive actions are confirmed and narrow
+
+Retry and purge go through `ModalDelete`. A retry **re-runs the job from the
+start** — the email is sent again, the API called again — so the confirmation
+says that rather than asking a generic "are you sure". "Clear finished" purges
+only `success` and `canceled`; failed rows are the list somebody still has to
+act on, and a button that quietly took them too would delete the evidence.
+
+`management.queue.manage` / `management.schedule.manage` gate every one of those
+buttons, separately from the `*.index` permission that shows the list. A
+read-only operator gets the board without the buttons.
+
+### Schedules
+
+The list is unpaginated because the API's is: one row per job registered in Go
+code, which is a handful. There is no "create" — a schedule row exists only
+because code registers the job.
+
+"No next run" has three different causes and the page must not collapse them: an
+unparseable expression (`cron_error`, a bug to fix), a disabled job (a choice),
+and a valid expression that can never fire (neither). An invalid cron comes back
+as a per-field error under the input rather than being saved, because a stored
+bad expression makes the job silently stop running.
+
+**Run now** works on a disabled job too — disabled means the clock will not
+start it, not that an operator may not, and running it once by hand is how you
+check it is safe to enable. The API answers "accepted", not "finished": the
+outcome shows up on Job Runs a moment later, which is why the page refetches on
+a delay instead of reading a result out of the response.
 
 ## Quick search
 
@@ -232,8 +313,35 @@ cannot do the multi-value case at all.
 <TomSelect v-model="form.role_ids" :options="roleOptions" :multiple="true" placeholder="Select roles" />
 ```
 
+It takes `{ id, name }` items and **emits strings**, its placeholder option
+included — so a numeric value (the rows-per-page pickers in
+`ServerSidePagination` / `ClientSidePagination`) converts on the way back out
+and ignores an empty emit. On a URL-backed value, ignore an emit that matches
+what is already selected too: the `modelValue` watcher re-sets the control after
+the navigation, and that fires change a second time.
+
+`NativeSelect` survives in exactly three places, all of them deliberate: its own
+definition under `base/ui/native-select`, the `base/ui/usage` page that
+documents it, and the datepicker's month/year pickers — those are the internals
+of a calendar popover, where a searchable select would be both wrong and
+broken. Everything a page renders is `TomSelect`.
+
 `TomSelect` renders its own control, so `aria-invalid` on it does not reach
 anything visible — show its error with `FormFeedback` alone.
+
+Its options come from `/api/options/*`, never from the resource's own list
+endpoint: `getAllOptions()` on `RoleService` / `PermissionService`, kept in
+`roleOptionsCollection` / `permissionOptionsCollection` so a dropdown and a
+table on the same page do not share one ref. Those endpoints answer to
+`option.role.index` / `option.permission.index` — permissions of their own, so a
+user form does not require handing out role management — which means the page
+has to check before asking, the way `/account/users` and `/account/roles` do.
+Call it unguarded and someone who may edit users but not read roles gets a 403
+toast on a page that otherwise loaded.
+
+The exception is the user picker on `/system/audits`, which still reads the
+paginated `GET /api/management/users` (first 100, no search): there is no
+`/api/options/users` yet, so that dropdown silently truncates past 100 users.
 
 Every field carries a `placeholder` — an example of what belongs in it
 (`name@example.com`, `Minimum 8 characters`), not a repeat of the label. An
@@ -260,7 +368,11 @@ and every key in it renders as the key.
 choice from `localStorage` instead — `setLocale` alone does not survive a
 reload, and a browser header would override a choice the reader made by hand.
 
-`LanguageSwitcher` sits in all eight theme menus (four themes x side/top).
+`LanguageSwitcher` sits in all eight theme menus (four themes x side/top) and
+in `app/layouts/auth.vue` — it belongs to the auth shell rather than the
+sign-in page, so forgot-password and reset-password get it too. The strings
+on those pages are the `auth` domain; a switcher over hardcoded copy changes
+nothing visible and reads as broken.
 
 `definePageMeta({ title, pageSubTitle })` holds **i18n keys** too —
 `app/themes/Layout.vue` resolves both with `t()` (page heading and `useHead`

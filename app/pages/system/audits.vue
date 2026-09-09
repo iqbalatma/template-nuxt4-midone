@@ -61,9 +61,17 @@ const viewDetail = (log: ActivityLog) => modalDetailRef.value?.handleModal(true,
       <div class="mb-4 flex justify-end">
         <FilterPopover :active="hasActiveFilters">
           <div class="relative">
+            <!-- Autofill guards, same as the users list: a filter input must
+                 never be treated as a login field. -->
             <Input
               v-model="filters.search"
               type="text"
+              name="audit-search"
+              autocomplete="off"
+              data-1p-ignore
+              data-lpignore="true"
+              data-bwignore
+              data-form-type="other"
               :placeholder="$t('system.audits.searchPlaceholder')"
               class="w-full pr-8"
             />
