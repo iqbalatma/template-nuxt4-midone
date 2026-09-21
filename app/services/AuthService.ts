@@ -1,6 +1,7 @@
 import type { ResponseData, ResponseError, ResponseSingleData } from '~/types/response'
 import type { AuthUser, Profile } from '~/types/entities/user'
 import { useAuthStore } from '~/stores/auth'
+import { openOAuthPopup } from '~/utils/oauthPopup'
 
 export interface AuthRequest {
   email: string
@@ -22,7 +23,7 @@ export const useAuthService = () => {
   const responseError = ref<ResponseError | null>(null)
   const submitting = ref(false)
 
-  const { setAuthenticatedUser, setUser, setUnauthenticatedUser } = useAuthStore()
+  const { setAuthenticatedUser, setUser, setUnauthenticatedUser, setAccessToken } = useAuthStore()
 
   const authenticate = async (request: AuthRequest): Promise<boolean> => {
     submitting.value = true
@@ -83,13 +84,46 @@ export const useAuthService = () => {
   }
 
   /**
-   * Full-page redirect rather than $api: the OAuth flow is a browser
-   * navigation, and the callback redirects back to /auth/callback with the
-   * token in the query string.
+   * Opens the provider redirect in a popup so the tab never leaves the app, and
+   * finishes the login here once /auth/callback posts the result back (see
+   * utils/oauthPopup + pages/auth/callback.vue). Never $api: the OAuth flow is
+   * a browser navigation, and the token comes back in a query string.
+   *
+   * Falls back to the old full-page redirect only when the popup was *blocked*
+   * — on a deliberate close it does nothing, because reopening the flow someone
+   * just dismissed, in the tab they were keeping, is worse than no popup.
+   *
+   * Resolves to an error *reason* (a key under `auth.callback.errors.*`) or
+   * null, and never translates: this composable is also constructed outside a
+   * component, where `useI18n` would throw. The caller renders it with
+   * `useOAuthError`.
    */
-  const loginWithGoogle = () => {
+  const loginWithGoogle = async (): Promise<string | null> => {
     const config = useRuntimeConfig()
-    window.location.href = `${config.public.apiBase}/api/auth/google/redirect`
+    const url = `${config.public.apiBase}/api/auth/google/redirect`
+
+    const result = await openOAuthPopup(url)
+
+    if (result.status === 'blocked') {
+      window.location.href = url
+      return null
+    }
+    if (result.status === 'cancelled') return null
+    if (result.error) return result.error
+    if (!result.access_token) return 'missing_code'
+
+    setAccessToken(result.access_token)
+
+    // Same reason as the full-page callback: the redirect carries only a token,
+    // and the menu is built from the permission list on the profile.
+    const profile = await fetchMe().catch(() => null)
+    if (!profile) {
+      await setUnauthenticatedUser()
+      return 'issue_token_failed'
+    }
+
+    await navigateTo('/')
+    return null
   }
 
   /**

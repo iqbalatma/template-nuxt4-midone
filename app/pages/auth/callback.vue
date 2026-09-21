@@ -2,6 +2,8 @@
 import { useAuthService } from '~/services/AuthService'
 import { useAuthStore } from '~/stores/auth'
 import { useFlashStore } from '~/stores/flash'
+import { useOAuthError } from '~/composables/useOAuthError'
+import { OAUTH_CALLBACK_MESSAGE_TYPE } from '~/utils/oauthPopup'
 
 /**
  * Landing point for the OAuth flow. The API redirects the browser here with
@@ -18,18 +20,12 @@ const { setAccessToken, setUnauthenticatedUser } = useAuthStore()
 const { fetchMe } = useAuthService()
 const flashStore = useFlashStore()
 
-const { t, te } = useI18n()
-
-/** Reasons the API can send back, mapped to something a person can act on. */
-const errorMessage = (reason: string) => {
-  const key = `auth.callback.errors.${reason}`
-  return te(key) ? t(key) : t('auth.callback.errors.unknown')
-}
+const { oauthErrorMessage } = useOAuthError()
 
 const failed = (reason: string) => {
   flashStore.setFailed({
     code: 'ERR_AUTHENTICATION',
-    message: errorMessage(reason),
+    message: oauthErrorMessage(reason),
     status_code: 401,
     timestamp: new Date().toISOString(),
   })
@@ -38,6 +34,23 @@ const failed = (reason: string) => {
 
 onMounted(async () => {
   const error = route.query['error']
+
+  // Opened as a popup by /auth (see openOAuthPopup): hand the raw result to the
+  // window that opened us and close, rather than finishing the login here — the
+  // store this page would write to is not the one the app is using.
+  if (window.opener && window.opener !== window) {
+    window.opener.postMessage(
+      {
+        type: OAUTH_CALLBACK_MESSAGE_TYPE,
+        access_token: route.query['access_token'],
+        error,
+      },
+      window.location.origin,
+    )
+    window.close()
+    return
+  }
+
   if (typeof error === 'string' && error) {
     await setUnauthenticatedUser()
     await failed(error)

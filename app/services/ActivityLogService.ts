@@ -31,7 +31,7 @@ export const useActivityLogService = () => {
     loading.value = true
     try {
       const response = await $api<ResponseDataCollectionWithPagination<ActivityLog>>(
-        'api/management/audits',
+        'api/management/activity-logs',
         {
           method: 'GET',
           query: {

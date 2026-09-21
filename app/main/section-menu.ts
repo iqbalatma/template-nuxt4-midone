@@ -43,10 +43,17 @@ export const accountMenus: SectionMenu[] = [
 /** Adding a system resource = one entry here + one page file under system/. */
 export const systemMenus: SectionMenu[] = [
   {
+    title: 'system.nav.activityLogsTitle',
+    description: 'system.nav.activityLogsDescription',
+    to: '/system/activity-logs',
+    icon: 'ScrollText',
+    permission: Permission.ActivityLogIndex,
+  },
+  {
     title: 'system.nav.auditsTitle',
     description: 'system.nav.auditsDescription',
     to: '/system/audits',
-    icon: 'ScrollText',
+    icon: 'GitCompare',
     permission: Permission.AuditIndex,
   },
   // The dashboard first among the background-job screens: it is the one that
@@ -86,6 +93,13 @@ export const systemMenus: SectionMenu[] = [
     to: '/system/cache',
     icon: 'DatabaseZap',
     permission: Permission.CacheShow,
+  },
+  {
+    title: 'system.nav.m2mClientsTitle',
+    description: 'system.nav.m2mClientsDescription',
+    to: '/system/m2m-clients',
+    icon: 'Bot',
+    permission: Permission.M2MClientIndex,
   },
 ]
 

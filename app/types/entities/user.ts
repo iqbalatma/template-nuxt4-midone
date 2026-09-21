@@ -29,6 +29,17 @@ export default interface User {
   avatar: Media | null
 }
 
+/**
+ * Mirrors `user.OptionResource` - returned by GET /api/options/users. Searched
+ * and capped server-side, so this is what a picker binds to rather than the
+ * paginated `User` list, which truncates at per_page.
+ */
+export interface UserOption {
+  id: string
+  name: string
+  email: string
+}
+
 export interface AuthTokens {
   access_token: string
   refresh_token: string

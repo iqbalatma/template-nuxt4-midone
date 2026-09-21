@@ -4,7 +4,7 @@ import { useAuthService } from '~/services/AuthService'
 const RECONNECT_DELAY_MS = 3000
 
 /**
- * Subscribes to one of the API's read-only WebSocket feeds (`/management/audits/ws`,
+ * Subscribes to one of the API's read-only WebSocket feeds (`/management/activity-logs/ws`,
  * `/management/job-logs/ws`) and hands each frame to `onFrame`.
  *
  * Like useNotificationSocket, it mints a ws-token per connection rather than

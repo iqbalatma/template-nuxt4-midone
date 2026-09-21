@@ -20,6 +20,24 @@ const formRequest = ref<AuthRequest>({
 const flashStore = useFlashStore()
 
 const { authenticate, loginWithGoogle, submitting } = useAuthService()
+const { oauthErrorMessage } = useOAuthError()
+
+// The popup keeps this page mounted, unlike the old full-page redirect, so the
+// button has to say something while the flow is open — and say why if it fails.
+const signingInWithGoogle = ref(false)
+const signInWithGoogle = async () => {
+  signingInWithGoogle.value = true
+  const reason = await loginWithGoogle()
+  signingInWithGoogle.value = false
+
+  if (!reason) return
+  flashStore.setFailed({
+    code: 'ERR_AUTHENTICATION',
+    message: oauthErrorMessage(reason),
+    status_code: 401,
+    timestamp: new Date().toISOString(),
+  })
+}
 </script>
 
 <template>
@@ -93,10 +111,11 @@ const { authenticate, loginWithGoogle, submitting } = useAuthService()
         class="w-full rounded-lg px-4 py-5"
         look="outline"
         type="button"
-        @click="loginWithGoogle()"
+        :disabled="signingInWithGoogle"
+        @click="signInWithGoogle()"
       >
         <img class="h-4 w-4" :src="googleLogoUrl" alt="" />
-        {{ $t('auth.login.google') }}
+        {{ signingInWithGoogle ? $t('auth.callback.signingIn') : $t('auth.login.google') }}
       </Button>
     </div>
 

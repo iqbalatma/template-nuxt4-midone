@@ -23,10 +23,10 @@ describe('useBreadcrumb', () => {
   it('adds the section entry the side menu does not list', () => {
     // /account and /system are shell pages: the page on screen is one of the
     // section menus under them, so the leaf comes from section-menu.ts.
-    expect(at('/system/audits')).toEqual([
+    expect(at('/system/activity-logs')).toEqual([
       'nav.groups.management',
       'nav.items.system',
-      'system.nav.auditsTitle',
+      'system.nav.activityLogsTitle',
     ])
     expect(at('/account/roles')).toEqual([
       'nav.groups.management',
@@ -36,7 +36,7 @@ describe('useBreadcrumb', () => {
   })
 
   it('keeps the entry that owns a nested route with no section of its own', () => {
-    expect(at('/system/audits/7')).toEqual(['nav.groups.management', 'nav.items.system'])
+    expect(at('/system/activity-logs/7')).toEqual(['nav.groups.management', 'nav.items.system'])
   })
 
   it('falls back to path segments when nothing in the menu matches', () => {

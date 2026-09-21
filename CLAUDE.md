@@ -15,7 +15,7 @@ app/themes/     four interchangeable layouts, all fed from app/main/side-menu.ts
 app/components/ app-level shared components
 app/services/   one composable per API resource — the only place $api is called
 app/stores/     pinia stores (auth, notification, flash, theme)
-app/composables/ cross-cutting behaviour (live feeds, menu filtering)
+app/composables/ cross-cutting behaviour (live feeds, menu filtering, list state)
 app/types/      response envelope + entity shapes mirroring the Go resources
 app/enums/      Permission and ResponseCode, mirroring the Go enums
 i18n/locales/   translations, one file per domain per locale
@@ -77,7 +77,8 @@ answers 403.
 
 ## WebSockets
 
-Four read-only feeds: `/api/notifications/ws`, `/api/management/audits/ws`,
+Five read-only feeds: `/api/notifications/ws`,
+`/api/management/activity-logs/ws`, `/api/management/audits/ws`,
 `/api/management/job-logs/ws` and `/api/management/queue/ws`.
 
 **The access token does not work on them.** A browser handshake cannot set an
@@ -99,7 +100,8 @@ notification older than the loaded page still has to light up the bell.
   control frame by re-running `fetchMe`, so a role change reaches the menu
   without a reload. Control frames carry an `event` key; a notification never
   does.
-- `useLiveFeed` — the generic one behind the audits, job-runs and queue pages,
+- `useLiveFeed` — the generic one behind the activity-log, change-trail,
+  job-runs and queue pages,
   with a `paused` flag so a reader can freeze incoming rows without dropping the
   socket.
 
@@ -128,8 +130,8 @@ whatever the URL asked for until the reader changes it.
 ## Shell pages
 
 Three of them: `/account` (users, roles, permissions), `/system` (activity log,
-jobs dashboard, queue, schedules, job runs, cache) and `/profile` (own details,
-own password). Each is one side-menu entry. `app/pages/account.vue` and
+change trail, jobs dashboard, queue, schedules, job runs, cache, M2M clients)
+and `/profile` (own details, own password). Each is one side-menu entry. `app/pages/account.vue` and
 `app/pages/system.vue` are the parent routes: they render `SectionNav`
 (left-hand nav + `<NuxtPage/>`), and the matching `index.vue` redirects to the
 first entry, since a shell has no content of its own.
@@ -177,6 +179,33 @@ back as an `ERR_INVALID_ACTION` message, not a per-field error. Media URLs are
 `apiBase` in front of the 150px `thumb` conversion. `components/UserAvatar.vue`
 is the only thing that renders it, so all eight theme headers and the account
 trigger show the picture at once.
+
+## Activity log vs change trail
+
+Two `/system` entries that read as the same screen and are not.
+`/system/activity-logs` is one row per mutating HTTP request — method, path,
+status, and the sanitized bodies. `/system/audits` is one row per *recorded
+mutation*, carrying before/after per column in `trails`, and it only exists where
+a service opted in. Two permissions
+(`management.activity-log.index`, `management.audit.index`), two feeds, two
+pages, and neither is derivable from the other: the request log cannot say which
+fields moved, and the trail cannot say which requests changed nothing.
+
+The activity log owned `/system/audits` and `management.audit.index` in an
+earlier version of this template, which is now the change trail's name. Nothing
+migrates that: a template's permissions table is built from the enum by
+`gartisan sync-permission`, so a fresh clone just gets both rows. A project
+already generated from the older template renames the row itself — the seeder
+removes any permission the enum no longer names, and its grants with it, so an
+enum-only rename there would revoke it from every role that held it.
+
+`/system/m2m-clients` sits under the same shell. The plaintext secret comes back
+exactly once, from create and from regenerate, and both paths funnel into
+`ModalM2MClientSecret` — show it before refreshing the list, because nothing can
+recover it afterwards. `M2M_SCOPES` in `types/entities/m2m_client.ts` mirrors
+`m2mclient.AllScopes` on the API the way `enums/Permission.ts` mirrors
+`enums/permission.go`; a scope offered here but not declared there is refused by
+the API's validator.
 
 ## Background job screens
 
@@ -339,9 +368,22 @@ has to check before asking, the way `/account/users` and `/account/roles` do.
 Call it unguarded and someone who may edit users but not read roles gets a 403
 toast on a page that otherwise loaded.
 
-The exception is the user picker on `/system/audits`, which still reads the
-paginated `GET /api/management/users` (first 100, no search): there is no
-`/api/options/users` yet, so that dropdown silently truncates past 100 users.
+A picker over a table that can grow past a page takes `:loadFn` instead of
+`:options` — `TomSelect` then asks the server per keystroke (two characters
+minimum) rather than filtering a list fetched up front. The user filters on
+`/system/activity-logs` and `/system/audits` work that way, through
+`useUserService().getAllOptions` → `GET /api/options/users`, which searches and
+caps server-side. A paginated fetch behind a dropdown truncates at `per_page`
+with no way to reach the rest, and says nothing about it.
+
+`getAllOptions` returns rather than filling a ref: `loadFn` runs per keystroke
+and owns its results, so a shared ref would have two pickers on one page
+overwriting each other.
+
+The activity-log filter needs **both** `option.user.index` (to fill the picker)
+and `user.index` (to send `user_id` — the API gates that param separately,
+because naming another user's id is how you read their activity). The audit
+filter needs only the first.
 
 Every field carries a `placeholder` — an example of what belongs in it
 (`name@example.com`, `Minimum 8 characters`), not a repeat of the label. An
@@ -352,7 +394,8 @@ keys like every other string.
 
 The exception is `<Input type="date">` (and the other native pickers): the
 browser draws its own hint and ignores `placeholder`, so those get an
-`aria-label` instead — see the date range in `app/pages/system/audits.vue`.
+`aria-label` instead — see the date range in
+`app/pages/system/activity-logs.vue`.
 
 ## i18n
 
@@ -448,11 +491,18 @@ debounced; bind it with `v-model`, and call `refresh()` after a mutation.
 Free-text and number inputs belong in `debounce`. Without it every keystroke is
 a navigation and a request.
 
+`useServerList.spec.ts` pins the one invariant worth pinning: exactly one
+request per change — on mount, per filter, per debounced burst, on reset, and on
+a URL change the page did not initiate. Run it after touching the watchers;
+"fetches twice" is the failure this design exists to prevent and the one that is
+invisible by eye.
+
 More than two filters go in a `FilterPopover` rather than a toolbar row — the
 trigger shows a dot while any is applied, and its footer holds the reset button.
 
 Pages written before this still hand-roll `watch(() => route.query, ...)`;
-`/system/audits` and `/system/job-logs` are the converted ones.
+`/system/activity-logs`, `/system/audits` and `/system/job-logs` are the
+converted ones.
 
 `ServerSidePagination` drives `page`/`per_page` through the same query. Empty
 filters are dropped rather than sent blank — the API treats a present-but-empty
@@ -468,6 +518,18 @@ silently replaced.
   `forgot-password` and `reset-password` all live under it.
 - The OAuth callback receives only a token in the query string, so it calls
   `fetchMe` before navigating.
+- Google sign-in opens a **popup** (`utils/oauthPopup.ts`) so the tab never
+  leaves the app; `callback.vue` detects `window.opener` and posts the raw result
+  back instead of finishing the login itself, because the store it would write to
+  is not the one the app is using. The full-page redirect is the fallback for a
+  *blocked* popup only — falling back when someone closes it deliberately would
+  reopen the flow they just dismissed. `openOAuthPopup` also polls `popup.closed`:
+  `close` does not fire cross-window, and a popup closed before it reaches the
+  callback posts nothing, so without the poll the button spins forever.
+- `loginWithGoogle` returns an error *reason*, never a message: `useAuthService`
+  is also constructed outside a component, where `useI18n` throws. Render it with
+  `useOAuthError().oauthErrorMessage`, which both `/auth` and `/auth/callback`
+  share so a reason handled in one flow is handled in the other.
 - Forgot-password shows the same confirmation whether or not the address exists.
   The API deliberately answers identically; a friendlier "no such account" here
   would put the enumeration back.

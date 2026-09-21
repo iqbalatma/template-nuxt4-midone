@@ -1,8 +1,10 @@
 {
   "system": {
     "nav": {
-      "auditsTitle": "Activity Log",
-      "auditsDescription": "Every mutating request",
+      "activityLogsTitle": "Activity Log",
+      "activityLogsDescription": "Every mutating request",
+      "auditsTitle": "Change Trail",
+      "auditsDescription": "Which fields changed, and to what",
       "jobLogsTitle": "Job Runs",
       "jobLogsDescription": "Background job history",
       "cacheTitle": "Cache",
@@ -12,9 +14,11 @@
       "queueTitle": "Queue",
       "queueDescription": "Waiting, running and failed jobs",
       "schedulesTitle": "Schedules",
-      "schedulesDescription": "When each periodic job runs"
+      "schedulesDescription": "When each periodic job runs",
+      "m2mClientsTitle": "M2M Clients",
+      "m2mClientsDescription": "Credentials for machine callers"
     },
-    "audits": {
+    "activityLogs": {
       "title": "Activity Log",
       "subtitle": "Every request that changed something",
       "searchPlaceholder": "Path…",
@@ -31,6 +35,30 @@
       "detail": {
         "request": "Request",
         "response": "Response"
+      }
+    },
+    "audits": {
+      "title": "Change Trail",
+      "subtitle": "Which fields changed, who changed them, and to what",
+      "entryObjectTablePlaceholder": "Table, e.g. users",
+      "entryObjectIdPlaceholder": "Record id",
+      "actionPlaceholder": "Action, e.g. UPDATE_M2M_CLIENT",
+      "allActors": "All actors",
+      "dateFrom": "From date",
+      "dateTo": "To date",
+      "columnActor": "Actor",
+      "columnAction": "Action",
+      "columnEntryObject": "Record",
+      "columnChanges": "Changes",
+      "anonymous": "no actor",
+      "liveEmpty": "No changes recorded yet.",
+      "detail": {
+        "actor": "Actor",
+        "entryObject": "Record",
+        "endpoint": "Endpoint",
+        "before": "Before",
+        "after": "After",
+        "noTrails": "This action recorded no field change."
       }
     },
     "jobLogs": {
@@ -156,6 +184,29 @@
         "enabled": "Enabled",
         "enabledHint": "When off, the clock will not start this job. You can still run it by hand."
       }
+    },
+    "m2mClients": {
+      "title": "M2M Clients",
+      "subtitle": "Credentials for callers that are not a person",
+      "add": "Register Client",
+      "createTitle": "Register M2M Client",
+      "editTitle": "Edit M2M Client",
+      "clientNameLabel": "Display name",
+      "clientNamePlaceholder": "e.g. billing-sync",
+      "scopeLabel": "Scopes",
+      "scopeHint": "\"*\" grants every scope and cannot be combined with a narrower one.",
+      "secretHint": "The secret is generated on save and shown once — it cannot be retrieved again.",
+      "secretTitle": "Client Secret",
+      "secretWarning": "Copy the secret for {client} now. It is stored hashed and will never be shown again.",
+      "columnClient": "Client",
+      "columnScope": "Scopes",
+      "active": "Active",
+      "revoked": "Revoked",
+      "regenerate": "Regenerate Secret",
+      "regenerateTitle": "Regenerate Secret",
+      "regenerateConfirm": "Issue a new secret for {client}? Whatever is using the current one stops working immediately.",
+      "revokeTitle": "Revoke Client",
+      "revokeMessage": "The client stops authenticating immediately. The row is kept so its past requests stay attributable, and revocation cannot be undone."
     }
   }
 }

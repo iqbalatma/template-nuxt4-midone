@@ -12,9 +12,11 @@
       "roles": "Roles",
       "permissions": "Permissions",
       "system": "System",
-      "audits": "Activity Log",
+      "activityLogs": "Activity Log",
+      "audits": "Change Trail",
       "jobLogs": "Job Runs",
-      "cache": "Cache"
+      "cache": "Cache",
+      "m2mClients": "M2M Clients"
     }
   }
 }

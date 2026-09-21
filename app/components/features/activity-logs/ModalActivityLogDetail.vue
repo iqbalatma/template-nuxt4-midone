@@ -43,7 +43,7 @@ defineExpose({ handleModal })
       <div v-if="log" class="mt-4 flex max-h-[70vh] flex-col gap-4 overflow-auto">
         <div>
           <p class="text-foreground/50 mb-1 text-xs font-semibold tracking-wider uppercase">
-            {{ $t('system.audits.detail.request') }}
+            {{ $t('system.activityLogs.detail.request') }}
           </p>
           <pre
             v-if="pretty(log.request_body)"
@@ -55,7 +55,7 @@ defineExpose({ handleModal })
 
         <div>
           <p class="text-foreground/50 mb-1 text-xs font-semibold tracking-wider uppercase">
-            {{ $t('system.audits.detail.response') }}
+            {{ $t('system.activityLogs.detail.response') }}
           </p>
           <pre
             v-if="pretty(log.response_body)"

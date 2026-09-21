@@ -1,8 +1,10 @@
 {
   "system": {
     "nav": {
-      "auditsTitle": "Log Aktivitas",
-      "auditsDescription": "Setiap permintaan yang mengubah data",
+      "activityLogsTitle": "Log Aktivitas",
+      "activityLogsDescription": "Setiap permintaan yang mengubah data",
+      "auditsTitle": "Jejak Perubahan",
+      "auditsDescription": "Kolom apa yang berubah, dan menjadi apa",
       "jobLogsTitle": "Riwayat Job",
       "jobLogsDescription": "Riwayat job latar belakang",
       "cacheTitle": "Cache",
@@ -12,9 +14,11 @@
       "queueTitle": "Antrean",
       "queueDescription": "Job menunggu, berjalan, dan gagal",
       "schedulesTitle": "Jadwal",
-      "schedulesDescription": "Kapan setiap job berkala dijalankan"
+      "schedulesDescription": "Kapan setiap job berkala dijalankan",
+      "m2mClientsTitle": "Klien M2M",
+      "m2mClientsDescription": "Kredensial untuk pemanggil mesin"
     },
-    "audits": {
+    "activityLogs": {
       "title": "Log Aktivitas",
       "subtitle": "Setiap permintaan yang mengubah sesuatu",
       "searchPlaceholder": "Path…",
@@ -31,6 +35,30 @@
       "detail": {
         "request": "Permintaan",
         "response": "Respons"
+      }
+    },
+    "audits": {
+      "title": "Jejak Perubahan",
+      "subtitle": "Kolom apa yang berubah, oleh siapa, dan menjadi apa",
+      "entryObjectTablePlaceholder": "Tabel, mis. users",
+      "entryObjectIdPlaceholder": "Id data",
+      "actionPlaceholder": "Aksi, mis. UPDATE_M2M_CLIENT",
+      "allActors": "Semua pelaku",
+      "dateFrom": "Tanggal mulai",
+      "dateTo": "Tanggal akhir",
+      "columnActor": "Pelaku",
+      "columnAction": "Aksi",
+      "columnEntryObject": "Data",
+      "columnChanges": "Perubahan",
+      "anonymous": "tanpa pelaku",
+      "liveEmpty": "Belum ada perubahan tercatat.",
+      "detail": {
+        "actor": "Pelaku",
+        "entryObject": "Data",
+        "endpoint": "Endpoint",
+        "before": "Sebelum",
+        "after": "Sesudah",
+        "noTrails": "Aksi ini tidak mencatat perubahan kolom."
       }
     },
     "jobLogs": {
@@ -156,6 +184,29 @@
         "enabled": "Aktif",
         "enabledHint": "Saat nonaktif, jadwal tidak akan menjalankannya. Anda tetap bisa menjalankan manual."
       }
+    },
+    "m2mClients": {
+      "title": "Klien M2M",
+      "subtitle": "Kredensial untuk pemanggil yang bukan manusia",
+      "add": "Daftarkan Klien",
+      "createTitle": "Daftarkan Klien M2M",
+      "editTitle": "Ubah Klien M2M",
+      "clientNameLabel": "Nama tampilan",
+      "clientNamePlaceholder": "mis. billing-sync",
+      "scopeLabel": "Scope",
+      "scopeHint": "\"*\" memberi semua scope dan tidak bisa digabung dengan scope yang lebih sempit.",
+      "secretHint": "Secret dibuat saat disimpan dan hanya ditampilkan sekali — tidak bisa diambil lagi.",
+      "secretTitle": "Secret Klien",
+      "secretWarning": "Salin secret untuk {client} sekarang. Yang tersimpan hanya hash-nya dan tidak akan ditampilkan lagi.",
+      "columnClient": "Klien",
+      "columnScope": "Scope",
+      "active": "Aktif",
+      "revoked": "Dicabut",
+      "regenerate": "Buat Secret Baru",
+      "regenerateTitle": "Buat Secret Baru",
+      "regenerateConfirm": "Terbitkan secret baru untuk {client}? Apa pun yang masih memakai secret lama langsung berhenti bekerja.",
+      "revokeTitle": "Cabut Klien",
+      "revokeMessage": "Klien langsung tidak bisa autentikasi lagi. Barisnya tetap disimpan agar permintaan lamanya tetap bisa dilacak, dan pencabutan tidak bisa dibatalkan."
     }
   }
 }

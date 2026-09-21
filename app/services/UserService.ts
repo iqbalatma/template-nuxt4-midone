@@ -1,8 +1,10 @@
 import { useFlashStore } from '~/stores/flash'
 import type User from '~/types/entities/user'
+import type { UserOption } from '~/types/entities/user'
 import type {
   PayloadDataCollectionPaginated,
   ResponseData,
+  ResponseDataCollectionWithoutPagination,
   ResponseDataCollectionWithPagination,
   ResponseSingleData,
 } from '~/types/response'
@@ -52,6 +54,22 @@ export const useUserService = () => {
     } finally {
       loading.value = false
     }
+  }
+
+  /**
+   * The searchable picker list. Returns rather than storing in a ref, because
+   * TomSelect's `loadFn` is called per keystroke and owns its own results — a
+   * shared ref would have two dropdowns on one page overwriting each other.
+   *
+   * Answers to `option.user.index`, not `user.index`: filling in a picker is a
+   * smaller capability than opening the user screen.
+   */
+  const getAllOptions = async (search: string): Promise<UserOption[]> => {
+    const response = await $api<ResponseDataCollectionWithoutPagination<UserOption>>(
+      'api/options/users',
+      { method: 'GET', query: { search: search || undefined } },
+    )
+    return response.payload.data
   }
 
   const addNew = async (request: UserRequest): Promise<boolean> => {
@@ -107,6 +125,7 @@ export const useUserService = () => {
     loading,
     submitting,
     getAllPaginated,
+    getAllOptions,
     addNew,
     updateById,
     deleteById,

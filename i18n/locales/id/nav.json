@@ -12,9 +12,11 @@
       "roles": "Peran",
       "permissions": "Hak Akses",
       "system": "Sistem",
-      "audits": "Log Aktivitas",
+      "activityLogs": "Log Aktivitas",
+      "audits": "Jejak Perubahan",
       "jobLogs": "Riwayat Job",
-      "cache": "Cache"
+      "cache": "Cache",
+      "m2mClients": "Klien M2M"
     }
   }
 }

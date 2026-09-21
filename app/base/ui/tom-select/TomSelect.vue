@@ -12,6 +12,18 @@ const props = withDefaults(
     id?: string
     name?: string
     multiple?: boolean
+    /**
+     * Turns this into a remote picker: the dropdown asks the server as you
+     * type instead of filtering a list handed in up front. Use it wherever the
+     * full table is too big to send — `options` alone truncates silently at
+     * whatever the caller happened to fetch, with no way to reach the rest.
+     *
+     * `options` is still honoured alongside it, as a seed: pass the already
+     * known selection so it has a label before the first search.
+     */
+    loadFn?: (query: string) => Promise<OptionItem[]>
+    /** Keystrokes before the first request. One letter matches half the table. */
+    minQueryLength?: number
   }>(),
   {
     modelValue: undefined,
@@ -20,6 +32,8 @@ const props = withDefaults(
     id: undefined,
     name: undefined,
     multiple: false,
+    loadFn: undefined,
+    minQueryLength: 2,
   },
 )
 
@@ -62,6 +76,22 @@ async function initTomSelect() {
   const TomSelectCtor = TomSelectClass as unknown as {
     new (el: HTMLSelectElement, opts: unknown): TomSelectInstance
   }
+  // Only set when loadFn is given, so a plain list picker keeps exactly the
+  // behaviour it had: no preload, no shouldLoad gate, no load callback.
+  const remote = props.loadFn
+    ? {
+        preload: false,
+        shouldLoad: (query: string) => query.length >= props.minQueryLength,
+        load: (query: string, callback: (data: unknown[]) => void) => {
+          props.loadFn!(query)
+            .then((items) => callback(items.map((o) => ({ value: String(o.id), text: o.name }))))
+            // A failed search shows "no results" rather than a spinner that
+            // never stops — the $api plugin has already flashed the error.
+            .catch(() => callback([]))
+        },
+      }
+    : {}
+
   tsInstance = new TomSelectCtor(selectEl.value as HTMLSelectElement, {
     options: optionItems,
     valueField: 'value',
@@ -71,6 +101,7 @@ async function initTomSelect() {
     allowEmptyOption: !props.multiple,
     maxItems: props.multiple ? null : 1,
     plugins: props.multiple ? ['remove_button'] : [],
+    ...remote,
     onChange: (value: string | string[]) => {
       emit('update:modelValue', value)
     },
@@ -191,6 +222,9 @@ watch(
   () => props.options,
   (newOpts) => {
     if (!tsInstance) return
+    // In remote mode the live options are whatever the last search returned, so
+    // replacing them from the (seed-only) prop would wipe the dropdown mid-use.
+    if (props.loadFn) return
     const optionItems = newOpts.map((o) => ({ value: String(o.id), text: o.name }))
     tsInstance.clearOptions()
     tsInstance.addOption(optionItems)

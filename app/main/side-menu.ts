@@ -47,7 +47,7 @@ const mainMenu: (string | Menu)[] = [
     icon: 'Settings',
     route_name: 'system',
     title: 'nav.items.system',
-    permission: Permission.AuditIndex,
+    permission: Permission.ActivityLogIndex,
   },
 ]
 

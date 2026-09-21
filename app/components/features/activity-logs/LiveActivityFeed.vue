@@ -23,9 +23,12 @@ onMounted(async () => {
   logs.value = logsCollection.value.data
 })
 
-const { connected, paused } = useLiveFeed<ActivityLog>('/api/management/audits/ws', (log) => {
-  logs.value = [log, ...logs.value].slice(0, MAX_ITEMS)
-})
+const { connected, paused } = useLiveFeed<ActivityLog>(
+  '/api/management/activity-logs/ws',
+  (log) => {
+    logs.value = [log, ...logs.value].slice(0, MAX_ITEMS)
+  },
+)
 </script>
 
 <template>
@@ -39,7 +42,7 @@ const { connected, paused } = useLiveFeed<ActivityLog>('/api/management/audits/w
       {{ $t('common.loading') }}
     </div>
     <div v-else-if="logs.length === 0" class="text-foreground/40 py-10 text-center text-sm">
-      {{ $t('system.audits.liveEmpty') }}
+      {{ $t('system.activityLogs.liveEmpty') }}
     </div>
 
     <TransitionGroup
@@ -79,7 +82,7 @@ const { connected, paused } = useLiveFeed<ActivityLog>('/api/management/audits/w
             {{
               log.user
                 ? [log.user.first_name, log.user.last_name].filter(Boolean).join(' ')
-                : $t('system.audits.anonymous')
+                : $t('system.activityLogs.anonymous')
             }}
           </span>
           <span>{{ timeAgo(log.created_at) }}</span>

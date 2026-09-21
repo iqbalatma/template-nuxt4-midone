@@ -46,6 +46,11 @@ const mainMenu: Array<Menu> = [
     sub_menu: [
       {
         icon: 'ScrollText',
+        route_name: 'system-activity-logs',
+        title: 'nav.items.activityLogs',
+      },
+      {
+        icon: 'GitCompare',
         route_name: 'system-audits',
         title: 'nav.items.audits',
       },
@@ -58,6 +63,11 @@ const mainMenu: Array<Menu> = [
         icon: 'DatabaseZap',
         route_name: 'system-cache',
         title: 'nav.items.cache',
+      },
+      {
+        icon: 'Bot',
+        route_name: 'system-m2m-clients',
+        title: 'nav.items.m2mClients',
       },
     ],
   },
