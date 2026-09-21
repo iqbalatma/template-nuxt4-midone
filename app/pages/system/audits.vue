@@ -154,9 +154,7 @@ const viewDetail = (audit: Audit) => modalDetailRef.value?.handleModal(true, aud
               <TD>{{ audit.trails.length }}</TD>
               <TD>{{ audit.created_at }}</TD>
               <TD>
-                <div class="flex items-center gap-2">
-                  <ButtonView @click-view="viewDetail(audit)" />
-                </div>
+                <ButtonView @click-view="viewDetail(audit)" />
               </TD>
             </TableRow>
           </TableBody>

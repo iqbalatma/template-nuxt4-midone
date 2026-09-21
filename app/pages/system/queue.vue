@@ -13,6 +13,7 @@ import { useAuthStore } from '~/stores/auth'
 import { Permission } from '~/enums/Permission'
 import { queueStatusVariant } from '~/utils/badge'
 import { formatDuration } from '~/utils/helper'
+import { ACTION_BUTTON_CLASS } from '~/utils/actionButton'
 import type QueueJob from '~/types/entities/queue_job'
 import LiveQueueFeed from '~/components/features/queue/LiveQueueFeed.vue'
 
@@ -204,28 +205,31 @@ const isActing = (job: QueueJob) => actingId.value === job.id
                   {{ $t('system.queue.availableAt', { time: job.f_available_at }) }}
                 </SmallInfo>
               </TD>
-              <TD v-if="canManage">
-                <div class="flex gap-2">
-                  <Button
-                    v-if="['success', 'failed', 'canceled'].includes(job.status)"
-                    size="sm"
-                    look="outline"
-                    :disabled="isActing(job)"
-                    @click="onRetry(job)"
-                  >
-                    {{ $t('system.queue.retry') }}
-                  </Button>
-                  <Button
-                    v-if="job.status === 'pending'"
-                    size="sm"
-                    look="outline"
-                    variant="ghost"
-                    :disabled="isActing(job)"
-                    @click="onCancel(job)"
-                  >
-                    {{ $t('system.queue.cancel') }}
-                  </Button>
-                </div>
+              <TD v-if="canManage" class="space-x-2">
+                <Button
+                  v-if="['success', 'failed', 'canceled'].includes(job.status)"
+                  size="sm"
+                  look="text"
+                  variant="primary"
+                  :class="ACTION_BUTTON_CLASS"
+                  :disabled="isActing(job)"
+                  @click="onRetry(job)"
+                >
+                  <Lucide icon="RotateCcw" />
+                  {{ $t('system.queue.retry') }}
+                </Button>
+                <Button
+                  v-if="job.status === 'pending'"
+                  size="sm"
+                  look="text"
+                  variant="ghost"
+                  :class="ACTION_BUTTON_CLASS"
+                  :disabled="isActing(job)"
+                  @click="onCancel(job)"
+                >
+                  <Lucide icon="Ban" />
+                  {{ $t('system.queue.cancel') }}
+                </Button>
               </TD>
             </TableRow>
           </TableBody>

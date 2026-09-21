@@ -10,6 +10,7 @@ import { useAuthStore } from '~/stores/auth'
 import { Permission } from '~/enums/Permission'
 import { jobStatusVariant } from '~/utils/badge'
 import { formatDuration } from '~/utils/helper'
+import { ACTION_BUTTON_CLASS } from '~/utils/actionButton'
 import type ScheduledJob from '~/types/entities/scheduled_job'
 import type { JobStatus } from '~/types/entities/job_log'
 import ModalFormSchedule from '~/components/features/schedules/ModalFormSchedule.vue'
@@ -121,43 +122,45 @@ const onRunNow = async (schedule: ScheduledJob) => {
               </div>
               <span v-else class="text-sm opacity-40">{{ $t('system.schedules.neverRan') }}</span>
             </TD>
-            <TD v-if="canManage">
-              <div class="flex flex-wrap gap-2">
-                <Button
-                  size="sm"
-                  look="outline"
-                  :disabled="actingId === schedule.id"
-                  @click="modalFormRef?.handleModal(true, schedule)"
-                >
-                  {{ $t('common.edit') }}
-                </Button>
-                <Button
-                  size="sm"
-                  look="outline"
-                  variant="ghost"
-                  :disabled="actingId === schedule.id"
-                  @click="onToggle(schedule)"
-                >
-                  {{
-                    schedule.enabled
-                      ? $t('system.schedules.disable')
-                      : $t('system.schedules.enable')
-                  }}
-                </Button>
-                <!-- Runs even when disabled: "disabled" means the clock does not
-                     start it, not that an operator may not — and running it once
-                     by hand is how you check it is safe to enable. -->
-                <Button
-                  size="sm"
-                  look="outline"
-                  variant="ghost"
-                  :disabled="actingId === schedule.id"
-                  @click="onRunNow(schedule)"
-                >
-                  <Lucide icon="Play" class="size-3.5" />
-                  {{ $t('system.schedules.runNow') }}
-                </Button>
-              </div>
+            <TD v-if="canManage" class="space-x-2">
+              <Button
+                size="sm"
+                look="text"
+                variant="primary"
+                :class="ACTION_BUTTON_CLASS"
+                :disabled="actingId === schedule.id"
+                @click="modalFormRef?.handleModal(true, schedule)"
+              >
+                <Lucide icon="CheckSquare" />
+                {{ $t('common.edit') }}
+              </Button>
+              <Button
+                size="sm"
+                look="text"
+                variant="ghost"
+                :class="ACTION_BUTTON_CLASS"
+                :disabled="actingId === schedule.id"
+                @click="onToggle(schedule)"
+              >
+                <Lucide icon="Power" />
+                {{
+                  schedule.enabled ? $t('system.schedules.disable') : $t('system.schedules.enable')
+                }}
+              </Button>
+              <!-- Runs even when disabled: "disabled" means the clock does not
+                   start it, not that an operator may not — and running it once
+                   by hand is how you check it is safe to enable. -->
+              <Button
+                size="sm"
+                look="text"
+                variant="ghost"
+                :class="ACTION_BUTTON_CLASS"
+                :disabled="actingId === schedule.id"
+                @click="onRunNow(schedule)"
+              >
+                <Lucide icon="Play" />
+                {{ $t('system.schedules.runNow') }}
+              </Button>
             </TD>
           </TableRow>
         </TableBody>

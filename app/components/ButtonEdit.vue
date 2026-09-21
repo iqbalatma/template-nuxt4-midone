@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import { Button } from '~/base/ui/button'
 import { Lucide } from '~/base/ui/lucide'
+import { ACTION_BUTTON_CLASS } from '~/utils/actionButton'
 
 const emit = defineEmits(['click-edit'])
 </script>
 
 <template>
-  <Button size="sm" look="outline" @click="emit('click-edit')">
+  <Button
+    size="sm"
+    look="text"
+    variant="primary"
+    :class="ACTION_BUTTON_CLASS"
+    @click="emit('click-edit')"
+  >
     <Lucide icon="CheckSquare" />
     {{ $t('common.edit') }}
   </Button>

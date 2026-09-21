@@ -12,6 +12,7 @@ import ModalRegenerateM2MClientSecret from '~/components/features/m2m-clients/Mo
 import { useM2MClientService } from '~/services/M2MClientService'
 import { useAuthStore } from '~/stores/auth'
 import { Permission } from '~/enums/Permission'
+import { ACTION_BUTTON_CLASS } from '~/utils/actionButton'
 import type M2MClient from '~/types/entities/m2m_client'
 
 definePageMeta({
@@ -125,33 +126,36 @@ const onConfirmRevoke = async () => {
               </Badge>
             </TD>
             <TD>{{ client.created_at }}</TD>
-            <TD>
-              <div class="flex items-center gap-2">
-                <!-- A revoked client is terminal: the API refuses both a
-                     rotation and a second revoke, so neither is offered. -->
-                <ButtonEdit
-                  v-if="canUpdate && !client.revoked_at"
-                  @click-edit="modalFormRef?.handleModal(true, client)"
-                />
-                <Button
-                  v-if="canUpdate && !client.revoked_at"
-                  look="outline"
-                  variant="ghost"
-                  :title="$t('system.m2mClients.regenerate')"
-                  @click="modalRegenerateRef?.handleModal(true, client)"
-                >
-                  <Lucide icon="RefreshCw" />
-                </Button>
-                <ButtonDelete
-                  v-if="canRevoke && !client.revoked_at"
-                  @click-delete="
-                    () => {
-                      selectedClientId = client.id
-                      modalRevokeRef?.handleModal(true)
-                    }
-                  "
-                />
-              </div>
+            <TD class="space-x-2">
+              <!-- A revoked client is terminal: the API refuses both a
+                   rotation and a second revoke, so neither is offered. -->
+              <ButtonEdit
+                v-if="canUpdate && !client.revoked_at"
+                @click-edit="modalFormRef?.handleModal(true, client)"
+              />
+              <!-- Same shape as ButtonView/Edit/Delete beside it — bare icon
+                   and label, no capsule. No component of its own: one call
+                   site, and a fourth Button* nothing else uses is scaffolding. -->
+              <Button
+                v-if="canUpdate && !client.revoked_at"
+                size="sm"
+                look="text"
+                variant="ghost"
+                :class="ACTION_BUTTON_CLASS"
+                @click="modalRegenerateRef?.handleModal(true, client)"
+              >
+                <Lucide icon="RefreshCw" />
+                {{ $t('common.regenerate') }}
+              </Button>
+              <ButtonDelete
+                v-if="canRevoke && !client.revoked_at"
+                @click-delete="
+                  () => {
+                    selectedClientId = client.id
+                    modalRevokeRef?.handleModal(true)
+                  }
+                "
+              />
             </TD>
           </TableRow>
         </TableBody>

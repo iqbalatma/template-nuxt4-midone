@@ -1,9 +1,24 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import type { FetchResponse } from 'ofetch'
 import type { PayloadDataCollectionPaginated, ResponseError } from '~/types/response'
 
 dayjs.extend(duration)
+dayjs.extend(customParseFormat)
+
+/**
+ * The API renders most timestamps with `utils.FormatDateTimeVal` —
+ * `DD/MM/YYYY HH:mm:ss` — which `new Date()` and dayjs's default parser both
+ * read as Invalid Date (month 21). A few resources (queue) send RFC3339
+ * instead, so try the API format first and fall back to dayjs's own parsing.
+ */
+const API_DATETIME_FORMAT = 'DD/MM/YYYY HH:mm:ss'
+
+const parseApiDate = (time?: string | null) => {
+  const strict = dayjs(time ?? '', API_DATETIME_FORMAT, true)
+  return strict.isValid() ? strict : dayjs(time ?? '')
+}
 
 const cutText = (text: string, length: number) => {
   if (text.split(' ').length > 1) {
@@ -17,7 +32,7 @@ const cutText = (text: string, length: number) => {
 }
 
 const formatDate = (date: string, format: string) => {
-  return dayjs(date).format(format)
+  return parseApiDate(date).format(format)
 }
 
 const capitalizeFirstLetter = (string: string) => {
@@ -56,12 +71,16 @@ const formatCurrency = (number: number) => {
 }
 
 const timeAgo = (time: string) => {
-  const date = new Date((time || '').replace(/-/g, '/').replace(/[TZ]/g, ' '))
-  const diff = (new Date().getTime() - date.getTime()) / 1000
+  const date = parseApiDate(time)
+  if (!date.isValid()) {
+    return ''
+  }
+
+  const diff = (Date.now() - date.valueOf()) / 1000
   const dayDiff = Math.floor(diff / 86400)
 
-  if (isNaN(dayDiff) || dayDiff < 0 || dayDiff >= 31) {
-    return dayjs(time).format('MMMM DD, YYYY')
+  if (dayDiff < 0 || dayDiff >= 31) {
+    return date.format('MMMM DD, YYYY')
   }
 
   return (

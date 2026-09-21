@@ -176,9 +176,7 @@ const viewDetail = (log: ActivityLog) => modalDetailRef.value?.handleModal(true,
               <TD class="font-mono text-sm">{{ log.ip }}</TD>
               <TD>{{ log.created_at }}</TD>
               <TD>
-                <div class="flex items-center gap-2">
-                  <ButtonView @click-view="viewDetail(log)" />
-                </div>
+                <ButtonView @click-view="viewDetail(log)" />
               </TD>
             </TableRow>
           </TableBody>

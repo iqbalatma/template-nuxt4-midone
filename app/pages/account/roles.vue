@@ -121,19 +121,17 @@ const onConfirmDelete = async () => {
                 {{ role.is_mutable ? $t('account.roles.mutable') : $t('account.roles.immutable') }}
               </Badge>
             </TD>
-            <TD>
-              <div class="flex items-center gap-2">
-                <ButtonEdit @click-edit="modalFormRef?.handleModal(true, role)" />
-                <ButtonDelete
-                  v-if="role.is_mutable"
-                  @click-delete="
-                    () => {
-                      selectedRoleId = role.id
-                      modalDeleteRef?.handleModal(true)
-                    }
-                  "
-                />
-              </div>
+            <TD class="space-x-2">
+              <ButtonEdit @click-edit="modalFormRef?.handleModal(true, role)" />
+              <ButtonDelete
+                v-if="role.is_mutable"
+                @click-delete="
+                  () => {
+                    selectedRoleId = role.id
+                    modalDeleteRef?.handleModal(true)
+                  }
+                "
+              />
             </TD>
           </TableRow>
         </TableBody>

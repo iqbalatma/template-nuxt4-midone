@@ -132,18 +132,16 @@ const onConfirmDelete = async () => {
                   {{ user.created_at }}
                 </div>
               </TD>
-              <TD>
-                <div class="flex items-center gap-2">
-                  <ButtonEdit @click-edit="modalFormRef?.handleModal(true, user)" />
-                  <ButtonDelete
-                    @click-delete="
-                      () => {
-                        selectedUserId = user.id
-                        modalDeleteRef?.handleModal(true)
-                      }
-                    "
-                  />
-                </div>
+              <TD class="space-x-2">
+                <ButtonEdit @click-edit="modalFormRef?.handleModal(true, user)" />
+                <ButtonDelete
+                  @click-delete="
+                    () => {
+                      selectedUserId = user.id
+                      modalDeleteRef?.handleModal(true)
+                    }
+                  "
+                />
               </TD>
             </TableRow>
           </TableBody>

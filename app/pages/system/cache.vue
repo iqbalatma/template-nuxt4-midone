@@ -8,6 +8,7 @@ import { Table, TableBody, TableHeader, TableRow } from '~/base/ui/table'
 import { useCacheService } from '~/services/CacheService'
 import { useAuthStore } from '~/stores/auth'
 import { Permission } from '~/enums/Permission'
+import { ACTION_BUTTON_CLASS } from '~/utils/actionButton'
 
 definePageMeta({
   title: 'system.cache.title',
@@ -76,10 +77,13 @@ const formatTtl = (seconds: number) => {
             <TD v-if="canClear">
               <Button
                 size="sm"
-                look="outline"
+                look="text"
+                variant="danger"
+                :class="ACTION_BUTTON_CLASS"
                 :disabled="clearingKey === entry.key"
                 @click="onClear(entry.key)"
               >
+                <Lucide icon="Trash2" />
                 {{ $t('system.cache.drop') }}
               </Button>
             </TD>

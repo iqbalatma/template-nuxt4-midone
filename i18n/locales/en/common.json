@@ -3,6 +3,7 @@
     "actions": "Actions",
     "add": "Add",
     "edit": "Edit",
+    "regenerate": "Regenerate",
     "view": "View",
     "delete": "Delete",
     "save": "Save",
